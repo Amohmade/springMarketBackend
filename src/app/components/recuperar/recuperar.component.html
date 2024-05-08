@@ -1,1 +1,26 @@
-<p>recuperar works!</p>
+<div class="recuperar">
+    <div class="blur">
+        <mat-card>
+            <mat-card-header>
+              <mat-card-title>Recupera tu cuenta</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Introduce tu correo electrónico o número de móvil para buscar tu cuenta.</p>
+                <form [formGroup]="recuperarForm" (ngSubmit)="enviar()">
+                    <mat-form-field appearance="outline" class="entrada">
+                        <mat-label>Introduce tu correo o telefono</mat-label>
+                        <input matInput formControlName="datoRecuperar" required>
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+              <button class="enviar" mat-button [disabled]="!recuperarForm.valid" type="submit" (click)="enviar()">Recuperar <span class="material-symbols-outlined icon">
+                send
+                </span></button>
+              <button class="enviar" mat-flat-button [disabled]="!recuperarForm.valid" type="submit" (click)="enviar()">Recuperar <span class="material-symbols-outlined icon">
+                send
+                </span></button>
+            </mat-card-actions>
+          </mat-card>
+    </div>
+</div>
