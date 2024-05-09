@@ -1,7 +1,9 @@
 <div class="header">
     <mat-grid-list cols="3" rowHeight="75px">
         <mat-grid-tile></mat-grid-tile>
-        <mat-grid-tile><a routerLink=""><h2>ManageDB</h2></a></mat-grid-tile>
-        <mat-grid-tile class="icons"><a routerLink="/Entrar"><span class="material-symbols-outlined">account_circle</span></a></mat-grid-tile>
+        <mat-grid-tile><a [routerLink]="['']"><h2>ManageDB</h2></a></mat-grid-tile>
+        <mat-grid-tile><button mat-icon [routerLink]="['/Entrar']"><span class="material-symbols-outlined">
+            account_circle
+            </span></button></mat-grid-tile>
     </mat-grid-list>
 </div>
