@@ -27,6 +27,7 @@ export class AccederComponent{
       // Validators.required
     ]),
   });
+
   enviar(){
     console.log(this.userForm.value);
   }

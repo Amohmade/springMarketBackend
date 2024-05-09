@@ -14,12 +14,8 @@
                 </form>
             </mat-card-content>
             <mat-card-actions>
-              <button class="enviar" mat-button [disabled]="!recuperarForm.valid" type="submit" (click)="enviar()">Recuperar <span class="material-symbols-outlined icon">
-                send
-                </span></button>
-              <button class="enviar" mat-flat-button [disabled]="!recuperarForm.valid" type="submit" (click)="enviar()">Recuperar <span class="material-symbols-outlined icon">
-                send
-                </span></button>
+                <button class="cancelar" mat-stroked-button [routerLink]="['/Entrar']" >Cancelar</button>
+                <button class="enviar" mat-flat-button [disabled]="!recuperarForm.valid" type="submit" (click)="enviar()">Recuperar</button>
             </mat-card-actions>
           </mat-card>
     </div>
