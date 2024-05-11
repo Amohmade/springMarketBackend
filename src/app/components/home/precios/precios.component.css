@@ -86,8 +86,10 @@ img{
     width: auto;
 }
 
-hr{
-    width:40%;
-    /* border: 0.5px solid white; */
+.puntos {
+    width:100px;
+    height:5px;
+    margin:auto;
+    background:radial-gradient(circle closest-side,#ffffff 98%,#0000) 0/calc(100%/3) 100%;
 }
 

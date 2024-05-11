@@ -1,0 +1,22 @@
+.header{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "slnt" 0;
+    text-align: center;
+    background-color: white;
+  }
+  
+  h2{
+    margin: auto;
+    font-size:x-large;
+  }
+  
+  a{
+    color: black;
+    text-decoration: none;
+  }
+  
+  a:hover{
+    color: gray;
+  }

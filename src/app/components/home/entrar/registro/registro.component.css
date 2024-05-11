@@ -24,20 +24,19 @@
     max-width: 500px;
 }
 
-.mat-mdc-card-header{
+.volver{
+    vertical-align: middle;
+    color: white;
+    font-weight: 500;
+}
+
+.card-header{
+    display:flex;
     padding: 2em;
-    justify-content: center;
-    /* background-color: black; */
     background-image: linear-gradient(#74101D,#DA1E37);
     font-family: "Noto Sans", sans-serif;
     color: white;
     border-radius: 5px 5px 0px 0px;
-}
-
-.volver{
-    float: left;
-    color: white;
-    font-weight: 500;
 }
 
 .mat-mdc-card-title{
@@ -59,7 +58,7 @@
 }
 
 .enviar{
-    padding: 1em;
+    padding: 2em;
     font-weight: normal;
 }
 

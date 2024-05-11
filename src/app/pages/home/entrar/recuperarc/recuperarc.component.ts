@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../components/header/header.component';
-import { RecuperarComponent } from '../../components/recuperar/recuperar.component';
+import { HeaderComponent } from '../../../../components/general/header/header.component';
+import { RecuperarComponent } from '../../../../components/home/entrar/recuperar/recuperar.component';
 
 @Component({
   selector: 'app-recuperarc',

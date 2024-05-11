@@ -1,12 +1,10 @@
 <div class="acceder">
     <div class="blur">
         <mat-card>
-            <mat-card-header>
-                <button class="volver" mat-button [routerLink]="['']"><span class="material-symbols-outlined volver">
-                    arrow_back
-                    </span></button>
-              <mat-card-title>Acceder</mat-card-title>
-            </mat-card-header>
+            <div class="card-header">
+                <button class="volver" mat-button [routerLink]="['']"><span class="material-symbols-outlined volver">arrow_back</span></button>
+                <mat-card-title>Acceder</mat-card-title>
+            </div>
             <mat-card-content>
                 <form [formGroup]="userForm" (ngSubmit)="enviar()">
                     Usuario: <br>

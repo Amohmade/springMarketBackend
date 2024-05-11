@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../components/header/header.component';
-import { RegistroComponent } from '../../components/registro/registro.component';
+import { HeaderComponent } from '../../../../components/general/header/header.component';
+import { RegistroComponent } from '../../../../components/home/entrar/registro/registro.component';
 
 @Component({
   selector: 'app-registrar',

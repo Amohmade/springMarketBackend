@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../components/header/header.component';
-import { AccederComponent } from '../../components/acceder/acceder.component';
+import { HeaderComponent } from '../../../../components/general/header/header.component';
+import { AccederComponent } from '../../../../components/home/entrar/acceder/acceder.component';
 
 @Component({
   selector: 'app-cuenta',

@@ -1,0 +1,18 @@
+.barra{
+    width: 75px;
+    background-color: black;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.contenido{
+    width:95%;
+    margin: 5px;
+}
+
+.menu{
+    height: max-content;
+    display: flex;
+    height: 92vh;
+    background-color: beige;
+}

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../components/header/header.component';
-import { BannerComponent } from '../../components/banner/banner.component';
-import { PreciosComponent } from '../../components/precios/precios.component';
-import { FuncionesComponent } from '../../components/funciones/funciones.component';
+import { HeaderComponent } from '../../components/general/header/header.component';
+import { BannerComponent } from '../../components/home/banner/banner.component';
+import { PreciosComponent } from '../../components/home/precios/precios.component';
+import { FuncionesComponent } from '../../components/home/funciones/funciones.component';
 
 @Component({
   selector: 'app-home',
