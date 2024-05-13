@@ -1,6 +1,17 @@
 <app-userheader></app-userheader>
 <div class="menu">
-    <app-barra-lateral class="barra"></app-barra-lateral>
-    <app-contenido class="contenido"></app-contenido>
+    <div class="contenido">
+        <button class="mat-button" mat-raised-button *ngFor="let accion of accionPorRol(1)">{{accion.nombre}}</button>
+        <div class="spacer"></div>
+        <div class="micuenta">
+                <h2>Mi cuenta</h2>
+                <ul>
+                    <li><a href="">Informacion personal</a></li>
+                    <li><a href="">Seguridad</a></li>
+                    <li><a href="">Cerrar sesion</a></li>
+                </ul>
+        </div>
+    </div>
+    <app-barra-menu class="barra-menu"></app-barra-menu>
 </div>
 

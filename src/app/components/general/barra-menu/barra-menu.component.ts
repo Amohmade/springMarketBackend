@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RouterModule } from '@angular/router';
+import { UserMenuComponent } from '../../../pages/user-menu/user-menu.component';
 
 @Component({
-  selector: 'app-barra-lateral',
+  selector: 'app-barra-menu',
   standalone: true,
   imports: [RouterModule,MatGridListModule,MatButtonModule],
-  templateUrl: './barra-lateral.component.html',
-  styleUrl: './barra-lateral.component.css'
+  templateUrl: './barra-menu.component.html',
+  styleUrl: './barra-menu.component.css'
 })
-export class BarraLateralComponent {
-
+export class BarraMenuComponent {
+  
 }

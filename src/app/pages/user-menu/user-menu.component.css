@@ -1,18 +1,55 @@
-.barra{
-    width: 75px;
-    background-color: black;
-    margin: 5px;
+.barra-menu{
+    display: flex;
+    height: 75px;
+    background-color: white;
     border-radius: 5px;
 }
 
+.mat-button{
+    width: 31%;
+    /* font-weight: bold; */
+    font-size: large;
+    background-color: white;
+    border-radius: 5px;
+    padding: 2em;
+    margin: 0 1em 1em 0 ;
+}
+
 .contenido{
-    width:95%;
-    margin: 5px;
+    margin-bottom: auto;
+    height: 100%;
 }
 
 .menu{
-    height: max-content;
-    display: flex;
-    height: 92vh;
-    background-color: beige;
+    padding: 1em;
+    background-color: black;
 }
+
+.spacer{
+    height: auto;
+}
+
+.micuenta{
+    background-color: white;
+    border-radius: 5px;
+    padding: 1em 3em 1em 2em;
+    margin: 0 0 16px 0;
+    text-decoration: none;
+    height: auto;
+    width: fit-content;
+}
+
+a, a:active{
+    text-decoration: none;
+    color: black;
+}
+
+li{
+    list-style-type: none;
+    transition: all 0.1 ease-out;
+}
+
+li:hover{
+    color: white;
+    background-color: green;
+} 
