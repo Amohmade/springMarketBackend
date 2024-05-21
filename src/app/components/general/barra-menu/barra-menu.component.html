@@ -1,19 +1,11 @@
 <div class="barra">
-    <mat-grid-list rowHeight="75px">
-        <mat-grid-tile><span class="material-symbols-outlined">
-            barcode_scanner
-            </span></mat-grid-tile>
-        <mat-grid-tile><span class="material-symbols-outlined">
-            list
-            </span></mat-grid-tile>
-        <mat-grid-tile><span class="material-symbols-outlined">
-            monitoring
-            </span></mat-grid-tile>
-        <mat-grid-tile><span class="material-symbols-outlined">
-            groups
-            </span></mat-grid-tile>
-        <mat-grid-tile><span class="material-symbols-outlined">
+    <mat-grid-list cols="{{rol==1?5:3}}" rowHeight="75px">
+        <mat-grid-tile *ngFor="let icono of Iconos | slice:0:(rol == 1 ? 4 : 2)" [routerLink]="[icono.nombre]"><span class="material-symbols-outlined">
+            {{icono.src}}
+             </span></mat-grid-tile>
+        <mat-grid-tile [routerLink]="['Menu/Ajustes']"><span class="material-symbols-outlined">
             account_circle
-            </span></mat-grid-tile>
+             </span>
+            </mat-grid-tile>
     </mat-grid-list>
 </div>

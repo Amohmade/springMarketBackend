@@ -1,0 +1,155 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: "Inter", sans-serif;
+}
+
+.contenido{
+    display: grid;
+    grid-template-columns: auto;
+    padding: 4em;
+    flex: 1 1 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.detalles{
+    display: flex;
+}
+
+.mat-mdc-card-header{
+    padding: 1em 2em;
+}
+
+.mat-mdc-card-title{
+    font-size: x-large;
+}
+
+.mat-mdc-card-sm-image{
+    height: 8em;
+    width: 8em;
+}
+
+.caja{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    font-size: large;
+    text-align: center;
+    width: 8em;
+}
+
+h2{
+    font-weight: bold;
+}
+
+.botones{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1em;
+    margin-top: 1em;
+    flex: 1 1 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.boton{
+    font-size: large;
+    padding: 2em;
+}
+
+.vender{
+    display: grid;
+    grid-template-columns: auto 5em 40px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.item1{
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    padding: 1em;
+    color: black;
+    background-color: rgb(123, 255, 123);
+    border-radius: 5px 0 0 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.item1:hover{
+    color: white;
+    background-color: rgb(39, 206, 39);
+}
+
+.item2{
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    border-right-style: solid;
+    border-width: 1px;
+    border-color: lightslategray;
+}
+.item3{
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: lightslategray;
+    transition: all 0.2s ease-in-out;
+}
+
+.item4{
+    transition: all 0.2s ease-in-out;
+}
+
+.item3:hover{
+    background-color: black;
+    color: white;
+    border-radius: 0 5px 0 0;
+}
+
+.item4:hover{
+    background-color: black;
+    color: white;
+    border-radius: 0 0 5px 0;
+}
+
+.ajustar{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    font-size: x-large;
+    text-align: center;
+}
+
+.plus{
+    border-style: none;
+    height: 36px;
+    background-color: white;
+    font-size: large;
+    padding: 0px;
+}
+
+.mod{
+    padding: 1em;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.mod:hover{
+    background-color: rgb(98, 171, 255);
+    color: white;
+}
+
+.res{
+    padding: 1em;
+    color: white;
+    background-color: rgb(255, 100, 100);
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.res:hover{
+    background-color: rgb(255, 40, 40);
+}

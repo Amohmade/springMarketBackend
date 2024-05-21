@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RouterModule } from '@angular/router';
@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './userheader.component.css'
 })
 export class UserheaderComponent {
+
   notificaciones(){
     alert("No tienes notificaciones");
   }

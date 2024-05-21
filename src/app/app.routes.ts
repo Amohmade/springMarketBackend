@@ -5,6 +5,9 @@ import { RegistrarComponent } from './pages/home/entrar/registrar/registrar.comp
 import { RecuperarcComponent } from './pages/home/entrar/recuperarc/recuperarc.component';
 import { UserMenuComponent } from './pages/user-menu/user-menu.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { EscanearComponent } from './pages/escanear/escanear.component';
+import { InfoscanComponent } from './pages/escanear/infoscan/infoscan.component';
+import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
 
 export const routes: Routes = [
     {
@@ -28,9 +31,26 @@ export const routes: Routes = [
         title: 'RecuperarContraseña'
     },
     {
-        path: 'Mi Cuenta',
+        path: 'Menu',
         component: UserMenuComponent,
-        title: 'Mi Cuenta'
+        children: [
+            {
+                path: 'Escanear',
+                component: EscanearComponent,
+                title: 'Escanear'
+            }
+        ],
+        title: 'Menu'
+    },
+    {
+        path: 'Menu/Escanear/:id',
+        component: InfoscanComponent,
+        title: 'Info Escaneo'
+    },
+    {
+        path: 'Menu/Estadisticas',
+        component: EstadisticasComponent,
+        title: 'Estadisticas'
     },
     {
         path: '**',

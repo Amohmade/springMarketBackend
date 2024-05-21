@@ -4,6 +4,7 @@ import { UserheaderComponent } from '../../components/general/userheader/userhea
 import { BarraMenuComponent } from '../../components/general/barra-menu/barra-menu.component';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { EscanearComponent } from '../escanear/escanear.component';
 
 @Component({
   selector: 'app-user-menu',
@@ -18,16 +19,23 @@ import { RouterModule } from '@angular/router';
   styleUrl: './user-menu.component.css'
 })
 export class UserMenuComponent {
+
+  role: number;
+
   Acciones = [
-    { nombre: 'Escanear', rol: 3 },
-    { nombre: 'Productos', rol: 1 },
-    { nombre: 'Estadísticas', rol: 2 },
-    { nombre: 'Empleados', rol: 1 },
-    { nombre: 'Pedidos', rol: 3 },
-    { nombre: 'Proveedores', rol: 1 }
+    { nombre: 'Escanear', rol: 3},
+    { nombre: 'Productos', rol: 1},
+    { nombre: 'Estadísticas', rol: 2},
+    { nombre: 'Empleados', rol: 1},
+    { nombre: 'Pedidos', rol: 3},
+    { nombre: 'Proveedores', rol: 1}
   ];
 
-  accionPorRol(rol: number): any[]{
-    return this.Acciones.filter(accion => accion.rol >= rol);
+  constructor() {
+    this.role = 1;
+  }
+
+  accionPorRol(role: number): any[]{
+    return this.Acciones.filter(accion => accion.rol >= role);
   }
 }
