@@ -8,6 +8,8 @@ import { ErrorComponent } from './pages/error/error.component';
 import { EscanearComponent } from './pages/escanear/escanear.component';
 import { InfoscanComponent } from './pages/escanear/infoscan/infoscan.component';
 import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
+import { ProductosComponent } from './pages/productos/productos.component';
+import { EmpleadosComponent } from './pages/empleados/empleados.component';
 
 export const routes: Routes = [
     {
@@ -33,14 +35,12 @@ export const routes: Routes = [
     {
         path: 'Menu',
         component: UserMenuComponent,
-        children: [
-            {
-                path: 'Escanear',
-                component: EscanearComponent,
-                title: 'Escanear'
-            }
-        ],
         title: 'Menu'
+    },
+    {
+        path: 'Menu/Escanear',
+        component: EscanearComponent,
+        title: 'Escanear'
     },
     {
         path: 'Menu/Escanear/:id',
@@ -48,7 +48,32 @@ export const routes: Routes = [
         title: 'Info Escaneo'
     },
     {
+        path: 'Menu/Productos',
+        component: ProductosComponent,
+        title: 'Productos'
+    },
+    {
         path: 'Menu/Estadisticas',
+        component: EstadisticasComponent,
+        title: 'Estadisticas'
+    },
+    {
+        path: 'Menu/Empleados',
+        component: EmpleadosComponent,
+        title: 'Empleados'
+    },
+    {
+        path: 'Menu/Pedidos',
+        component: EstadisticasComponent,
+        title: 'Estadisticas'
+    },
+    {
+        path: 'Menu/Proveedores',
+        component: EstadisticasComponent,
+        title: 'Estadisticas'
+    },
+    {
+        path: 'Menu/Cuenta',
         component: EstadisticasComponent,
         title: 'Estadisticas'
     },

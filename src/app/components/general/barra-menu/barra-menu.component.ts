@@ -22,7 +22,7 @@ export class BarraMenuComponent {
   Iconos = [
     { nombre: 'Escanear', src: "barcode_scanner"},
     { nombre: 'Productos', src: "list"},
-    { nombre: 'Estadísticas', src: "monitoring"},
+    { nombre: 'Estadisticas', src: "monitoring"},
     { nombre: 'Empleados', src: "groups"},
   ];
 

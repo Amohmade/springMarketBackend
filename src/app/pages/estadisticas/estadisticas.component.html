@@ -1,1 +1,53 @@
-<p>estadisticas works!</p>
+<app-userheader></app-userheader>
+<!-- <div class="contenido"> -->
+    <div class="contenido">
+        <!-- Bloque superior -->
+            <div class="dinero">
+                <div class="caja">
+                    <p>Ingresos</p>
+                    <h1><b>0001</b></h1>
+                </div>
+                <div class="caja">
+                    <p>Gastos</p>
+                    <h1><b>0001</b></h1>
+                </div>
+                <div class="caja">
+                    <p>Beneficios</p>
+                    <h1><b>0001</b></h1>
+                </div>
+                <div class="caja">
+                    <p>Perdida o robo</p>
+                    <h1><b>0001</b></h1>
+                </div>
+                <div class="caja">
+                    <p>Gastos local</p>
+                    <h1><b>0001</b></h1>
+                </div>
+                <div class="caja">
+                    <p>Nos deben</p>
+                    <h1><b>0001</b></h1>
+                </div>
+            </div>
+        <!-- Bloque abajo izquierda -->
+            <div class="masvendido" >
+                <h2>Mas vendido</h2>
+                    <div class="topproducto" *ngFor="let producto of Topventas; index as i">
+                    <b>{{i+1}}º</b>
+                        <div class="producto">
+                            <h3>{{producto.nombre}}   <b>{{producto.unidades}}</b> ventas</h3>
+                        </div>
+                    </div>
+            </div>
+        <!-- Bloque abajo derecha -->
+        <div class="queso">
+            <h2>Mas vendido</h2>
+                    <div class="topproducto" *ngFor="let producto of Topventas; index as i">
+                    <b>{{i+1}}º</b>
+                        <div class="producto">
+                            <h3>{{producto.nombre}}   <b>{{producto.unidades}}</b> ventas</h3>
+                        </div>
+                    </div>
+        </div>
+    </div>
+<!-- </div> -->
+<app-barra-menu></app-barra-menu>

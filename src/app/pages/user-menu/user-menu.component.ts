@@ -21,19 +21,19 @@ import { EscanearComponent } from '../escanear/escanear.component';
 export class UserMenuComponent {
 
   role: number;
-
+  
+  constructor() {
+    this.role = 1;
+  }
+  
   Acciones = [
     { nombre: 'Escanear', rol: 3},
     { nombre: 'Productos', rol: 1},
-    { nombre: 'Estadísticas', rol: 2},
+    { nombre: 'Estadisticas', rol: 2},
     { nombre: 'Empleados', rol: 1},
     { nombre: 'Pedidos', rol: 3},
     { nombre: 'Proveedores', rol: 1}
   ];
-
-  constructor() {
-    this.role = 1;
-  }
 
   accionPorRol(role: number): any[]{
     return this.Acciones.filter(accion => accion.rol >= role);
