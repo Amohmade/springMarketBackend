@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { BarraMenuComponent } from '../../components/general/barra-menu/barra-menu.component';
+import { BarraMenuComponent } from '../barra-menu/barra-menu.component';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { UserheaderComponent } from '../../components/general/userheader/userheader.component';
+import { UserheaderComponent } from '../userheader/userheader.component';
 
 @Component({
   selector: 'app-escanear',

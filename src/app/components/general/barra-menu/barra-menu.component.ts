@@ -17,20 +17,11 @@ import { RouterModule } from '@angular/router';
   styleUrl: './barra-menu.component.css'
 })
 export class BarraMenuComponent {
-  @Input() rol=0;
 
   Iconos = [
     { nombre: 'Escanear', src: "barcode_scanner"},
-    { nombre: 'Productos', src: "list"},
+    { nombre: 'Productos', src: "grocery"},
     { nombre: 'Estadisticas', src: "monitoring"},
-    { nombre: 'Empleados', src: "groups"},
+    { nombre: 'Proveedores', src: "patient_list"}
   ];
-
-  iconosPorRol(rol:number){
-    if(rol==1){
-      return 3;
-    }else{
-      return 1;
-    }
-  }
 }

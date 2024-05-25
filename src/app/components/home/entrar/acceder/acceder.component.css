@@ -1,10 +1,6 @@
 .acceder{
     align-items: center;
     justify-content: center;
-    background-image: url('https://plus.unsplash.com/premium_photo-1681487916420-8f50a06eb60e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-repeat: no-repeat;
-    background-attachment: fixed;  
-    background-size: cover;
 }
 
 .blur{
@@ -20,19 +16,28 @@
 }
 .mat-mdc-card{
     margin:auto;
-    height: 50%;
     max-width: 500px;
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    color: white;
+    border: #ffffff20 solid 1px;
 }
 
 .card-header{
-    display:flex;
+    display: grid;
+    grid-template-columns: auto auto auto;
     padding: 2em;
-    background-image: linear-gradient(#74101D,#DA1E37);
+    /* background-image: linear-gradient(#74101D,#DA1E37); */
     font-family: "Noto Sans", sans-serif;
     color: white;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 3px 3px 0px 0px;
+    align-items: center;
+    justify-items: start;
 }
 
+::ng-deep .mat-text-field.mat-focused .mat-form-field- {
+    color: rgb(255, 255, 255)!important;
+}
 
 .volver{
     vertical-align: middle;
@@ -42,15 +47,15 @@
 
 .mat-mdc-card-title{
     font-size: xx-large;
+    align-items: center;
 }
 
 .mat-mdc-card-content{
-    padding: 2em;
+    padding: 1em 2em;
 }
 
 .mat-mdc-card-actions{
     padding: 2em;
-    padding-top: 0;
     justify-content: end;
 }
 
@@ -58,9 +63,22 @@
     vertical-align: middle;
 }
 
+.links{
+    display: flex;
+    justify-content: space-between;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+}
+
 .enviar{
     padding: 1em;
     font-weight: normal;
+    width: 100%;
+    height: auto;
 }
 
 .enviar:enabled{

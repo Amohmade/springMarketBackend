@@ -1,33 +1,33 @@
-:host {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
 .contenido{
     display: grid;
     grid-template-columns: auto auto;
     gap: 1em;
-    padding: 1em 4em;
+    /* padding: 1em 4em; */
 }
 
-.micuenta{
+/* .micuenta{
     padding: 1em 4em;
     height: auto;
     width: auto;
+    margin-top: 1em;
     display: flex;
+    gap: 1em;
     flex: 1 1 auto;
+    grid-template-columns: auto auto;
     flex-direction: column;
     justify-content: flex-end;
-}
+} */
 
 .buttoncuenta{
     padding: 2em;
     text-decoration: none;
-    height: auto;
-    width: 40%;
+    text-align: center;
+    /* height: auto; */
+    /* width: 50%; */
     background-color: white;
     border-radius: 5px;
+    box-shadow: 0 3px 5px 0px gray;
+
 }
 
 /* .barra-menu{
@@ -58,7 +58,7 @@
 }
 
 .extrab:hover{
-    margin: 1em;
+    /* margin: 1em; */
     padding: 1em;
     color: white;
     background-color: black;

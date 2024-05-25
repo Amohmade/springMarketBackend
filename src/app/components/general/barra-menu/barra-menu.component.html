@@ -1,11 +1,12 @@
 <div class="barra">
-    <mat-grid-list cols="{{rol==1?5:3}}" rowHeight="75px">
-        <mat-grid-tile *ngFor="let icono of Iconos | slice:0:(rol == 1 ? 4 :2)" [routerLink]="[icono.nombre]"><span class="material-symbols-outlined">
+    <mat-grid-list cols="5" rowHeight="75px">
+        <mat-grid-tile *ngFor="let icono of Iconos" [routerLink]="[icono.nombre]"><span class="material-symbols-outlined">
             {{icono.src}}
-             </span></mat-grid-tile>
-        <mat-grid-tile [routerLink]="['../Ajustes']"><span class="material-symbols-outlined">
+             </span>
+        </mat-grid-tile>
+        <mat-grid-tile [routerLink]="['Mi Cuenta']"><span class="material-symbols-outlined">
             account_circle
              </span>
-            </mat-grid-tile>
+        </mat-grid-tile>
     </mat-grid-list>
 </div>

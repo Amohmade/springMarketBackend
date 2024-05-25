@@ -1,0 +1,63 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.cuerpo{
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    background-color: black;
+    /* background-image: url('https://plus.unsplash.com/premium_photo-1681487916420-8f50a06eb60e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover; */
+}
+
+@keyframes rotate {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}
+
+.gradient {
+--size: 1000px;
+--speed: 5s;
+--easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
+
+width: var(--size);
+height: var(--size);
+filter: blur(calc(var(--size) / 5));
+background-image: linear-gradient(#74101D,#DA1E37);
+animation: rotate var(--speed) var(--easing) alternate infinite;
+border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+@media (min-width: 720px) {
+    .gradient {
+        --size: 500px;
+        align-self: center;
+        position: absolute;
+    }
+}
+
+/* .banner {
+background-color: #ffffff;
+position: absolute;
+inset: 0;
+display: flex;
+place-content: center;
+align-items: center;
+overflow: hidden;
+text-align: center;
+} */
+
+/* This is just to transition when you change the viewport size. */
+* {
+transition: all 0.5s ease-out;
+}

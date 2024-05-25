@@ -1,16 +1,14 @@
-<app-userheader></app-userheader>
 <div class="contenido" cols="2">
-    <div class="box">
+    <div class="box" [routerLink]="['QR']">
         <span class="material-symbols-outlined">
         barcode_scanner
         </span><br>
         Escanear producto
     </div>
-    <div class="box">
+    <div class="box" [routerLink]="['Buscar']">
         <span class="material-symbols-outlined">
         search
         </span><br>
         Buscar producto
     </div>
 </div>
-<app-barra-menu></app-barra-menu>

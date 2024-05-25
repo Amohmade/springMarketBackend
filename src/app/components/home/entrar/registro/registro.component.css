@@ -20,7 +20,6 @@
 }
 .mat-mdc-card{
     margin:auto;
-    height: 50%;
     max-width: 500px;
 }
 
@@ -36,7 +35,7 @@
     background-image: linear-gradient(#74101D,#DA1E37);
     font-family: "Noto Sans", sans-serif;
     color: white;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 3px 3px 0px 0px;
 }
 
 .mat-mdc-card-title{

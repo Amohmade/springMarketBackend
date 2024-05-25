@@ -1,5 +1,5 @@
-<div class="recuperar">
-    <div class="blur">
+<!-- <div class="recuperar">
+    <div class="blur"> -->
         <mat-card>
             <mat-card-header>
               <mat-card-title>Recupera tu cuenta</mat-card-title>
@@ -14,9 +14,9 @@
                 </form>
             </mat-card-content>
             <mat-card-actions>
-                <button class="cancelar" mat-stroked-button [routerLink]="['/Entrar']" >Cancelar</button>
+                <button class="cancelar" mat-stroked-button onclick="history.back()">Cancelar</button>
                 <button class="enviar" mat-flat-button [disabled]="!recuperarForm.valid" type="submit" (click)="enviar()">Recuperar</button>
             </mat-card-actions>
           </mat-card>
-    </div>
-</div>
+    <!-- </div>
+</div> -->
