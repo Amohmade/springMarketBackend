@@ -1,10 +1,10 @@
 .barra{
-    padding: 1em;
+    padding: 1em 6em;
 }
 
 .mat-grid-list{
     background-color: white;
-    border-radius: 5px;
+    border-radius: 3px;
     /* transition: all 0.2s ease-in-out; */
 }
 
@@ -26,11 +26,16 @@ button:hover{
 .mat-grid-tile{
     border: none;
     background-color: white;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     border-radius: 5px;
 }
 
 .mat-grid-tile:hover{
     color: white;
     background-color: black;
+}
+
+.active{
+    background-color: black;
+    color: white;
 }

@@ -8,8 +8,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
   selector: 'app-estadisticas',
   standalone: true,
   imports: [
-    UserheaderComponent,
-    BarraMenuComponent,
     CommonModule,
     MatGridListModule
   ],

@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Component, Input} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { RouterModule } from '@angular/router';
+import { RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-barra-menu',
   standalone: true,
   imports: [
     RouterModule,
+    RouterLinkActive,
     MatGridListModule,
     CommonModule,
     MatButtonModule],
@@ -24,4 +25,5 @@ export class BarraMenuComponent {
     { nombre: 'Estadisticas', src: "monitoring"},
     { nombre: 'Proveedores', src: "patient_list"}
   ];
+  
 }

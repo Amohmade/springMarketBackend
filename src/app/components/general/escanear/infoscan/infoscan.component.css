@@ -1,34 +1,76 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+    
     font-family: "Inter", sans-serif;
 }
 
 .contenido{
     display: grid;
-    grid-template-columns: auto;
-    padding: 4em;
-    flex: 1 1 auto;
-    justify-content: center;
+    grid-template-columns: 50% auto;
+    /* flex-direction: column;
+    flex: 1 1 auto; */
+    gap: 1em;
+    /* justify-content: center; */
     align-items: center;
 }
 
-.detalles{
+.busqueda{
+    width: 100%;
+}
+
+.cesta{
+    width: 100%;
+}
+
+.listacesta{
     display: flex;
+    flex-direction: column;
+    padding: 1em 4em;
+    overflow-y:scroll;
+    min-height: 200px;
+    max-height: 500px;
+    transition: all 0.3s ease-in-out;
+}
+
+.productocarrito{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.mat-mdc-card-content{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.mat-mdc-card-actions{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: large;
+}
+
+.mat-mdc-card-actions button{
+    font-size: large;
+    padding: 1em;
+    background-color: black;
+    color: white;
+}
+
+.pagar{
+    width: 100%;
+    font-size: large;
+    padding: 1em;
 }
 
 .mat-mdc-card-header{
-    padding: 1em 2em;
+    padding:2em;
+    justify-content: center;
 }
 
 .mat-mdc-card-title{
     font-size: x-large;
-}
-
-.mat-mdc-card-sm-image{
-    height: 8em;
-    width: 8em;
 }
 
 .caja{
@@ -39,26 +81,15 @@
     background-color: white;
     font-size: large;
     text-align: center;
-    width: 8em;
+    grid-column: 1;
 }
 
 h2{
     font-weight: bold;
 }
 
-.botones{
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 1em;
-    margin-top: 1em;
-    flex: 1 1 auto;
-    justify-content: center;
-    align-items: center;
-}
-
-.boton{
+.precio{
     font-size: large;
-    padding: 2em;
 }
 
 .vender{
@@ -83,73 +114,10 @@ h2{
     background-color: rgb(39, 206, 39);
 }
 
-.item2{
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    border-right-style: solid;
-    border-width: 1px;
-    border-color: lightslategray;
-}
-.item3{
-    border-bottom-style: solid;
-    border-width: 1px;
-    border-color: lightslategray;
-    transition: all 0.2s ease-in-out;
-}
-
-.item4{
-    transition: all 0.2s ease-in-out;
-}
-
-.item3:hover{
-    background-color: black;
-    color: white;
-    border-radius: 0 5px 0 0;
-}
-
-.item4:hover{
-    background-color: black;
-    color: white;
-    border-radius: 0 0 5px 0;
-}
-
 .ajustar{
     justify-content: center;
     display: flex;
     flex-direction: column;
     font-size: x-large;
     text-align: center;
-}
-
-.plus{
-    border-style: none;
-    height: 36px;
-    background-color: white;
-    font-size: large;
-    padding: 0px;
-}
-
-.mod{
-    padding: 1em;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    transition: all 0.2s ease-in-out;
-}
-
-.mod:hover{
-    background-color: rgb(98, 171, 255);
-    color: white;
-}
-
-.res{
-    padding: 1em;
-    color: white;
-    background-color: rgb(255, 100, 100);
-    border-radius: 5px;
-    transition: all 0.2s ease-in-out;
-}
-
-.res:hover{
-    background-color: rgb(255, 40, 40);
 }

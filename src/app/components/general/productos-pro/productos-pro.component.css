@@ -1,0 +1,11 @@
+.contenido {
+    padding: 2em;
+}
+
+.mat-table {
+width: 100%;
+}
+
+mat-paginator {
+margin-top: 10px;
+}

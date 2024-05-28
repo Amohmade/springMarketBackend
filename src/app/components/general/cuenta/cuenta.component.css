@@ -1,0 +1,54 @@
+.mat-mdc-card{
+    margin:auto;
+    max-width: 600px;
+}
+
+.cuenta{
+    vertical-align: middle;
+    font-weight: 500;
+    font-size: 3em;
+}
+
+.card-header{
+    display:flex;
+    padding: 2em;
+    padding-bottom: 0;
+    font-family: "Noto Sans", sans-serif;
+    /* color: white; */
+    border-radius: 3px 3px 0px 0px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mat-mdc-card-title{
+    font-size: xx-large;
+}
+
+.mat-mdc-card-content{
+    padding:1em 6em;
+}
+
+.mat-mdc-card-actions{
+    padding: 2em;
+    padding-top: 0;
+    justify-content: end;
+}
+
+.icon{
+    vertical-align: middle;
+}
+
+.modificar{
+    padding: 2em;
+    font-weight: normal;
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+}
+
+.modificar:enabled{
+    color: white;
+    background-color: black;
+}
+.modificar:disabled{
+    background-color: lightgray;
+}

@@ -6,7 +6,7 @@
 
 .cuerpo{
     display: flex;
-    margin: 1em 3em;
+    margin: 1em 5em;
     flex: 1 1 auto;
     flex-direction: column;
     justify-content: center;

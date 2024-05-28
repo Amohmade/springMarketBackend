@@ -4,13 +4,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import { FormGroup,FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,FormGroup,FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-registro',
+  selector: 'app-cuenta',
   standalone: true,
   imports: [
+    FormsModule,
     MatCardModule,
     MatFormFieldModule,
     ReactiveFormsModule,
@@ -19,10 +20,19 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     RouterModule
   ],
-  templateUrl: './registro.component.html',
-  styleUrl: './registro.component.css'
+  templateUrl: './cuenta.component.html',
+  styleUrl: './cuenta.component.css'
 })
-export class RegistroComponent {
+export class CuentaComponent {
+
+  name="Usuario";
+
+  nombre:string ="Mohamed";
+  telefono:number =123456789;
+  correo:string="moha@gmail.com";
+  contrasena:string="Mohamed123";
+
+  isReadOnly = true;
 
   hide=true;
 
@@ -44,7 +54,12 @@ export class RegistroComponent {
       // Validators.required
     ]),
   });
+
   enviar(){
     console.log(this.registerForm.value);
+  }
+
+  toggleReadOnly(): void {
+    this.isReadOnly = !this.isReadOnly; // Toggle the read-only state
   }
 }

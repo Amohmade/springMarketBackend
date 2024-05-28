@@ -20,10 +20,12 @@ import data from '../../../../assets/json/data.json';
     MatSortModule,
     MatInputModule
   ],
-  templateUrl: './productos.component.html',
-  styleUrl: './productos.component.css'
+  templateUrl: './productos-pro.component.html',
+  styleUrl: './productos-pro.component.css'
 })
-export class ProductosComponent implements OnInit {
+export class ProductosProComponent implements OnInit {
+
+  nombre:string = "Proveedor";
 
   columnas: string[] = ['id', 'nombre', 'stock', 'precio_base', 'precio_venta'];
   datos = data;

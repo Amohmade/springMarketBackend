@@ -1,0 +1,7 @@
+<div class="proveedores" cols="3">
+    <div class="proveedor" *ngFor="let proveedor of Proveedores" [routerLink]="[proveedor.id]">
+        <h2>{{proveedor.nombre}}</h2>
+        <b>{{proveedor.num_productos}} </b>
+        <a>productos</a>
+    </div>
+</div>

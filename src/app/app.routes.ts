@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { UserMenuComponent } from './components/general/user-menu/user-menu.component';
-import { ErrorComponent } from './pages/error/error.component';
 import { EscanearComponent } from './components/general/escanear/escanear.component';
 import { InfoscanComponent } from './components/general/escanear/infoscan/infoscan.component';
 import { EstadisticasComponent } from './components/general/estadisticas/estadisticas.component';
@@ -11,6 +10,10 @@ import { EntrarComponent } from './components/home/entrar/entrar.component';
 import { AccederComponent } from './components/home/entrar/acceder/acceder.component';
 import { RegistroComponent } from './components/home/entrar/registro/registro.component';
 import { RecuperarComponent } from './components/home/entrar/recuperar/recuperar.component';
+import { ErrorComponent } from './components/general/error/error.component';
+import { CuentaComponent } from './components/general/cuenta/cuenta.component';
+import { ProveedoresComponent } from './components/general/proveedores/proveedores.component';
+import { ProductosProComponent } from './components/general/productos-pro/productos-pro.component';
 
 export const routes: Routes = [
     {
@@ -56,33 +59,27 @@ export const routes: Routes = [
             {
                 path: 'Escanear',
                 component: EscanearComponent,
-                children:[
-                    {
-                        path: 'QR',
-                        component: InfoscanComponent,
-                        children:[
-                            {
-                                path: 'QR/id:',
-                                component: InfoscanComponent,
-                                title: 'Info QR'
-                            }
-                        ],
-                        title: ' Buscar por QR'
-                    },
-                    {
-                        path: 'Buscar',
-                        component: InfoscanComponent,
-                        children:[
-                            {
-                                path: 'Buscar/id:',
-                                component: InfoscanComponent,
-                                title: 'Info producto'
-                            }
-                        ],
-                        title: 'Buscar producto'
-                    },
-                ],
                 title: 'Escanear'
+            },
+            {
+                path: 'Escanear/QR',
+                component: InfoscanComponent,
+                title: ' Buscar por QR'
+            },
+            {
+                path: 'Escanear/QR/id:',
+                component: InfoscanComponent,
+                title: 'Info QR'
+            },
+            {
+                path: 'Escanear/Buscar',
+                component: InfoscanComponent,
+                title: 'Buscar producto'
+            },
+            {
+                path: 'Escanear/Buscar/id:',
+                component: InfoscanComponent,
+                title: 'Info producto'
             },
             {
                 path: 'Productos',
@@ -96,8 +93,13 @@ export const routes: Routes = [
             },
             {
                 path: 'Proveedores',
-                component: EstadisticasComponent,
+                component: ProveedoresComponent,
                 title: 'Proveedores'
+            },
+            {
+                path: 'Proveedores/:id',
+                component: ProductosProComponent,
+                title: 'Productos Proveedor'
             },
             {
                 path: 'Pedidos',
@@ -105,8 +107,8 @@ export const routes: Routes = [
                 title: 'Estadisticas'
             },
             {
-                path: 'Mi Cuenta',
-                component: EstadisticasComponent,
+                path: 'Cuenta',
+                component: CuentaComponent,
                 title: 'Estadisticas'
             },
             {
@@ -117,11 +119,6 @@ export const routes: Routes = [
         ],
         title: 'Menu'
     },
-    // {
-    //     path: 'Menu/Escanear',
-    //     component: EscanearComponent,
-    //     title: 'Escanear'
-    // },
     {
         path: '**',
         component: ErrorComponent,
