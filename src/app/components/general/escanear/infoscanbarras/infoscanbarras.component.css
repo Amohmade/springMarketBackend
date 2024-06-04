@@ -5,7 +5,7 @@
 
 .contenido{
     display: grid;
-    grid-template-columns: 50% auto;
+    grid-template-columns: 60% auto;
     /* flex-direction: column;
     flex: 1 1 auto; */
     gap: 1em;
@@ -19,6 +19,21 @@
 
 .cesta{
     width: 100%;
+}
+
+.camara{
+    height: 100%;
+    width: 100%;
+}
+
+.caja{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    min-height: 200px;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+    border-radius: 3px;
 }
 
 .listacesta{

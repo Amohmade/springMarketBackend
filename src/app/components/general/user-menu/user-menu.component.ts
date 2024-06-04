@@ -33,7 +33,7 @@ export class UserMenuComponent {
     { nombre: 'Productos', rol: 1},
     { nombre: 'Estadisticas', rol: 2},
     { nombre: 'Proveedores', rol: 1},
-    // { nombre: 'Proveedores', rol: 1},
+    { nombre: 'Cuenta', rol: 1},
     // { nombre: 'Pedidos', rol: 3}
   ];
 

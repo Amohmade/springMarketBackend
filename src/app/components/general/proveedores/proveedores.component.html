@@ -1,7 +1,6 @@
 <div class="proveedores" cols="3">
-    <div class="proveedor" *ngFor="let proveedor of Proveedores" [routerLink]="[proveedor.id]">
-        <h2>{{proveedor.nombre}}</h2>
-        <b>{{proveedor.num_productos}} </b>
-        <a>productos</a>
+    <div class="proveedor" *ngFor="let proveedor of proveedores;let i = index" [routerLink]="[proveedor.id]">
+        <h2>{{proveedor.empresa}}</h2>
+        <b>{{proveedor.email}} </b>
     </div>
 </div>

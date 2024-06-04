@@ -10,7 +10,9 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+        
         "build": {
+          
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/angularp",
@@ -22,7 +24,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/dynamsoft-javascript-barcode/dist",
+                "output": "assets/dynamsoft-javascript-barcode"
+              }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
@@ -61,6 +68,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "angularp:build",
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "angularp:build:production"
@@ -87,7 +98,12 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/dynamsoft-javascript-barcode/dist",
+                "output": "assets/dynamsoft-javascript-barcode"
+              }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
@@ -103,3 +119,4 @@
     "analytics": "65a91740-ea3f-4d42-8477-59c326a7427e"
   }
 }
+

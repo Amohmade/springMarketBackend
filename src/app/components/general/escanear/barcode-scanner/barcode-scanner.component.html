@@ -1,0 +1,14 @@
+<span id="loading-status" style="font-size:x-large" [hidden]="isLoaded">Cargando libreria...</span>
+<br/>
+ 
+<div class="select" [hidden]="!isLoaded">
+<h1 for="videoSource">Escanear producto</h1>
+<select class="webcam" id="videoSource" (change)="openCamera()"></select><br><br>
+</div>
+ 
+<div id="videoview">
+<div class="dce-video-container" id="videoContainer"></div>
+<canvas id="overlay"></canvas>
+</div>
+
+ 

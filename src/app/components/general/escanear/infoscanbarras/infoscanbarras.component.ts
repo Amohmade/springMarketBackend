@@ -8,8 +8,9 @@ import {AsyncPipe, CommonModule, NgFor, NgIf} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import data from '../../../../assets/json/data.json';
+import data from '../../../../../assets/json/data.json';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { BarcodeScannerComponent } from '../barcode-scanner/barcode-scanner.component';
 
 interface Producto {
   id: number;
@@ -20,7 +21,7 @@ interface Producto {
 }
 
 @Component({
-  selector: 'app-productos-pro',
+  selector: 'app-infoscanbarras',
   standalone: true,
   imports: [
     NgFor,
@@ -34,18 +35,20 @@ interface Producto {
     MatAutocompleteModule,
     ReactiveFormsModule,
     AsyncPipe,
-    HttpClientModule
+    HttpClientModule,
+    BarcodeScannerComponent
   ],
-  templateUrl: './productos-pro.component.html',
-  styleUrl: './productos-pro.component.css'
+  templateUrl: './infoscanbarras.component.html',
+  styleUrl: './infoscanbarras.component.css'
 })
-
-export class ProductosProComponent implements OnInit {
+export class InfoscanbarrasComponent implements OnInit{
 
   datos: Producto[] = data.map((producto:Producto) => ({
     ...producto,
     precio_venta: producto.precio_base * 1.3
   }));
+
+  audio = document.getElementById('play');
 
   miform = new FormControl('');
   
@@ -74,7 +77,7 @@ export class ProductosProComponent implements OnInit {
   private _filter(value: string): Producto[] {
     const filterValue = value === 'string' ? value.toLowerCase() : value.toString();
     return this.datos.filter(producto => 
-      producto.nombre.toString().includes(filterValue)
+      producto.id.toString().includes(filterValue)
     );
   }
 
@@ -97,7 +100,7 @@ export class ProductosProComponent implements OnInit {
     localStorage.setItem('carrito',JSON.stringify(this.productos))
   }
 
-  addProducto(producto: any){
+  addProducto(producto: any){ 
     this.productos.push(producto);
     this.saveCarrito();
     this.subTotal += producto.price;
@@ -136,4 +139,15 @@ export class ProductosProComponent implements OnInit {
   //   localStorage.setItem('cart_total', JSON.stringify(this.total));
   //   this.router.navigate(['/payment']);
   // }
+  onScannedProduct(barcode: string) {
+    const producto = this.datos.find(p => p.id.toString() === barcode);
+    // if (producto && !this.productoCarrito(producto)) {
+    if (producto) {
+      this.addProducto(producto);
+      const audio = document.getElementById('play') as HTMLAudioElement;
+      if (audio) {
+        audio.play();
+      }
+    }
+  }
 }

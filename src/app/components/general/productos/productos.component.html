@@ -1,3 +1,9 @@
+Sube una lista de productos con formato json: <b>id</b> | <b>nombre</b> | <b>stock</b> | <b>precio_base</b> |  <b>precio_venta</b><br><br>
+<button type="button" mat-raised-button (click)="fileInput.click()">Subir productos</button>
+
+<input hidden requiredFileType="'application/json'" (change)="onArchivoSeleccionado($event)" #fileInput type="file">
+<span class="archivo">{{archivoSeleccionado?.name}}</span>
+<br><br>
 
 <table mat-table [dataSource]="datos">
   <ng-container matColumnDef="id">

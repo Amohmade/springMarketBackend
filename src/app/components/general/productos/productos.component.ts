@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { UserheaderComponent } from '../userheader/userheader.component';
 import { BarraMenuComponent } from '../barra-menu/barra-menu.component';
 import data from '../../../../assets/json/data.json';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-productos-pro',
@@ -18,6 +19,7 @@ import data from '../../../../assets/json/data.json';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    MatButtonModule,
     MatInputModule
   ],
   templateUrl: './productos.component.html',
@@ -29,6 +31,8 @@ export class ProductosComponent implements OnInit {
   datos = data;
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
+
+  archivoSeleccionado: any = null;
 
   ngOnInit(): void {
     this.datos.forEach((producto:any) => {
@@ -43,5 +47,10 @@ export class ProductosComponent implements OnInit {
       this.datos = new MatTableDataSource(this.datos);
       this.datos.paginator = this.paginator;
     });
+  }
+
+  onArchivoSeleccionado(event: any): void {
+      this.archivoSeleccionado = event.target.files[0] ?? null;
+
   }
 }

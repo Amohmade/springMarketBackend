@@ -1,0 +1,35 @@
+<div class="contenido">
+      <!-- //Escaner -->
+        <!-- Sonido al escanear -->
+        <audio id="play" src="../../../../../assets/Camera-beep-sound-effect.mp3"></audio>
+      <div class="caja">
+        <app-barcode-scanner class="camara" (scannedProduct)="onScannedProduct($event)"></app-barcode-scanner>
+      </div>
+      <!-- <mat-card class="cesta">
+        <mat-card-header>
+          <mat-card-title>Escaner</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="camara">
+            <app-barcode-scanner (scannedProduct)="onScannedProduct($event)"></app-barcode-scanner>
+        </mat-card-content>
+      </mat-card> -->
+
+      <!-- //Carrito -->
+      <mat-card class="cesta">
+        <mat-card-header>
+          <mat-card-title>Cesta</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="listacesta">
+          <div *ngFor="let producto of productos; let i  = index" class="productocarrito">
+            <p>{{producto.nombre}}</p><p>{{producto.precio_venta.toFixed(2)}}€</p>
+            <button mat-icon-button (click)="deleteProductoCarrito(producto)">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <a>Total: <b>{{ total() | currency:'EUR':'symbol':'1.2-2' }}</b></a>
+          <button *ngIf="total()!= 0" mat-button (click)="clearCarrito()">Pagar</button>
+        </mat-card-actions>
+      </mat-card>
+</div>

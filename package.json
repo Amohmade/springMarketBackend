@@ -25,6 +25,8 @@
     "@angular/ssr": "^17.2.3",
     "@material/grid-list": "^4.0.0",
     "@material/web": "^1.4.1",
+    "cors": "^2.8.5",
+    "dynamsoft-javascript-barcode": "^9.6.42",
     "express": "^4.18.2",
     "primeng": "^17.15.0",
     "rxjs": "~7.8.0",
