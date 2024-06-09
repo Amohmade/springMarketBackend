@@ -8,7 +8,7 @@ import { HttpClient ,HttpClientModule } from '@angular/common/http';
 interface Proveedor {
   id: number;
   email: string;
-  empresa: string;
+  nombre: string;
   telefono: number;
 }
 
@@ -33,10 +33,10 @@ export class ProveedoresComponent {
     this.fetchProveedores().subscribe(data => {
       this.proveedores = data;
     });
+    console.log(this.proveedores)
   }
 
   fetchProveedores(): Observable<Proveedor[]> {
-    // Replace with your actual API URL
     const apiUrl = 'api/proveedores';
     return this.http.get<Proveedor[]>(apiUrl);
   }
