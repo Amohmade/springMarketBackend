@@ -8,7 +8,6 @@ import {AsyncPipe, CommonModule, NgFor, NgIf} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import data from '../../../../../assets/json/data.json';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BarcodeScannerComponent } from '../barcode-scanner/barcode-scanner.component';
 
@@ -18,6 +17,7 @@ interface Producto {
   stock: number;
   precio_base: number;
   precio_venta: number;
+  cantidad: number;
 }
 
 @Component({
@@ -43,10 +43,7 @@ interface Producto {
 })
 export class InfoscanbarrasComponent implements OnInit{
 
-  datos: Producto[] = data.map((producto:Producto) => ({
-    ...producto,
-    precio_venta: producto.precio_base * 1.3
-  }));
+  listaproductos: Producto[] = [];
 
   audio = document.getElementById('play');
 
@@ -65,6 +62,10 @@ export class InfoscanbarrasComponent implements OnInit{
   constructor(private http: HttpClient){}
 
   ngOnInit() {
+    this.fetchListaProductos(1).subscribe(data => {
+      this.listaproductos = data;
+    });
+    console.log(this.listaproductos);
     this.filteredOptions = this.miform.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
@@ -74,41 +75,64 @@ export class InfoscanbarrasComponent implements OnInit{
     this.productos = this.getProducto();
   }
 
+  fetchListaProductos(id:number): Observable<Producto[]> {
+    const apiUrl = `api/productos?establecimiento=${id}`;
+    return this.http.get<Producto[]>(apiUrl);
+  }
+
   private _filter(value: string): Producto[] {
     const filterValue = value === 'string' ? value.toLowerCase() : value.toString();
-    return this.datos.filter(producto => 
+    return this.listaproductos.filter(producto => 
       producto.id.toString().includes(filterValue)
     );
   }
 
   onOptionSelected(event: any): void {
     const seleccionado = event.option.value;
-    this.selectedProducto = this.datos.find(producto => (producto.id === seleccionado)||(producto.nombre === seleccionado)) || null;
+    this.selectedProducto = this.listaproductos.find(producto => (producto.id === seleccionado)||(producto.nombre === seleccionado)) || null;
   }
 
   //Funciones carrito
-
-  getAllProductos(){
-    return this.http.get(data);
-  }
 
   getProducto(){
     return this.productos;
   }
 
   saveCarrito(){
-    localStorage.setItem('carrito',JSON.stringify(this.productos))
+    localStorage.setItem('carrito_compra',JSON.stringify(this.productos))
   }
 
-  addProducto(producto: any){ 
-    this.productos.push(producto);
+  addProducto(producto: any){
+    const index = this.productos.findIndex((p) => p.id === producto.id);
+    if (index > -1) {
+      this.productos[index].cantidad += 1;
+    } else {
+      producto.cantidad = 1;
+      this.productos.push(producto);
+    }
     this.saveCarrito();
-    this.subTotal += producto.price;
-    console.log(this.subTotal);
+    this.updateSubTotal();
+  }
+
+  updateSubTotal() {
+    this.subTotal = this.productos.reduce((total, producto) => total + producto.precio_venta * producto.cantidad, 0);
+  }
+
+  updateCantidad(producto: Producto, cantidad: number) {
+    const index = this.productos.findIndex((p) => p.id === producto.id);
+    if (index > -1) {
+      this.productos[index].cantidad = cantidad;
+      if (this.productos[index].cantidad <= 0) {
+        this.deleteProductoCarrito(producto);
+      } else {
+        this.saveCarrito();
+        this.updateSubTotal();
+      }
+    }
   }
 
   loadCarrito(){
-    this.productos = JSON.parse(localStorage.getItem('carrito') as any) || [];
+    this.productos = JSON.parse(localStorage.getItem('carrito_compra') as any) || [];
   }
 
   productoCarrito(producto:any){
@@ -125,7 +149,9 @@ export class InfoscanbarrasComponent implements OnInit{
   }
 
   clearCarrito(){
-    localStorage.clear();
+    sessionStorage.removeItem("carrito_compra");
+    this.productos = [];
+    this.updateSubTotal();
     window.location.reload();
   }
 
@@ -135,12 +161,8 @@ export class InfoscanbarrasComponent implements OnInit{
     }, 0);
   }
 
-  // checkout() {
-  //   localStorage.setItem('cart_total', JSON.stringify(this.total));
-  //   this.router.navigate(['/payment']);
-  // }
   onScannedProduct(barcode: string) {
-    const producto = this.datos.find(p => p.id.toString() === barcode);
+    const producto = this.listaproductos.find(p => p.id.toString() === barcode);
     // if (producto && !this.productoCarrito(producto)) {
     if (producto) {
       this.addProducto(producto);

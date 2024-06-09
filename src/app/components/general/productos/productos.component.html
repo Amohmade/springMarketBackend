@@ -1,11 +1,8 @@
-Sube una lista de productos con formato json: <b>id</b> | <b>nombre</b> | <b>stock</b> | <b>precio_base</b> |  <b>precio_venta</b><br><br>
-<button type="button" mat-raised-button (click)="fileInput.click()">Subir productos</button>
-
-<input hidden requiredFileType="'application/json'" (change)="onArchivoSeleccionado($event)" #fileInput type="file">
-<span class="archivo">{{archivoSeleccionado?.name}}</span>
-<br><br>
-
-<table mat-table [dataSource]="datos">
+<div *ngIf="role !== 1">
+<button type="button" mat-flat-button (click)="subirProductos()">Subir productos</button>
+</div>
+<br>
+<table mat-table [dataSource]="datos" class="tabla">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>ID</th>
     <td mat-cell *matCellDef="let producto">{{ producto.id }}</td>
@@ -21,14 +18,30 @@ Sube una lista de productos con formato json: <b>id</b> | <b>nombre</b> | <b>sto
     <td mat-cell *matCellDef="let producto">{{ producto.stock }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="precio_base">
-    <th mat-header-cell *matHeaderCellDef>Precio Base</th>
-    <td mat-cell *matCellDef="let producto">{{ producto.precio_base }}</td>
+  <ng-container matColumnDef="precio_base" >
+    <th mat-header-cell *matHeaderCellDef>Precio Coste</th>
+    <td mat-cell *matCellDef="let producto">{{ producto.precio_coste | number: '1.2-2' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="precio_venta">
     <th mat-header-cell *matHeaderCellDef>Precio Venta</th>
     <td mat-cell *matCellDef="let producto">{{ producto.precio_venta | number: '1.2-2' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones" class="acciones">
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let producto">
+      <button mat-icon-button (click)="editarProducto(producto)">
+        <span class="material-symbols-outlined">
+          edit
+          </span>
+      </button>
+      <button mat-icon-button (click)="eliminarProducto(producto)">
+        <span class="material-symbols-outlined borrar">
+          delete
+          </span>
+      </button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="columnas"></tr>

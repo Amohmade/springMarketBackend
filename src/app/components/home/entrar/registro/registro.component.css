@@ -15,6 +15,12 @@
     padding: 4em;
 }
 
+.top{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1em;
+}
+
 .mat-mdc-form-field{
     margin-top: 1em;
 }

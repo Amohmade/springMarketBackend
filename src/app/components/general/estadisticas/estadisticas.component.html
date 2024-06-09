@@ -1,50 +1,66 @@
 
 <div class="contenido">
     <!-- Bloque superior -->
-        <div class="dinero">
-            <div class="caja">
-                <p>Ingresos</p>
-                <h1><b>0001</b></h1>
-            </div>
-            <div class="caja">
-                <p>Gastos</p>
-                <h1><b>0001</b></h1>
-            </div>
-            <div class="caja">
-                <p>Beneficios</p>
-                <h1><b>0001</b></h1>
-            </div>
-            <div class="caja">
-                <p>Perdida o robo</p>
-                <h1><b>0001</b></h1>
-            </div>
-            <div class="caja">
-                <p>Gastos local</p>
-                <h1><b>0001</b></h1>
-            </div>
-            <div class="caja">
-                <p>Nos deben</p>
-                <h1><b>0001</b></h1>
-            </div>
+    <div class="dinero">
+        <div class="titulo">
+            <button class="mat-button" mat-icon-button (click)="cambiarMes(-1)">
+                <span class="material-symbols-outlined">
+                chevron_left
+                </span>
+            </button>
+            <div class="fecha"><b>{{ getMes() }}</b> / <b>{{ getAnho() }}</b></div>
+            <button class="mat-button" mat-icon-button (click)="cambiarMes(+1)">
+                <span class="material-symbols-outlined">
+                    chevron_right
+                </span>
+            </button>
         </div>
+        <hr>
+        <div class="caja">
+            <p>Ingresos</p>
+            <h1><b>0001</b></h1>
+        </div>
+        <div class="caja">
+            <p>Gastos</p>
+            <h1><b>0001</b></h1>
+        </div>
+        <div class="caja">
+            <p>Beneficios</p>
+            <h1><b>0001</b></h1>
+        </div>
+    </div>
     <!-- Bloque abajo izquierda -->
         <div class="masvendido" >
-            <h2>Mas vendido</h2>
+            <h2>Top ventas</h2>
                 <div class="topproducto" *ngFor="let producto of Topventas; index as i">
                 <b>{{i+1}}º</b>
-                    <div class="producto">
+                    <div class="producto" [ngStyle]="{'width.px': producto.unidades/10}">
                         <h3>{{producto.nombre}}   <b>{{producto.unidades}}</b> ventas</h3>
                     </div>
                 </div>
         </div>
     <!-- Bloque abajo derecha -->
     <div class="queso">
-        <h2>Mas vendido</h2>
-                <div class="topproducto" *ngFor="let producto of Topventas; index as i">
-                <b>{{i+1}}º</b>
-                    <div class="producto">
-                        <h3>{{producto.nombre}}   <b>{{producto.unidades}}</b> ventas</h3>
-                    </div>
-                </div>
+        <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>Imprimir factura</mat-card-title>
+              <mat-card-subtitle>Selecciona los meses y el año</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field [formGroup]="rangoGrupoFechas">
+                    <mat-label>Fecha inicio a fecha fin</mat-label>
+                    <mat-date-range-input [rangePicker]="picker" (ngSubmit)="Imprimir()">
+                      <input matStartDate formControlName="fechaInicio" placeholder="Fecha inicio" required>
+                      <input matEndDate formControlName="fechaFin" placeholder="Fecha fin" required>
+                    </mat-date-range-input>
+                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button class="enviar" mat-flat-button type="submit" [disabled]="!rangoGrupoFechas.valid" type="submit" (click)="Imprimir()">Imprimir</button>
+            </mat-card-actions>
+          </mat-card>
     </div>
 </div>

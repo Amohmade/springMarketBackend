@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Subir Archivo</h1>
+<div mat-dialog-content>
+  <p>Seleccione un archivo JSON para subir que siga el siguiente formato:</p>
+  <p><b>id</b> | <b>nombre</b> | <b>stock</b> | <b>precio_coste</b></p> 
+  <input type="file" (change)="onFileSelected($event)">
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button class="subir" (click)="onUploadClick()" [disabled]="!archivoSeleccionado">Subir</button>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Output } from '@angular/core';
 import { BarraMenuComponent } from '../../components/general/barra-menu/barra-menu.component';
 import { RouterModule,RouterLink, RouterLinkActive, RouterOutlet  } from '@angular/router';
 import { UserheaderComponent } from '../../components/general/userheader/userheader.component';
@@ -16,4 +16,9 @@ import { UserheaderComponent } from '../../components/general/userheader/userhea
 })
 export class MenuComponent {
 
+  role: number;
+  
+  constructor() {
+    this.role = 1;
+  }
 }

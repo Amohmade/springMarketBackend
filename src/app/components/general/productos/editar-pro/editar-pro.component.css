@@ -1,0 +1,21 @@
+.mat-mdc-dialog-title{
+    padding: 1em 2em;
+    padding-bottom: 0;
+    font-size: x-large;
+}
+
+.mat-mdc-dialog-content{
+    padding: 1em 2em;
+}
+
+.mat-mdc-dialog-actions{
+    padding: 2em;
+    padding-top: 0;
+    justify-content: end;
+}
+
+.guardar:enabled{
+    background-color: black;
+    color: white;
+}
+ 

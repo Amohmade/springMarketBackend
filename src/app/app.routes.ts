@@ -56,7 +56,8 @@ export const routes: Routes = [
         children:[
             {
                 path: '',
-                component: UserMenuComponent,
+                component: EscanearComponent,
+                title: 'Escanear'
             },
             {
                 path: 'Escanear',
@@ -99,7 +100,7 @@ export const routes: Routes = [
                 title: 'Proveedores'
             },
             {
-                path: 'Proveedores/:id',
+                path: 'Proveedores/:proveedor',
                 component: ProductosProComponent,
                 title: 'Productos Proveedor'
             },

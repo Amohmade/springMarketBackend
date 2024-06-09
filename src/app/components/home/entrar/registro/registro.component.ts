@@ -6,6 +6,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { FormGroup,FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-registro',
@@ -13,6 +14,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     MatCardModule,
     MatFormFieldModule,
+    MatSelectModule,
     ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
@@ -40,6 +42,10 @@ export class RegistroComponent {
       // Validators.required
     ]),
     password: new FormControl<string>('',[
+      // Validators.minLength(3),
+      // Validators.required
+    ]),
+    tipo: new FormControl<string>('',[
       // Validators.minLength(3),
       // Validators.required
     ]),

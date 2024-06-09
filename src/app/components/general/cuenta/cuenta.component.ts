@@ -60,6 +60,6 @@ export class CuentaComponent {
   }
 
   toggleReadOnly(): void {
-    this.isReadOnly = !this.isReadOnly; // Toggle the read-only state
+    this.isReadOnly = !this.isReadOnly;
   }
 }

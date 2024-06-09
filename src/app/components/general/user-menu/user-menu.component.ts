@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserheaderComponent } from '../userheader/userheader.component';
 import { BarraMenuComponent } from '../barra-menu/barra-menu.component';
@@ -22,19 +22,14 @@ import { EscanearComponent } from '../escanear/escanear.component';
 })
 export class UserMenuComponent {
 
-  role: number;
-  
-  constructor() {
-    this.role = 1;
-  }
+  @Input() role!: number;
   
   Acciones = [
-    { nombre: 'Escanear', rol: 3},
-    { nombre: 'Productos', rol: 1},
+    { nombre: 'Escanear', rol: 1},
+    { nombre: 'Productos', rol: 2},
     { nombre: 'Estadisticas', rol: 2},
     { nombre: 'Proveedores', rol: 1},
-    { nombre: 'Cuenta', rol: 1},
-    // { nombre: 'Pedidos', rol: 3}
+    { nombre: 'Cuenta', rol: 2},
   ];
 
   accionPorRol(role: number): any[]{

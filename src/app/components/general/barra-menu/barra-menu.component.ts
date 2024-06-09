@@ -19,11 +19,16 @@ import { RouterLinkActive, RouterModule } from '@angular/router';
 })
 export class BarraMenuComponent {
 
+  @Input() role!: number;
+
   Iconos = [
-    { nombre: 'Escanear', src: "barcode_scanner"},
-    { nombre: 'Productos', src: "grocery"},
-    { nombre: 'Estadisticas', src: "monitoring"},
-    { nombre: 'Proveedores', src: "patient_list"}
+    { nombre: 'Escanear', src: "barcode_scanner", rol: 1},
+    { nombre: 'Productos', src: "grocery", rol: 2},
+    { nombre: 'Estadisticas', src: "monitoring", rol: 2},
+    { nombre: 'Proveedores', src: "patient_list", rol: 1}
   ];
-  
+
+  accionPorRol(role: number): any[]{
+    return this.Iconos.filter(icono => icono.rol >= role);
+  }
 }

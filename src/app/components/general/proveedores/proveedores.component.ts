@@ -32,7 +32,6 @@ export class ProveedoresComponent {
   ngOnInit(): void {
     this.fetchProveedores().subscribe(data => {
       this.proveedores = data;
-      console.log(this.proveedores);
     });
   }
 
