@@ -10,12 +10,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ServiciorolService } from '../../../serviciorol.service';
 
 interface Producto {
   id: number;
   nombre: string;
-  precio_base: number;
-  precio_venta: number;
+  precioVenta: number;
   stock: number;
   cantidad: number;
 }
@@ -57,16 +57,22 @@ export class ProductosProComponent implements OnInit {
 
   proveedor: string | null = null;
 
+  role:string = "";
+  id:string = "";
 
-  //Busqueda producto
-  constructor(private http: HttpClient, private route: ActivatedRoute){}
+  constructor(private http: HttpClient, private route: ActivatedRoute,private serviciorol:ServiciorolService){
+    this.role = this.serviciorol.getRole() ?? "";
+    this.id = this.serviciorol.getId() ?? "";
+  }
 
-  ngOnInit() {
+  ngOnInit():void {
+
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.proveedor = params.get('proveedor');
       if (this.proveedor) {
         this.fetchListaProductos(this.proveedor).subscribe(data => {
           this.listaproductos = data;
+          console.log(this.listaproductos)
         });
         this.loadCarrito();
       }
@@ -81,7 +87,7 @@ export class ProductosProComponent implements OnInit {
   }
 
   fetchListaProductos(proveedor:string): Observable<Producto[]> {
-    const apiUrl = `api/productos?proveedor=${proveedor}`;
+    const apiUrl = `http://localhost:8082/proveedores/productos/${proveedor}`;
     return this.http.get<Producto[]>(apiUrl);
   }
 
@@ -168,7 +174,7 @@ export class ProductosProComponent implements OnInit {
 
   total(): number {
     return this.productos.reduce((total, producto) => {
-      return total + producto.precio_venta;
+      return total + (producto.precioVenta * producto.cantidad);
     }, 0);
-  }
+  }  
 }

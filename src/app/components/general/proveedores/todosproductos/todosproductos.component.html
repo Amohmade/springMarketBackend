@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Cesta</h1>
+<div mat-dialog-content>
+    <div *ngFor="let producto of productos; let i  = index" class="productocarrito">
+        <p>{{producto.nombre}}</p><p>{{producto.precioVenta.toFixed(2)}}€</p>
+        <button mat-icon-button (click)="updateCantidad(producto, producto.cantidad - 1)">
+          <span class="material-symbols-outlined">remove</span>
+        </button>
+        <p>{{producto.cantidad}}</p>
+        <button mat-icon-button (click)="updateCantidad(producto, producto.cantidad + 1)">
+          <span class="material-symbols-outlined">add</span>
+        </button>
+        <button mat-icon-button (click)="deleteProductoCarrito(producto)">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+</div>
+<div mat-dialog-actions>
+    <a>Total: <b>{{ total() | currency:'EUR':'symbol':'1.2-2' }}</b></a>
+    <button *ngIf="total()!= 0" mat-button (click)="clearCarrito()">Pagar</button>
+</div>

@@ -4,18 +4,19 @@ import { MatButtonModule } from '@angular/material/button';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {AsyncPipe, CommonModule, NgFor, NgIf} from '@angular/common';
+import {CommonModule, NgFor, NgIf} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ServiciorolService } from '../../../../serviciorol.service';
 
 interface Producto {
   id: number;
   nombre: string;
   stock: number;
   precio_coste: number;
-  precio_venta: number;
+  precioVenta: number;
   cantidad: number;
 }
 
@@ -33,7 +34,6 @@ interface Producto {
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    AsyncPipe,
     HttpClientModule
   ],
   templateUrl: './infoscan.component.html',
@@ -54,15 +54,18 @@ export class InfoscanComponent implements OnInit {
 
   subTotal!: any;
 
+  role:string = "";
+  id:string = "";
 
-  //Busqueda producto
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient,private serviciorol: ServiciorolService){
+    this.role = this.serviciorol.getRole() ?? "";
+    this.id = this.serviciorol.getId() ?? "";
+  }
 
   ngOnInit() {
-    this.fetchListaProductos(1).subscribe(data => {
+    this.fetchListaProductos(this.id).subscribe(data => {
       this.listaproductos = data;
     });
-    console.log(this.listaproductos);
     this.loadCarrito();
 
     this.filteredOptions = this.miform.valueChanges.pipe(
@@ -73,8 +76,8 @@ export class InfoscanComponent implements OnInit {
     this.productos = this.getProducto();
   }
 
-  fetchListaProductos(id:number): Observable<Producto[]> {
-    const apiUrl = `api/productos?establecimiento=${id}`;
+  fetchListaProductos(id:string): Observable<Producto[]> {
+    const apiUrl = `http://localhost:8082/establecimientos/productos/${id}`;
     return this.http.get<Producto[]>(apiUrl);
   }
 
@@ -155,7 +158,7 @@ export class InfoscanComponent implements OnInit {
 
   total(): number {
     return this.productos.reduce((total, producto) => {
-      return total + producto.precio_venta;
+      return total + (producto.precioVenta * producto.cantidad);
     }, 0);
   }
 }

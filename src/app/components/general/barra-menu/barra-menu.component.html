@@ -1,6 +1,6 @@
 <div class="barra">
-    <mat-grid-list [cols]="role == 1 ? 5 : 3" rowHeight="75px">
-        <mat-grid-tile *ngFor="let icono of accionPorRol(role)" [routerLink]="[icono.nombre]" [routerLinkActive]="'active'"><span class="material-symbols-outlined">
+    <mat-grid-list [cols]="role == 'Establecimiento'? 5 : 3" rowHeight="75px">
+        <mat-grid-tile *ngFor="let icono of accionPorRol()" [routerLink]="[icono.nombre]" [routerLinkActive]="'active'"><span class="material-symbols-outlined">
             {{icono.src}}
              </span>
         </mat-grid-tile>

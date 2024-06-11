@@ -21,7 +21,7 @@
         </mat-card-header>
         <mat-card-content class="listacesta">
           <div *ngFor="let producto of productos; let i  = index" class="productocarrito">
-            <p>{{producto.nombre}}</p><p>{{producto.precio_venta.toFixed(2)}}€</p>
+            <p>{{producto.nombre}}</p><p>{{producto.precioVenta.toFixed(2)}}€</p>
             <button mat-icon-button (click)="updateCantidad(producto, producto.cantidad - 1)">
               <span class="material-symbols-outlined">remove</span>
             </button>

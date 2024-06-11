@@ -1,7 +1,7 @@
 .proveedores{
     display: grid;
     gap: 1em;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 32% 32% 32%;
     overflow-y:scroll;
     min-height: 200px;
     max-height: 500px;
@@ -12,4 +12,25 @@
     border-radius: 5px;
     padding: 2em;
     align-items: center;
+}
+
+.buscar{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1em;
+    margin: 0em 1em;
+}
+
+.precio{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.carrito{
+    width: 10em;
+    margin-top: 1em;
 }

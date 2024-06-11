@@ -1,9 +1,9 @@
-import { NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { Component, Input} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RouterLinkActive, RouterModule } from '@angular/router';
+import { ServiciorolService } from '../../../serviciorol.service';
 
 @Component({
   selector: 'app-barra-menu',
@@ -13,22 +13,29 @@ import { RouterLinkActive, RouterModule } from '@angular/router';
     RouterLinkActive,
     MatGridListModule,
     CommonModule,
-    MatButtonModule],
+    MatButtonModule
+  ],
   templateUrl: './barra-menu.component.html',
   styleUrl: './barra-menu.component.css'
 })
-export class BarraMenuComponent {
+export class BarraMenuComponent implements OnInit {
 
-  @Input() role!: number;
+  role:string = "";
+
+  constructor(private rol:ServiciorolService){}
+
+  ngOnInit(): void {
+    this.role = this.rol.getRole() ?? "";
+  }
 
   Iconos = [
-    { nombre: 'Escanear', src: "barcode_scanner", rol: 1},
-    { nombre: 'Productos', src: "grocery", rol: 2},
-    { nombre: 'Estadisticas', src: "monitoring", rol: 2},
-    { nombre: 'Proveedores', src: "patient_list", rol: 1}
+    { nombre: 'Escanear', src: "barcode_scanner", roles: ['Establecimiento'] },
+    { nombre: 'Productos', src: "grocery", roles: ['Establecimiento', 'Proveedor'] },
+    { nombre: 'Estadisticas', src: "monitoring", roles: ['Establecimiento', 'Proveedor'] },
+    { nombre: 'Proveedores', src: "patient_list", roles: ['Establecimiento'] }
   ];
 
-  accionPorRol(role: number): any[]{
-    return this.Iconos.filter(icono => icono.rol >= role);
+  accionPorRol(): any[] {
+    return this.Iconos.filter(icono => icono.roles.includes(this.role));
   }
 }

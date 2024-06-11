@@ -18,7 +18,7 @@
           </mat-card-header>
           <mat-card-content class="detalles" cols="2" *ngIf="selectedProducto">
               <div class="precio">
-                <p>Precio: <b>{{selectedProducto.precio_venta.toFixed(2)}}€</b></p>
+                <p>Precio: <b>{{selectedProducto.precioVenta}}€</b></p>
               </div>
               <div class="comprar">
                 <button mat-icon-button (click)="addProducto(selectedProducto)"><span class="material-symbols-outlined">shopping_cart</span></button>
@@ -34,7 +34,7 @@
       </mat-card-header>
       <mat-card-content class="listacesta">
         <div *ngFor="let producto of productos; let i  = index" class="productocarrito">
-          <p>{{producto.nombre}}</p><p>{{producto.precio_venta.toFixed(2)}}€</p>
+          <p>{{producto.nombre}}</p><p>{{producto.precioVenta}}€</p>
             <button mat-icon-button (click)="updateCantidad(producto, producto.cantidad - 1)">
               <span class="material-symbols-outlined">remove</span>
             </button>

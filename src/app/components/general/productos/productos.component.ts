@@ -5,19 +5,20 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient,HttpClientModule } from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { HttpClient,HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { EditarProComponent } from './editar-pro/editar-pro.component';
 import { SubirProComponent } from './subir-pro/subir-pro.component';
 import { BorrarProComponent } from './borrar-pro/borrar-pro.component';
+import { ServiciorolService } from '../../../serviciorol.service';
 
 interface Producto {
   id: number;
   nombre: string;
   stock: number;
-  precio_base: number;
-  precio_venta: number;
+  precioBase: number;
+  precioVenta: number;
 } 
 
 @Component({
@@ -39,16 +40,15 @@ interface Producto {
 })
 export class ProductosComponent implements OnInit {
 
-  columnas: string[] = ['id', 'nombre', 'stock', 'precio_base', 'precio_venta','acciones'];
+  columnas: string[] = ['id', 'nombre', 'stock', 'precio_coste', 'precio_venta','acciones'];
   productos: Producto[] = [];
   datos:any;
-  role: number;
+  role:string = "";
+  id:string = "";
   
-  constructor(private http: HttpClient,public dialog: MatDialog){
-    this.role = 2;
-    if(this.role!=1){
-      this.columnas = ['id', 'nombre', 'stock', 'precio_base','acciones'];
-    }
+  constructor(private http: HttpClient,public dialog: MatDialog,private serviciorol: ServiciorolService){
+    this.role = this.serviciorol.getRole() ?? "";
+    this.id = this.serviciorol.getId() ?? "";
   }
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -56,22 +56,26 @@ export class ProductosComponent implements OnInit {
   archivoSeleccionado: any = null;
 
   ngOnInit(): void {
-    this.fetchListaProductos(1).subscribe(data => {
+    if(this.role == 'Proveedor') {
+      this.columnas = ['id', 'nombre', 'stock', 'precio_venta','acciones'];
+    }
+
+    this.fetchListaProductos(this.id).subscribe(data => {
       this.productos = data;
       this.iniciarPaginator();
     });
   }
 
-  fetchListaProductos(id: number): Observable<Producto[]>{
-    if(this.role==1){
-      const apiUrl = `api/productos?establecimiento=${id}`;
-      return this.http.get<Producto[]>(apiUrl); 
+  fetchListaProductos(id: string): Observable<Producto[]>{
+    if(this.role == 'Establecimiento'){
+      let apiUrl = `http://localhost:8082/establecimientos/productos/${id}`
+      return this.http.get<Producto[]>(apiUrl);
     }else{
-      const apiUrl = `api/productos?proveedor=${id}`;
+      let apiUrl = `http://localhost:8082/proveedores/productos/${id}`;
       return this.http.get<Producto[]>(apiUrl);
     }
   }
-
+  
   iniciarPaginator(): void {
     setTimeout(() => {
       this.datos = new MatTableDataSource(this.productos);
@@ -87,7 +91,6 @@ export class ProductosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.archivoSeleccionado = result;
-        // You can handle the file upload here or call another method to process the file
       }
     });
   }

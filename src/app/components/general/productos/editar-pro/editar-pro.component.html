@@ -2,10 +2,6 @@
 <div mat-dialog-content>
   <form [formGroup]="form">
     <mat-form-field>
-      <mat-label>ID</mat-label>
-      <input matInput formControlName="id" readonly>
-    </mat-form-field>
-    <mat-form-field>
       <mat-label>Name</mat-label>
       <input matInput formControlName="nombre">
     </mat-form-field>
@@ -13,11 +9,11 @@
       <mat-label>Stock</mat-label>
       <input matInput formControlName="stock">
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Precio Base</mat-label>
-      <input matInput formControlName="precio_base">
+    <mat-form-field *ngIf="role == 'Establecimiento'">
+      <mat-label>Precio Coste</mat-label>
+      <input matInput formControlName="precio_coste">
     </mat-form-field>
-    <mat-form-field *ngIf="role == 1">
+    <mat-form-field>
       <mat-label>Precio Venta</mat-label>
       <input matInput formControlName="precio_venta">
     </mat-form-field>

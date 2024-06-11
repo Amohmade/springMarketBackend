@@ -7,7 +7,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { FormGroup,FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-registro',
@@ -20,7 +19,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatSelectModule,
     RouterModule
   ],
   templateUrl: './registro.component.html',
