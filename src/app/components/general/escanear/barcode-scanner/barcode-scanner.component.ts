@@ -1,21 +1,40 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { BarcodeScanner } from 'dynamsoft-javascript-barcode';
+import { BarcodeScanner} from 'dynamsoft-javascript-barcode';
 import { OverlayManager } from '../../../../overlay';
 import { products } from '../../../../products';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+
+interface VideoDeviceInfo {
+  deviceId: string;
+  label: string;
+}
 
 @Component({
   selector: 'app-barcode-scanner',
   templateUrl: './barcode-scanner.component.html',
   standalone: true,
   imports:[
+    CommonModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatFormFieldModule,
+    FormsModule
   ],
   styleUrls: ['./barcode-scanner.component.css'],
 })
 export class BarcodeScannerComponent implements OnInit {
   products = products;
   txts: string[] = [];
+  
+  cameras: MediaDeviceInfo[] = [];
+  selectedCamera: string | null = null;
 
-  SCAN_DELAY = 2000; //Delay para escanear
+  SCAN_DELAY = 1500; //Delay para escanear
 
   // Mapa para calcular ultimo scan
   lastScanned: Map<string, number> = new Map();
@@ -24,8 +43,8 @@ export class BarcodeScannerComponent implements OnInit {
   overlay: HTMLCanvasElement | undefined;
   context: CanvasRenderingContext2D | undefined;
   scanner: BarcodeScanner | undefined;
-  cameraInfo: any = {};
-  videoSelect: HTMLSelectElement | undefined;
+  cameraInfo: { [key: string]: MediaDeviceInfo } = {};
+  // videoSelect: HTMLSelectElement | undefined;
   overlayManager: OverlayManager;
 
   @Output() scannedProduct = new EventEmitter<string>();
@@ -43,7 +62,7 @@ export class BarcodeScannerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.videoSelect = document.querySelector('select#videoSource') as HTMLSelectElement;
+    // this.videoSelect = document.querySelector('select#videoSource') as HTMLSelectElement;
     this.overlayManager.initOverlay(document.getElementById('overlay') as HTMLCanvasElement);
     (async () => {
       await this.initBarcodeScanner();
@@ -64,44 +83,30 @@ export class BarcodeScannerComponent implements OnInit {
     let uiElement = document.getElementById('videoContainer');
     if (uiElement) {
       await this.scanner.setUIElement(uiElement);
-      let cameras = await this.scanner.getAllCameras();
+      let cameras = await this.scanner.getAllCameras() as unknown as MediaDeviceInfo[];
       this.listCameras(cameras);
-      await this.openCamera();
+      
+      if (this.cameras.length > 0) {
+        this.selectedCamera = this.cameras[0].deviceId;
+        await this.openCamera();
+      }
+
       this.scanner.onFrameRead = results => {
-        
         this.overlayManager.clearOverlay();
         let resultElement = document.getElementById('result');
-        
-        // try {
-          let localization;
-          if (results.length > 0) {
 
-            for (var i = 0; i < results.length; ++i) {
+        if (results.length > 0) {
+          for (var i = 0; i < results.length; ++i) {
+            let barcodeText = results[i].barcodeText;
+            let now = Date.now();
 
-              let barcodeText = results[i].barcodeText;
-              let now = Date.now();
-
-              if (!this.lastScanned.has(barcodeText) || (now - this.lastScanned.get(barcodeText)!) > this.SCAN_DELAY) {
-                this.txts.push(results[i].barcodeText);
-                this.lastScanned.set(barcodeText, now);
-                this.scannedProduct.emit(barcodeText);
-                // localization = results[i].localizationResult;
-                // this.overlayManager.drawOverlay(localization, results[i].barcodeText);
-              }
+            if (!this.lastScanned.has(barcodeText) || (now - this.lastScanned.get(barcodeText)!) > this.SCAN_DELAY) {
+              this.txts.push(results[i].barcodeText);
+              this.lastScanned.set(barcodeText, now);
+              this.scannedProduct.emit(barcodeText);
             }
-            // if (resultElement) {
-            //   resultElement.innerHTML += this.txts.join(', ');
-            // }
           }
-          // else {
-          //   if (resultElement) {
-          //     resultElement.innerHTML = "No barcode found";
-          //   }
-          // }
-
-        // } catch (e) {
-        //   alert(e);
-        // };
+        }
       };
       this.scanner.onPlayed = () => {
         this.updateResolution();
@@ -110,25 +115,27 @@ export class BarcodeScannerComponent implements OnInit {
     }
   }
 
-  async openCamera(): Promise<void> {
+  async openCamera(event?: MatSelectChange): Promise<void>{
     this.overlayManager.clearOverlay();
-    if (this.videoSelect) {
-      let deviceId = this.videoSelect.value;
+    if (this.selectedCamera) {
       if (this.scanner) {
-        await this.scanner.setCurrentCamera(this.cameraInfo[deviceId]);
+        await this.scanner.setCurrentCamera(this.cameraInfo[this.selectedCamera]);
       }
     }
-
   }
 
-  listCameras(deviceInfos: any): void {
-    for (var i = 0; i < deviceInfos.length; ++i) {
-      var deviceInfo = deviceInfos[i];
-      var option = document.createElement('option');
-      option.value = deviceInfo.deviceId;
-      option.text = deviceInfo.label;
-      this.cameraInfo[deviceInfo.deviceId] = deviceInfo;
-      if (this.videoSelect) this.videoSelect.appendChild(option);
-    }
+  listCameras(deviceInfos: VideoDeviceInfo[]): void {
+    this.cameras = deviceInfos.map(deviceInfo => ({
+      deviceId: deviceInfo.deviceId,
+      groupId: '',
+      kind: 'videoinput',
+      label: deviceInfo.label,
+      toJSON: () => ({})
+    }));
+    this.cameraInfo = this.cameras.reduce((acc, deviceInfo) => {
+      acc[deviceInfo.deviceId] = deviceInfo;
+      return acc;
+    }, {} as { [key: string]: MediaDeviceInfo });
+    console.log(this.cameras)
   }
 }

@@ -16,6 +16,7 @@ import { ProveedoresComponent } from './components/general/proveedores/proveedor
 import { ProductosProComponent } from './components/general/productos-pro/productos-pro.component';
 import { BarcodeScannerComponent } from './components/general/escanear/barcode-scanner/barcode-scanner.component';
 import { InfoscanbarrasComponent } from './components/general/escanear/infoscanbarras/infoscanbarras.component';
+import { ComprarportodosComponent } from './components/general/proveedores/comprarportodos/comprarportodos.component';
 
 export const routes: Routes = [
     {
@@ -69,21 +70,11 @@ export const routes: Routes = [
                 component: InfoscanbarrasComponent,
                 title: ' Codigo de Barras'
             },
-            // {
-            //     path: 'Escanear/QR/id:',
-            //     component: InfoscanComponent,
-            //     title: 'Info QR'
-            // },
             {
                 path: 'Escanear/Buscar',
                 component: InfoscanComponent,
                 title: 'Buscar producto'
             },
-            // {
-            //     path: 'Escanear/Buscar/id:',
-            //     component: InfoscanComponent,
-            //     title: 'Info producto'
-            // },
             {
                 path: 'Productos',
                 component: ProductosComponent,
@@ -97,6 +88,11 @@ export const routes: Routes = [
             {
                 path: 'Proveedores',
                 component: ProveedoresComponent,
+                title: 'Proveedores'
+            },
+            {
+                path: 'Proveedores/Todos',
+                component: ComprarportodosComponent,
                 title: 'Proveedores'
             },
             {

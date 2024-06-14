@@ -6,8 +6,51 @@
 
 .cuerpo{
     display: flex;
-    margin: 1em 5em;
+    height: 100%;
     flex: 1 1 auto;
     flex-direction: column;
+    justify-content:center ;
+}
+
+.contenido{
+    /* display: flex; */
+    height: 100%;
+    flex: 1 1 auto;
+    flex-direction: column;
+    /* justify-content:center ; */
+}
+
+.mat-drawer{
+    width:100px;
+    padding: 1em;
+}
+
+.mat-drawer-content{
+    padding: 2em 4em;
+    display: flex;
     justify-content: center;
+}
+
+.mat-grid-list{
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.2s ease-in-out;
+}
+
+.mat-grid-tile{
+    border: none;
+    color: #1E2E35;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.mat-grid-tile:hover{
+    color: #96EEC8;
+    background-color: #1E2E35;
+}
+
+.active{
+    color: #96EEC8;
+    background-color: #1E2E35;
 }

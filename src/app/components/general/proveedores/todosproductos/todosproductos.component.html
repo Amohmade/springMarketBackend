@@ -16,5 +16,5 @@
 </div>
 <div mat-dialog-actions>
     <a>Total: <b>{{ total() | currency:'EUR':'symbol':'1.2-2' }}</b></a>
-    <button *ngIf="total()!= 0" mat-button (click)="clearCarrito()">Pagar</button>
+    <button *ngIf="total()!= 0" mat-button (click)="realizarCompra()">Pagar</button>
 </div>

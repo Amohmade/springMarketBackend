@@ -1,5 +1,5 @@
 :host {
-    font-family: "Gabarito", sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 .contenido{
@@ -11,8 +11,6 @@
 
 .busqueda{
     width: 100%;
-    font-family: "Gabarito", sans-serif;
-    color: #1E2E35;
 }
 
 .cesta{
@@ -60,16 +58,13 @@
     justify-content: space-around;
     align-items: center;
     font-size: large;
-    font-family: "Gabarito", sans-serif;
-    color: #1E2E35;
 }
 
 .mat-mdc-card-actions button{
     font-size: large;
     padding: 1em;
-    background-color: #aae7cd;
-    color: #1E2E35;
-    font-family: "Gabarito", sans-serif;
+    background-color: black;
+    color: white;
 }
 
 .pagar{
@@ -84,9 +79,7 @@
 }
 
 .mat-mdc-card-title{
-    font-size: xx-large;
-    font-family: "Gabarito", sans-serif;
-    color: #1E2E35;
+    font-size: x-large;
 }
 
 .caja{
@@ -113,6 +106,21 @@ h2{
     grid-template-columns: auto 5em 40px;
     background-color: white;
     border-radius: 5px;
+}
+
+.item1{
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    padding: 1em;
+    color: black;
+    background-color: rgb(123, 255, 123);
+    border-radius: 5px 0 0 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.item1:hover{
+    color: white;
+    background-color: rgb(39, 206, 39);
 }
 
 .ajustar{

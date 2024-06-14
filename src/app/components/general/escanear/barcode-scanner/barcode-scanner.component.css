@@ -19,4 +19,9 @@ height: 100%;
 z-index: 2;
 object-fit: contain;
 }
+
+h1{
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+}
   

@@ -1,6 +1,5 @@
 :host {
-    
-    font-family: "Inter", sans-serif;
+    font-family: "Gabarito", sans-serif;
 }
 
 .contenido{
@@ -11,10 +10,6 @@
     gap: 1em;
     /* justify-content: center; */
     align-items: center;
-}
-
-.busqueda{
-    width: 100%;
 }
 
 .cesta{
@@ -64,13 +59,15 @@
     justify-content: space-around;
     align-items: center;
     font-size: large;
+    color: #1E2E35;
 }
 
 .mat-mdc-card-actions button{
     font-size: large;
     padding: 1em;
-    background-color: black;
-    color: white;
+    background-color: #aae7cd;
+    color: #1E2E35;
+    font-family: "Gabarito", sans-serif;
 }
 
 .pagar{
@@ -85,7 +82,9 @@
 }
 
 .mat-mdc-card-title{
-    font-size: x-large;
+    font-size: xx-large;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .caja{

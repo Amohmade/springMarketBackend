@@ -1,36 +1,40 @@
-<div *ngIf="role == 'Proveedor'">
-<button type="button" mat-flat-button (click)="subirProductos()">Subir productos</button>
-</div>
+<mat-form-field class="busqueda">
+  <input type="text"
+         placeholder="Buscar producto"
+         matInput
+         [formControl]="searchControl">
+</mat-form-field>
+<button *ngIf="role == 'Proveedor'" (click)="subirProductos()" class="subir">Subir productos</button>
 <br>
-<table mat-table [dataSource]="datos" class="tabla">
+<table mat-table [dataSource]="datos" matSort class="tabla">
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
     <td mat-cell *matCellDef="let producto">{{ producto.id }}</td>
   </ng-container>
 
   <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
     <td mat-cell *matCellDef="let producto">{{ producto.nombre }}</td>
   </ng-container>
 
   <ng-container matColumnDef="stock">
-    <th mat-header-cell *matHeaderCellDef>Stock</th>
-    <td mat-cell *matCellDef="let producto">{{ producto.stock }}</td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock</th>
+    <td mat-cell *matCellDef="let producto" [ngClass]="{'sinstock': isStockZero(producto)}">{{ producto.stock }}</td>
   </ng-container>
 
   <ng-container matColumnDef="precio_coste" >
-    <th mat-header-cell *matHeaderCellDef>Precio Coste</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio Coste</th>
     <td mat-cell *matCellDef="let producto">{{ producto.precioCoste | number: '1.2-2' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="precio_venta">
-    <th mat-header-cell *matHeaderCellDef>Precio Venta</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio Venta</th>
     <td mat-cell *matCellDef="let producto">{{ producto.precioVenta | number: '1.2-2' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="acciones" class="acciones">
     <th mat-header-cell *matHeaderCellDef>Acciones</th>
-    <td mat-cell *matCellDef="let producto">
+    <td mat-cell *matCellDef="let producto" >
       <button mat-icon-button (click)="editarProducto(producto)">
         <span class="material-symbols-outlined">
           edit
@@ -40,6 +44,9 @@
         <span class="material-symbols-outlined borrar">
           delete
           </span>
+      </button>
+      <button mat-icon-button class="comprar" *ngIf="isStockZero(producto) && role == 'Establecimiento'" [routerLink]="[getProveedorLink(producto)]">
+        <span class="material-symbols-outlined">store</span>
       </button>
     </td>
   </ng-container>

@@ -1,7 +1,6 @@
 :host {
     display: flex;
     flex-direction: column;
-    font-family: "Inter", sans-serif;
 }
 
 .contenido{
@@ -39,12 +38,22 @@
 
 .mat-mdc-card-content{
     padding: 2em;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+}
+
+.mat-mdc-hint{
+    padding: 2em;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .mat-mdc-card-actions{
     padding: 2em;
     padding-top: 0;
     justify-content: end;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .fecha{
@@ -54,7 +63,7 @@
 hr{
     grid-column: 1 / span 3;
     width: 100%;
-    border-top: 1px solid #ffffff;
+    border-top: 1px solid #1E2E35;
 }
 
 .dinero{
@@ -64,6 +73,8 @@ hr{
     grid-template-columns: auto auto auto;
     gap: 1em;
     width: 100%;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .masvendido{
@@ -80,27 +91,43 @@ hr{
 }
 
 .producto{
-    background-color: white;
+    background-image: linear-gradient(to right,#1E2E35,#96EEC8);
     border-radius: 5px;
     margin: 1em;
     padding: 2em;
     align-items: center;
+    transition: all 2s ease-in;
 }
 
-.queso{
+.factura{
     grid-column: 3;
     grid-row: 2;
+    width: 500px;
 }
 
 h3{
     margin: 0;
+    font-family: "Gabarito", sans-serif;
+    color: white;
+}
+
+h2{
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+}
+
+.letra{
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .enviar:enabled{
-    color: white;
-    background-color: black;
+    color: #1E2E35;
+    background-color: #96EEC8;
+    font-family: "Gabarito", sans-serif;
 }
 .enviar:disabled{
     background-color: lightgray;
+    font-family: "Gabarito", sans-serif;
 }
 

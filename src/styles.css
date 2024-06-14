@@ -4,9 +4,9 @@
     src: url('/assets/Inter-VariableFont_slnt,wght.ttf');
 }
 body{
-    background-image: linear-gradient(#F1FAEE,#D9D9D9);
     background-attachment: fixed;
     margin: 0;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;
+    font-family: "Gabarito", sans-serif; }

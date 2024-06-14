@@ -1,4 +1,3 @@
-
 <div class="contenido">
     <!-- Bloque superior -->
     <div class="dinero">
@@ -34,17 +33,17 @@
             <h2>Top ventas</h2>
                 <div class="topproducto" *ngFor="let producto of Topventas; index as i">
                 <b>{{i+1}}º</b>
-                    <div class="producto" [ngStyle]="{'width.px': producto.unidades/10}">
+                    <div class="producto" [ngStyle]="{'width.px': producto.width}">
                         <h3>{{producto.nombre}}   <b>{{producto.unidades}}</b> ventas</h3>
                     </div>
                 </div>
         </div>
     <!-- Bloque abajo derecha -->
-    <div class="queso">
+    <div class="factura">
         <mat-card class="example-card">
             <mat-card-header>
-              <mat-card-title>Imprimir factura</mat-card-title>
-              <mat-card-subtitle>Selecciona los meses y el año</mat-card-subtitle>
+              <mat-card-title class="letra">Imprimir factura</mat-card-title>
+              <mat-card-subtitle class="letra">Selecciona los meses y el año</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <mat-form-field [formGroup]="rangoGrupoFechas">

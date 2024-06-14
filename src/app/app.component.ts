@@ -20,9 +20,8 @@ export class AppComponent implements OnInit {
   constructor(private serviciorol: ServiciorolService) {}
 
   ngOnInit(): void {
-    // this.serviciorol.setRole('Proveedor');
     this.serviciorol.setRole('Establecimiento');
-    this.serviciorol.setId('1');
+    this.serviciorol.setId('5');
     
 
     this.role = this.serviciorol.getRole();

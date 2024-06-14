@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {Observable, firstValueFrom} from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import {AsyncPipe, CommonModule, NgFor, NgIf} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
@@ -44,6 +45,7 @@ interface Producto {
 export class ProductosProComponent implements OnInit {
 
   listaproductos: Producto[] = [];
+  filteredProductos: Producto[] = [];
 
   miform = new FormControl('');
   
@@ -60,7 +62,13 @@ export class ProductosProComponent implements OnInit {
   role:string = "";
   id:string = "";
 
-  constructor(private http: HttpClient, private route: ActivatedRoute,private serviciorol:ServiciorolService){
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private serviciorol:ServiciorolService,
+    private _snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef
+  ){
     this.role = this.serviciorol.getRole() ?? "";
     this.id = this.serviciorol.getId() ?? "";
   }
@@ -72,7 +80,11 @@ export class ProductosProComponent implements OnInit {
       if (this.proveedor) {
         this.fetchListaProductos(this.proveedor).subscribe(data => {
           this.listaproductos = data;
-          console.log(this.listaproductos)
+          this.filteredProductos = data; // Show all products initially
+          this.filteredOptions = this.miform.valueChanges.pipe(
+            startWith(''),
+            map(value => this._filter(value || '')),
+          );
         });
         this.loadCarrito();
       }
@@ -92,10 +104,11 @@ export class ProductosProComponent implements OnInit {
   }
 
   private _filter(value: string): Producto[] {
-    const filterValue = value === 'string' ? value.toLowerCase() : value.toString();
-    return this.listaproductos.filter(producto => 
-      producto.nombre.toString().includes(filterValue)
+    const filterValue = value.trim().toLowerCase();
+    this.filteredProductos = this.listaproductos.filter(producto =>
+      producto.nombre.toLowerCase().includes(filterValue)
     );
+    return this.filteredProductos;
   }
 
   onOptionSelected(event: any): void {
@@ -126,7 +139,7 @@ export class ProductosProComponent implements OnInit {
     this.saveCarrito();
     this.updateSubTotal();
   }
-  
+
   updateSubTotal() {
     this.subTotal = this.productos.reduce((total, producto) => total + producto.precio_venta * producto.cantidad, 0);
   }
@@ -176,5 +189,36 @@ export class ProductosProComponent implements OnInit {
     return this.productos.reduce((total, producto) => {
       return total + (producto.precioVenta * producto.cantidad);
     }, 0);
-  }  
+  }
+  
+  prepareCompraData(): any[] {
+    return this.productos.map(producto => ({
+      productoProveedorId: producto.id,
+      cantidad: producto.cantidad
+    }));
+  }
+
+  async realizarCompra(): Promise<void> {
+    const compraData = this.prepareCompraData();
+    const apiUrl = `http://localhost:8082/compras/${this.id}`;
+    const comprasFallidas: Producto[] = [];
+
+    for (const item of compraData) {
+      try {
+        await firstValueFrom(this.http.post(apiUrl, [item]));
+        this._snackBar.open(`Compra realizada`, "OK");
+      } catch (error: any) {
+        const productoFallido = this.productos.find(p => p.id === item.productoProveedorId);
+        if (productoFallido) {
+          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK");
+          comprasFallidas.push(productoFallido);
+        }
+      }
+    }
+    this.productos = comprasFallidas;
+    
+    this.saveCarrito();
+    this.updateSubTotal();
+    this.cdr.detectChanges();
+  }
 }

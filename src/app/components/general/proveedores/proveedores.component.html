@@ -1,26 +1,12 @@
-<form class="buscar">
-    <mat-form-field class="busqueda">
-      <input type="text"
-             placeholder="Buscar entre todos los productos"
-             matInput
-             [formControl]="miform"
-             [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
-        @for (producto of filteredOptions | async ; track producto) {
-          <mat-option [value]="producto.nombre">{{producto.nombre}}</mat-option>
-        }
-      </mat-autocomplete>
-    </mat-form-field>
-    <div class="precio" *ngIf="selectedProducto">
-      <div></div>
-        {{selectedProducto.nombre}} | Precio: <b>{{selectedProducto.precioVenta.toFixed(2)}}€</b>
-        <button mat-icon-button (click)="addProducto(selectedProducto)"><span class="material-symbols-outlined">add_shopping_cart</span></button>
-        <button mat-flat-button (click)="abrirCarrito()" color="primary">Ver carrito</button>
-    </div>
-    <button class="carrito" *ngIf="!selectedProducto" mat-flat-button (click)="abrirCarrito()" color="primary">Ver carrito</button>
-  </form><br>
+<mat-form-field class="busqueda">
+    <input type="text"
+            placeholder="Buscar proveedor"
+            matInput
+            [formControl]="miform">
+</mat-form-field>
+<button mat-button [routerLink]="['Todos']">Buscar por todos</button>
 <div class="proveedores" cols="3">
-    <div class="proveedor" *ngFor="let proveedor of proveedores;let i = index" [routerLink]="[proveedor.id]">
+    <div class="proveedor" *ngFor="let proveedor of filteredProveedores;let i = index" [routerLink]="[proveedor.id]">
         <h3><b>{{proveedor.nombre}}</b></h3>
         <p>{{proveedor.telefono}} </p>
     </div>

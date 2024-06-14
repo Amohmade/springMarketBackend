@@ -12,7 +12,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { map, startWith } from 'rxjs/operators';
 import { ServiciorolService } from '../../../serviciorol.service';
 import { MatButtonModule } from '@angular/material/button';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { TodosproductosComponent } from './todosproductos/todosproductos.component';
 
 interface Proveedor {
@@ -20,15 +19,6 @@ interface Proveedor {
   email: string;
   nombre: string;
   telefono: number;
-}
-
-interface Producto {
-  id: number;
-  nombre: string;
-  stock: number;
-  precio_coste: number;
-  precioVenta: number;
-  cantidad: number;
 }
 
 @Component({
@@ -46,24 +36,22 @@ interface Producto {
     RouterModule,
     HttpClientModule,
     MatButtonModule,
-    TodosproductosComponent,
-    MatDialogModule
+    TodosproductosComponent
   ],
   templateUrl: './proveedores.component.html',
   styleUrl: './proveedores.component.css'
 })
 export class ProveedoresComponent implements OnInit{
   proveedores: Proveedor[] = [];
-  listaproductos: Producto[] = [];
+  filteredProveedores: Proveedor[] = [];
+  // listaproductos: Producto[] = [];
   miform = new FormControl('');
-  filteredOptions!: Observable<Producto[]>;
-  selectedProducto: Producto | null = null;
-  productos:any[]=[];
-  subTotal!: any;
+  // filteredOptions!: Observable<Producto[]>;
+  // selectedProducto: Producto | null = null;
   role:string = "";
   id:string = "";
 
-  constructor(private http: HttpClient,public dialog: MatDialog,private serviciorol: ServiciorolService){
+  constructor(private http: HttpClient,private serviciorol: ServiciorolService){
     this.role = this.serviciorol.getRole() ?? "";
     this.id = this.serviciorol.getId() ?? "";
   }
@@ -71,17 +59,16 @@ export class ProveedoresComponent implements OnInit{
   ngOnInit(): void {
     this.fetchProveedores().subscribe(data => {
       this.proveedores = data;
+      this.filteredProveedores = data;
+
     });
 
-    this.fetchListaProductos().subscribe(data => {
-      this.listaproductos = data;
-      this.loadCarrito();
-    });
-
-    this.filteredOptions = this.miform.valueChanges.pipe(
+    this.miform.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value || '')),
-    );
+      map(value => this._filter(value || ''))
+    ).subscribe(filtered => {
+      this.filteredProveedores = filtered;
+    });
   }
 
   //Apis
@@ -91,58 +78,53 @@ export class ProveedoresComponent implements OnInit{
     return this.http.get<Proveedor[]>(apiUrl);
   }
 
-  fetchListaProductos(): Observable<Producto[]> {
-    const apiUrl = `http://localhost:8082/proveedores/productos`;
-    return this.http.get<Producto[]>(apiUrl);
-  }
-
   //Busqueda
 
-  private _filter(value: string): Producto[] {
-    const filterValue = value === 'string' ? value.toLowerCase() : value.toString();
-    return this.listaproductos.filter(producto => 
-      producto.nombre.toString().includes(filterValue)
+  private _filter(value: string): Proveedor[] {
+    const filterValue = value.trim().toLowerCase();
+    return this.proveedores.filter(producto => 
+      producto.nombre.toLowerCase().includes(filterValue)
     );
   }
 
-  onOptionSelected(event: any): void {
-    const seleccionado = event.option.value;
-    this.selectedProducto = this.listaproductos.find(producto => (producto.id === seleccionado)||(producto.nombre === seleccionado)) || null;
-  }
+  // onOptionSelected(event: any): void {
+  //   const seleccionado = event.option.value;
+  //   this.selectedProducto = this.listaproductos.find(producto => (producto.id === seleccionado)||(producto.nombre === seleccionado)) || null;
+  // }
 
-  //Funciones carrito
+  // //Funciones carrito
 
-  addProducto(producto: any){
-    const index = this.productos.findIndex((p) => p.id === producto.id);
-    if (index > -1) {
-      this.productos[index].cantidad += 1;
-    } else {
-      producto.cantidad = 1;
-      this.productos.push(producto);
-    }
-    this.saveCarrito();
-    this.updateSubTotal();
-  }
+  // addProducto(producto: any){
+  //   const index = this.productos.findIndex((p) => p.id === producto.id);
+  //   if (index > -1) {
+  //     this.productos[index].cantidad += 1;
+  //   } else {
+  //     producto.cantidad = 1;
+  //     this.productos.push(producto);
+  //   }
+  //   this.saveCarrito();
+  //   this.updateSubTotal();
+  // }
 
-  saveCarrito(){
-    localStorage.setItem('carrito_todosproveedores',JSON.stringify(this.productos))
-  }
+  // saveCarrito(){
+  //   localStorage.setItem('carrito_todosproveedores',JSON.stringify(this.productos))
+  // }
 
-  updateSubTotal() {
-    this.subTotal = this.productos.reduce((total, producto) => total + producto.precio_venta * producto.cantidad, 0);
-  }
+  // updateSubTotal() {
+  //   this.subTotal = this.productos.reduce((total, producto) => total + producto.precio_venta * producto.cantidad, 0);
+  // }
 
-  loadCarrito(){
-    this.productos = JSON.parse(localStorage.getItem('carrito_todosproveedores') as any) || [];
-  }
+  // loadCarrito(){
+  //   this.productos = JSON.parse(localStorage.getItem('carrito_todosproveedores') as any) || [];
+  // }
 
-  abrirCarrito(): void {
-    const dialogRef = this.dialog.open(TodosproductosComponent, {
-      width: '700px',
-      data: { productos: this.productos }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.loadCarrito();
-    });
-  }
+  // abrirCarrito(): void {
+  //   const dialogRef = this.dialog.open(TodosproductosComponent, {
+  //     width: '700px',
+  //     data: { productos: this.productos, id:this.id }
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.loadCarrito();
+  //   });
+  // }
 }

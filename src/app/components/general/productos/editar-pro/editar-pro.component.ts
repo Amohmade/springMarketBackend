@@ -6,6 +6,7 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ServiciorolService } from '../../../../serviciorol.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Producto {
   id: number;
@@ -36,28 +37,34 @@ export class EditarProComponent {
   constructor(
     public dialogRef: MatDialogRef<EditarProComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {producto: Producto, role: number },
+    private _snackBar: MatSnackBar,
     private fb: FormBuilder,
     private rol: ServiciorolService
   ) {
     this.role = this.rol.getRole();
-    this.form = this.fb.group({
+    const formConfig: { [key: string]: any } = {
       id: [data.producto.id, Validators.required],
       nombre: [data.producto.nombre, Validators.required],
       stock: [data.producto.stock, Validators.required],
-      precio_venta: [data.producto.precioVenta, Validators.required],
-    });
-    if (this.role == "Establecimiento") {
-      this.form.addControl('precio_coste', this.fb.control(data.producto.precioCoste, Validators.required));
+      precioVenta: [data.producto.precioVenta, Validators.required]
+    };
+    
+    if (this.role === "Establecimiento") {
+      formConfig['precioCoste'] = [data.producto.precioCoste, Validators.required];
     }
+    
+    this.form = this.fb.group(formConfig);
   }
 
   onSave(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
+      console.log(this.form.value)
+      this.dialogRef.close(this.form.value);
     }
   }
 
   onCancel(): void {
+    console.log(this.form.value)
     this.dialogRef.close();
   }
 }

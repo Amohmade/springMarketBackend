@@ -19,12 +19,12 @@
             </mat-form-field><br>
             Correo: <br>
             <mat-form-field appearance="outline">
-                <input matInput formControlName="correo" [value]="this.user?.email" [readonly]="isReadOnly" required>
+                <input matInput formControlName="email" [value]="this.user?.email" [readonly]="isReadOnly" required>
             </mat-form-field><br>
             Contraseña: <br>
             <mat-form-field appearance="outline">
-                <input matInput [type]=" hide ? 'password' : 'text'" formControlName="password" [value]="this.user?.nombre" [readonly]="isReadOnly" required>
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <input matInput [type]=" hide ? 'password': 'text'" formControlName="nombre" [value]="this.user?.nombre" [readonly]="isReadOnly" required>
+                <button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </button>
             </mat-form-field>

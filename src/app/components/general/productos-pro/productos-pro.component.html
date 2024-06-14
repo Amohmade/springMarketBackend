@@ -4,27 +4,23 @@
         <input type="text"
                placeholder="Buscar producto"
                matInput
-               [formControl]="miform"
-               [matAutocomplete]="auto">
+               [formControl]="miform">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
           @for (producto of filteredOptions | async ; track producto) {
-            <mat-option [value]="producto.nombre">{{producto.id}} | {{producto.nombre}}</mat-option>
+            <mat-option [value]="producto.nombre">{{producto.nombre}}</mat-option>
           }
         </mat-autocomplete>
       </mat-form-field>
-      <mat-card class="card">
-          <mat-card-header>
-            <mat-card-title>{{ selectedProducto?.nombre || 'Seleccione un producto' }}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="detalles" cols="2" *ngIf="selectedProducto">
-              <div class="precio">
-                <p>Precio: <b>{{selectedProducto.precioVenta}}€</b></p>
-              </div>
-              <div class="comprar">
-                <button mat-icon-button (click)="addProducto(selectedProducto)"><span class="material-symbols-outlined">shopping_cart</span></button>
-              </div>
-          </mat-card-content>
-        </mat-card>
+      <mat-card>
+        <mat-card-content class="todos">
+          <div *ngFor="let producto of filteredProductos" class="productocarrito">
+            <p>{{producto.nombre}}</p>
+            <div>
+              <b class="precioitem">{{producto.precioVenta}}</b>€ <button mat-icon-button (click)="addProducto(producto)"><span class="material-symbols-outlined">shopping_cart</span></button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </form>
 
     <!-- //Carrito -->
@@ -49,7 +45,7 @@
       </mat-card-content>
       <mat-card-actions>
           <a>Total: <b>{{ total() | currency:'EUR':'symbol':'1.2-2' }}</b></a>
-        <button *ngIf="total()!= 0" mat-button (click)="clearCarrito()">Pagar</button>
+        <button *ngIf="total()!= 0" mat-button (click)="realizarCompra()">Pagar</button>
       </mat-card-actions>
     </mat-card>
 </div>

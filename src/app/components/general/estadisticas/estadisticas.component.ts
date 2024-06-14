@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule, MatStartDate} from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
+
+interface Producto {
+  id: number;
+  nombre: string;
+  unidades: number;
+  width: number;
+}
 
 @Component({
   selector: 'app-estadisticas',
@@ -26,13 +33,13 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './estadisticas.component.html',
   styleUrl: './estadisticas.component.css'
 })
-export class EstadisticasComponent{
+export class EstadisticasComponent implements OnInit{
   
-  Topventas = [
-    {nombre:"Pan",unidades:4000},
-    {nombre:"Coca Cola",unidades:2000},
-    {nombre:"Pan",unidades:1000}
-  ]
+  Topventas: Producto[] = [
+    { id: 1, nombre: "Pan", unidades: 0, width: 0 },
+    { id: 2, nombre: "Coca Cola", unidades: 0, width: 0 },
+    { id: 3, nombre: "Leche", unidades: 0, width: 0 }
+  ];
 
   anhoActual: number;
   mesActual: number;
@@ -47,6 +54,41 @@ export class EstadisticasComponent{
     this.rangoGrupoFechas = this.fb.group({
       fechaInicio: [null, Validators.required],
       fechaFin: [null, Validators.required]
+    });
+  }
+
+  originalUnits: Producto[] = [];
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.originalUnits = [
+        { id: 1, nombre: "Pan", unidades: 4000, width: 0 },
+        { id: 2, nombre: "Coca Cola", unidades: 2000, width: 0 },
+        { id: 3, nombre: "Leche", unidades: 1000, width: 0 }
+      ];
+      this.animateProducts();
+    }, 0);
+  }
+
+  animateProducts(): void {
+    this.Topventas.forEach((producto, index) => {
+      const targetUnits = this.originalUnits[index].unidades;
+      const duration = 1000; // Animation duration in milliseconds
+      const increment = targetUnits / (duration / 5); // Increment per frame
+      const maxWidth = targetUnits / 10; // Maximum width
+      let currentUnits = 0;
+
+      const interval = setInterval(() => {
+        if (currentUnits < targetUnits) {
+          currentUnits += increment;
+          this.Topventas[index].unidades = Math.min(Math.ceil(currentUnits), targetUnits); // Update current units for animation
+          this.Topventas[index].width = maxWidth; // Update width for animation
+        } else {
+          this.Topventas[index].unidades = targetUnits; // Ensure final count is accurate
+          this.Topventas[index].width = maxWidth; // Ensure final width is accurate
+          clearInterval(interval); // Stop interval when animation completes
+        }
+      }, 10); // Update every 10ms for smooth animation
     });
   }
 

@@ -1,32 +1,71 @@
 <div class="funciones">
-    <div class="titulo">
-        <h2>Funciones principales</h2>
-        <p>Bienvenido a nuestra plataforma diseñada para optimizar la gestión de tu tienda de alimentación.</p> 
-        <p>Descubre las potentes funcionalidades que ofrecemos para facilitar la administración de tus productos y la comunicación con tus proveedores:</p>
-        <div class="lista">
-            <ol>
-                <li>
-                    <h3>Gestión de Inventario Eficiente:</h3>
-                    <p>Mantén un control preciso sobre tus existencias. Actualiza fácilmente los productos disponibles, realiza seguimiento de stocks y genera órdenes de reposición de manera rápida y eficiente.</p>
-                </li>
-                <li>
-                    <h3>Comunicación Directa con Proveedores:</h3>
-                    <p>Simplifica tus interacciones con los proveedores. Envía solicitudes de productos directamente desde la plataforma, recibe notificaciones automáticas sobre cambios en inventario y precios, y gestiona tus relaciones comerciales de manera efectiva.</p>
-                </li>
-                <li>
-                    <h3>Accesibilidad Móvil para Flexibilidad Operativa:</h3>
-                    <p>Accede a todas las funcionalidades desde cualquier dispositivo móvil a través de un navegador web. Esta característica mejora la movilidad y flexibilidad de tu equipo, permitiéndoles gestionar la tienda sobre la marcha.</p>
-                </li>
-                <li>
-                    <h3>Análisis Avanzado para Decisiones Estratégicas:</h3>
-                    <p>Obtén insights valiosos a través de análisis de datos avanzado. Optimiza tus compras y toma decisiones estratégicas basadas en información detallada sobre el rendimiento de tus productos.</p>
-                </li>
-                <li>
-                    <h3>Soporte Personalizado y Capacitación Continua:</h3>
-                    <p>Recibe soporte prioritario y personalizado para resolver cualquier consulta o problema. Además, ofrecemos capacitación y asesoría especializada para aprovechar al máximo todas las capacidades de nuestra plataforma.</p>
-                </li>
-            </ol>
-        </div>
-        <p>¡Explora estas funciones y descubre cómo nuestra plataforma puede impulsar la eficiencia y el éxito de tu tienda de alimentación!</p>
+    <h1>Funciones principales</h1>
+    <div class="grupo">
+          <div class="caja" (click)="toggleAccordion('Ex1')">
+                <h2>Escaneo y Venta con API de Código de Barras</h2>
+                <p>
+                    Nuestro sistema optimiza la ventas mediante el escaneo de códigos de barras.
+                </p>
+                
+            <div class="box-content" [ngClass]="{'expanded bc1': Ex1}">
+                <ul>
+                    <li><strong>Escaneo de Códigos de Barras:</strong> Obtención instantánea de información de productos.</li>
+                    <li><strong>Actualización de Inventario en Tiempo Real:</strong> Verificación inmediata del stock.</li>
+                    <li><strong>Registro de Ventas Automatizado:</strong> Gestión eficiente y sin errores del inventario.</li>
+                </ul>
+            </div>
+            <span class="material-symbols-outlined">
+                {{ Ex1 ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+                </span>
+          </div>
+          <div class="caja2" (click)="toggleAccordion('Ex2')">
+                <h2>Tabla de Productos</h2>
+                <p>
+                Esta tabla muestra detalles de los productos en inventario del establecimiento.
+                </p>
+            <div class="box-content" [ngClass]="{'expanded bc2': Ex2}">
+                <ul>
+                <li><strong>Información Completa:</strong> Visualiza detalles esenciales de cada producto.</li>
+                <li><strong>Actualización Constante:</strong> Datos de stock y precios siempre al día.</li>
+                <li><strong>Alerta de Stock:</strong> Si el stock llega a 0, se resalta y se crea un enlace al proveedor para facilitar la reposición.</li>
+                <li><strong>Acciones Rápidas:</strong> Edita o elimina productos directamente desde la tabla.</li>
+                </ul>
+            </div>
+            <span class="material-symbols-outlined">
+                {{ Ex2 ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+                </span>
+          </div>
+          <div class="caja2" (click)="toggleAccordion('Ex3')">
+            <h2>Sección de Estadísticas</h2>
+            <p>Visión detallada del desempeño financiero y de ventas mensuales, con herramientas para gestionar facturas.</p>
+            <div class="box-content" [ngClass]="{'expanded bc3': Ex3}">
+                <ul>
+                    <li><strong>Ingresos, Gastos y Beneficios Mensuales:</strong> Visualización clara y concisa de la salud financiera mensual.</li>
+                    <li><strong>Top 3 Ventas Mensuales:</strong> Identificación rápida de los productos más vendidos cada mes.</li>
+                    <li><strong>Impresión de Facturas:</strong> Funcionalidad integrada para generar y gestionar facturas de ventas.</li>
+                  </ul>
+            </div>
+            <span class="material-symbols-outlined">
+                {{ Ex3 ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+                </span>
+          </div>
+          <div class="caja" (click)="toggleAccordion('Ex4')">
+                <h2>Tabla de Proveedores</h2>
+                <p>
+                Esta tabla muestra información detallada de los proveedores y sus productos.
+                </p>
+            <div class="box-content" [ngClass]="{'expanded bc4': Ex4}">
+                <h3>Funcionalidades:</h3>
+                <ul>
+                    <li><strong>Detalles del Proveedor:</strong> Nombre, contacto y detalles relevantes.</li>
+                    <li><strong>Acceso Rápido:</strong> Enlace directo para cada proveedor facilita la gestión de inventario.</li>
+                    <li><strong>Compra con Todos los Proveedores:</strong> Capacidades integradas para realizar pedidos a múltiples proveedores.</li>
+                </ul>
+            </div>
+            <span class="material-symbols-outlined">
+                {{ Ex4 ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+                </span>
+          </div>
+        
     </div>
 </div>

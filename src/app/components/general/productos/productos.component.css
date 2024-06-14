@@ -1,19 +1,60 @@
-.contenido {
-    padding: 2em;
+.busqueda{
+    width: 80%;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .mat-table {
-width: 100%;
+    width: 100%;
 }
 
-mat-paginator {
-margin-top: 10px;
+.mat-mdc-header-cell {
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
-.file-name {
-    margin-left: 1rem;
+.mat-mdc-cell {
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+}
+
+.mat-mdc-paginator {
+    margin-top: 10px;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .borrar{ 
-    color: red;
+    color: #DA2C38;
+}
+
+.sinstock{
+    color: #DA2C38;
+}
+
+.subir{
+    margin: 1em 2em;
+    padding: 1em;
+    border-width: 0;
+    border-radius: 3px;
+    font-family: "Gabarito", sans-serif;
+    font-weight: 600;
+    background-color: #96EEC8;
+    color: #1E2E35;
+    transition: all 0.3s ease-in-out;
+}
+
+.subir:hover{
+    background-color: #1E2E35;
+    color: #96EEC8;
+}
+
+.comprar{
+    background-color: #DA2C38;
+    color: white;
+}
+
+.comprar{
+    background-color: #DA2C38;
+    color: white;
 }

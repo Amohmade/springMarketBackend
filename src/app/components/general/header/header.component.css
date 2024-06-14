@@ -1,22 +1,28 @@
 .header{
-  font-family: "Inter", sans-serif;
+  font-family: "Gabarito", sans-serif;
   font-optical-sizing: auto;
   font-variation-settings:
     "slnt" 0;
   text-align: center;
-  background-color: white;
+  background-image: linear-gradient(to right,#aae7cd,#1E2E35);
 }
 
 h2{
   margin: auto;
-  font-size:x-large;
+  font-size:xx-large;
+  font-family: "Gabarito", sans-serif;
 }
 
 a{
-  color: black;
+  color: #1E2E35;
   text-decoration: none;
+  transition: all 0.2s ease-in-out;
 }
 
 a:hover{
-  color: gray;
+  color: #ffffff;
+}
+
+button{
+  color: white;
 }

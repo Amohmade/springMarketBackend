@@ -13,7 +13,6 @@
     display:flex;
     padding: 2em;
     padding-bottom: 0;
-    font-family: "Noto Sans", sans-serif;
     /* color: white; */
     border-radius: 3px 3px 0px 0px;
     align-items: center;
@@ -22,6 +21,8 @@
 
 .mat-mdc-card-title{
     font-size: xx-large;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .mat-mdc-card-content{
@@ -34,20 +35,26 @@
     justify-content: end;
 }
 
+.mat-mdc-form-field{
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+}
+
 .icon{
     vertical-align: middle;
 }
 
 .modificar{
     padding: 2em;
-    font-weight: normal;
+    font-family: "Gabarito", sans-serif;
+    font-weight: 500;
     width: 100%;
     transition: all 0.5s ease-in-out;
 }
 
 .modificar:enabled{
-    color: white;
-    background-color: black;
+    color: #1E2E35;
+    background-color: #96EEC8;
 }
 .modificar:disabled{
     background-color: lightgray;

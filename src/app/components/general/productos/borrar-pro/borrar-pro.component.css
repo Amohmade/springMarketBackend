@@ -2,10 +2,14 @@
     padding: 1em 2em;
     padding-bottom: 0;
     font-size: x-large;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .mat-mdc-dialog-content{
     padding: 1em 2em;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .mat-mdc-dialog-actions{
@@ -14,8 +18,12 @@
     justify-content: end;
 }
 
-.si{
-    background-color: black;
+button{
+    font-family: "Gabarito", sans-serif;
+}
+
+.si:focus{
+    background-color: #DA2C38;
     color: white;
 }
  

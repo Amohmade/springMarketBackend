@@ -4,18 +4,18 @@
     <mat-form-field>
       <mat-label>Name</mat-label>
       <input matInput formControlName="nombre">
-    </mat-form-field>
+    </mat-form-field><br>
     <mat-form-field>
       <mat-label>Stock</mat-label>
       <input matInput formControlName="stock">
-    </mat-form-field>
+    </mat-form-field><br>
     <mat-form-field *ngIf="role == 'Establecimiento'">
       <mat-label>Precio Coste</mat-label>
-      <input matInput formControlName="precio_coste">
-    </mat-form-field>
+      <input matInput formControlName="precioCoste">
+    </mat-form-field><br>
     <mat-form-field>
       <mat-label>Precio Venta</mat-label>
-      <input matInput formControlName="precio_venta">
+      <input matInput formControlName="precioVenta">
     </mat-form-field>
   </form>
 </div>

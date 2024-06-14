@@ -4,7 +4,7 @@
     grid-template-columns: 32% 32% 32%;
     overflow-y:scroll;
     min-height: 200px;
-    max-height: 500px;
+    max-height: 700px;
 }
 
 .proveedor{
@@ -20,6 +20,27 @@
     grid-template-columns: auto auto;
     gap: 1em;
     margin: 0em 1em;
+}
+
+.busqueda{
+    width: 80%;
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+}
+
+.mat-mdc-button{
+    margin: 1em 2em;
+    font-family: "Gabarito", sans-serif;
+    font-weight: 500;
+    background-color: #96EEC8;
+    color: #1E2E35;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.mat-mdc-button:hover{
+    background-color: #1E2E35;
+    color: #96EEC8;
 }
 
 .precio{

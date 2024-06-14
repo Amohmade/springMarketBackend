@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, firstValueFrom} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {CommonModule, NgFor, NgIf} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -18,6 +19,11 @@ interface Producto {
   stock: number;
   precio_base: number;
   precio_venta: number;
+  cantidad: number;
+}
+
+interface CarritoItem {
+  productoEstablecimientoId: number;
   cantidad: number;
 }
 
@@ -60,19 +66,23 @@ export class InfoscanbarrasComponent implements OnInit{
   role:string = "";
   id:string = "";
 
-  constructor(private http: HttpClient,private serviciorol: ServiciorolService){
-    this.role = this.serviciorol.getRole() ?? "";
-    this.id = this.serviciorol.getId() ?? "";
+  constructor(private http: HttpClient,
+    private serviciorol: ServiciorolService,
+    private _snackBar: MatSnackBar
+  ){
+      this.role = this.serviciorol.getRole() ?? "";
+      this.id = this.serviciorol.getId() ?? "";
   }
 
   ngOnInit() {
     this.fetchListaProductos(this.id).subscribe(data => {
       this.listaproductos = data;
     });
-    this.filteredOptions = this.miform.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
-    );
+    
+    // this.filteredOptions = this.miform.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value || '')),
+    // );
 
     this.loadCarrito();
     this.productos = this.getProducto();
@@ -80,15 +90,17 @@ export class InfoscanbarrasComponent implements OnInit{
 
   fetchListaProductos(id:string): Observable<Producto[]> {
     const apiUrl = `http://localhost:8082/establecimientos/productos/${id}`;
-    return this.http.get<Producto[]>(apiUrl);
-  }
-
-  private _filter(value: string): Producto[] {
-    const filterValue = value === 'string' ? value.toLowerCase() : value.toString();
-    return this.listaproductos.filter(producto => 
-      producto.id.toString().includes(filterValue)
+    return this.http.get<Producto[]>(apiUrl).pipe(
+      map(data => data.filter(producto => producto.stock > 0))
     );
   }
+
+  // private _filter(value: string): Producto[] {
+  //   const filterValue = value === 'string' ? value.toLowerCase() : value.toString();
+  //   return this.listaproductos.filter(producto => 
+  //     producto.id.toString().includes(filterValue)
+  //   );
+  // }
 
   onOptionSelected(event: any): void {
     const seleccionado = event.option.value;
@@ -152,10 +164,9 @@ export class InfoscanbarrasComponent implements OnInit{
   }
 
   clearCarrito(){
-    // sessionStorage.removeItem("carrito_compra");
+    localStorage.removeItem("carrito_compra");
     this.productos = [];
     this.updateSubTotal();
-    window.location.reload();
   }
 
   total(): number {
@@ -166,7 +177,6 @@ export class InfoscanbarrasComponent implements OnInit{
 
   onScannedProduct(barcode: string) {
     const producto = this.listaproductos.find(p => p.id.toString() === barcode);
-    // if (producto && !this.productoCarrito(producto)) {
     if (producto) {
       this.addProducto(producto);
       const audio = document.getElementById('play') as HTMLAudioElement;
@@ -175,4 +185,23 @@ export class InfoscanbarrasComponent implements OnInit{
       }
     }
   }
+
+  prepareCompraData(): any[] {
+    return this.productos.map(producto => ({
+      productoEstablecimientoId: producto.id,
+      cantidad: producto.cantidad
+    }));
+  }
+
+  async realizarCompra(): Promise<void> {
+    try {
+      const compraData = this.prepareCompraData();
+      const apiUrl = `http://localhost:8082/ventas`;
+      const response = await firstValueFrom(this.http.post(apiUrl, compraData));
+      this._snackBar.open("Compra realizada con exito", "OK");
+      this.clearCarrito();
+    } catch (error) {
+      this._snackBar.open("Error al realizar la compra:", "OK");
+    }
+  } 
 }

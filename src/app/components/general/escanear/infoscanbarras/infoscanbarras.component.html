@@ -5,15 +5,7 @@
       <div class="caja">
         <app-barcode-scanner class="camara" (scannedProduct)="onScannedProduct($event)"></app-barcode-scanner>
       </div>
-      <!-- <mat-card class="cesta">
-        <mat-card-header>
-          <mat-card-title>Escaner</mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="camara">
-            <app-barcode-scanner (scannedProduct)="onScannedProduct($event)"></app-barcode-scanner>
-        </mat-card-content>
-      </mat-card> -->
-
+      
       <!-- //Carrito -->
       <mat-card class="cesta">
         <mat-card-header>
@@ -36,7 +28,7 @@
         </mat-card-content>
         <mat-card-actions>
             <a>Total: <b>{{ total() | currency:'EUR':'symbol':'1.2-2' }}</b></a>
-          <button *ngIf="total()!= 0" mat-button (click)="clearCarrito()">Pagar</button>
+          <button *ngIf="total()!= 0" mat-button (click)="realizarCompra()">Pagar</button>
         </mat-card-actions>
       </mat-card>
 </div>
