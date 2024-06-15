@@ -1,19 +1,20 @@
 <h1 mat-dialog-title>Edit Product</h1>
 <div mat-dialog-content>
+  <br>
   <form [formGroup]="form">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input matInput formControlName="nombre">
     </mat-form-field><br>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Stock</mat-label>
       <input matInput formControlName="stock">
     </mat-form-field><br>
-    <mat-form-field *ngIf="role == 'Establecimiento'">
+    <mat-form-field appearance="outline" *ngIf="role == 'Establecimiento'">
       <mat-label>Precio Coste</mat-label>
       <input matInput formControlName="precioCoste">
     </mat-form-field><br>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Precio Venta</mat-label>
       <input matInput formControlName="precioVenta">
     </mat-form-field>

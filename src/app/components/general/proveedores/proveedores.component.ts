@@ -12,7 +12,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { map, startWith } from 'rxjs/operators';
 import { ServiciorolService } from '../../../serviciorol.service';
 import { MatButtonModule } from '@angular/material/button';
-import { TodosproductosComponent } from './todosproductos/todosproductos.component';
 
 interface Proveedor {
   id: number;
@@ -35,8 +34,7 @@ interface Proveedor {
     MatGridListModule,
     RouterModule,
     HttpClientModule,
-    MatButtonModule,
-    TodosproductosComponent
+    MatButtonModule
   ],
   templateUrl: './proveedores.component.html',
   styleUrl: './proveedores.component.css'

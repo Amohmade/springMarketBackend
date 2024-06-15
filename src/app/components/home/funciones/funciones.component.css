@@ -1,23 +1,24 @@
 .funciones{
-    background-image: linear-gradient(#E3F9ED,#1E2E35);
     text-align: left;
     margin: 0em 2em;
     padding: 2em;
-    border-radius: 10px;
     font-family: "Gabarito", sans-serif;
     color: #1E2E35;
 }
 
 .grupo{
+    background-image: linear-gradient(#E3F9ED,#1E2E35);
+    border-radius: 10px;
     display: grid;
     grid-template-columns: auto auto;
+    padding: 1em;
+    gap: 1em;
 }
 
 .caja{
     background-color: white;
     border-radius: 10px;
     padding: 2em;
-    margin: 1em;
     text-align: center;
     overflow: hidden;
     transition: height 0.5s ease-in-out;
@@ -28,7 +29,6 @@
     color: white;
     border-radius: 10px;
     padding: 2em;
-    margin: 1em;
     text-align: center;
     overflow: hidden;
     transition: height 0.5s ease-in-out;
@@ -38,7 +38,7 @@
     height: 0;
     opacity: 0;
     padding: 1em;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
   
 .box-content.expanded {
@@ -53,26 +53,25 @@
     background-size: contain;
 }
 
-.funcion1{
-    background-color: white;
-    background-image: url(https://cdn.dribbble.com/users/1220941/screenshots/11463637/media/73d1a3758fd18a336cf36a3b1d5ffa1d.gif);
+.bc2{
+    background-image: url(https://i.pinimg.com/originals/39/79/6a/39796ac6bf7fb5abd5814c8f61bf3ab1.gif);
     background-repeat: no-repeat;
     background-position: right;
-    border-radius: 10px;
-    margin:1em;
-    padding: 2em;
-
+    background-size: contain;
 }
 
-.funcion2{
-    background-color: white;
-    background-image: url(https://cdn.dribbble.com/users/1220941/screenshots/11463637/media/73d1a3758fd18a336cf36a3b1d5ffa1d.gif);
+.bc3{
+    background-image:url(https://s12.gifyu.com/images/SY1Sz.gif);
     background-repeat: no-repeat;
     background-position: right;
-    border-radius: 10px;
-    margin:1em;
-    padding: 2em;
-    align-items: center;
+    background-size: contain;
+}
+
+.bc4{
+    background-image: url(https://lordicon.com/icons/wired/outline/757-delivery.gif);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
 }
 
 .sub{
@@ -99,6 +98,7 @@ h3{
 }
 
 p{
+    font-family: "Gabarito", sans-serif;
     font-size: 16px;
 }
 
@@ -108,7 +108,7 @@ ul{
 
 li{
     font-size: 16px;
-    font-family: "Inter", sans-serif;
-    font-weight: 400;
+    font-family: "Gabarito", sans-serif;
+    /* font-weight: 300; */
     text-align: left;
 }

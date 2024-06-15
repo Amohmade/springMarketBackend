@@ -9,7 +9,6 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { EntrarComponent } from './components/home/entrar/entrar.component';
 import { AccederComponent } from './components/home/entrar/acceder/acceder.component';
 import { RegistroComponent } from './components/home/entrar/registro/registro.component';
-import { RecuperarComponent } from './components/home/entrar/recuperar/recuperar.component';
 import { ErrorComponent } from './components/general/error/error.component';
 import { CuentaComponent } from './components/general/cuenta/cuenta.component';
 import { ProveedoresComponent } from './components/general/proveedores/proveedores.component';
@@ -36,11 +35,6 @@ export const routes: Routes = [
             {
                 path: 'Registro',
                 component: RegistroComponent,
-                title: 'Registrar'
-            },
-            {
-                path: 'Recuperar',
-                component: RecuperarComponent,
                 title: 'Registrar'
             },
             {

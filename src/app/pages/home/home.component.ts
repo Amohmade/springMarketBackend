@@ -7,10 +7,14 @@ import { FuncionesComponent } from '../../components/home/funciones/funciones.co
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent,BannerComponent,PreciosComponent,FuncionesComponent],
+  imports: [
+    HeaderComponent,
+    BannerComponent,
+    PreciosComponent,
+    FuncionesComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-
 }

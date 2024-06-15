@@ -1,62 +1,60 @@
-.acceder{
-    align-items: center;
-    justify-content: center;
-}
-
-.blur{
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    height: 100%;
-    margin: 0; 
-    padding: 4em;
-}
-
 .mat-mdc-form-field{
-    margin-top: 1em;
+    margin-top: 5px;
 }
 .mat-mdc-card{
     margin:auto;
-    max-width: 500px;
+    min-width: 500px;
     background-color: transparent;
-    backdrop-filter: blur(100px);
     color: white;
-    border: #ffffff20 solid 1px;
 }
 
 .card-header{
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 2em;
-    /* background-image: linear-gradient(#74101D,#DA1E37); */
-    font-family: "Noto Sans", sans-serif;
-    color: white;
+    background-image: linear-gradient(to right,#1E2E35,#96EEC8);
     border-radius: 3px 3px 0px 0px;
     align-items: center;
     justify-items: start;
 }
 
-::ng-deep .mat-text-field.mat-focused .mat-form-field- {
-    color: rgb(255, 255, 255)!important;
-}
-
 .volver{
     vertical-align: middle;
     color: white;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .mat-mdc-card-title{
     font-size: xx-large;
     align-items: center;
+    font-family: "Gabarito", sans-serif;
+    color: white;
 }
 
 .mat-mdc-card-content{
-    padding: 1em 2em;
+    padding:3em;
+    padding-bottom:1em;
 }
 
 .mat-mdc-card-actions{
-    padding: 2em;
+    padding: 1em;
+    padding-top: 0;
     justify-content: end;
+}
+
+.mat-mdc-label{
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+}
+
+.mat-mdc-form-field{
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+}
+
+p{
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
 }
 
 .icon{
@@ -65,25 +63,27 @@
 
 .links{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 a{
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: #1E2E35;
     font-weight: 400;
 }
 
 .enviar{
     padding: 1em;
-    font-weight: normal;
+    font-family: "Gabarito", sans-serif;
+    font-weight:600;
     width: 100%;
     height: auto;
+    transition: all 0.3s ease-in-out;
 }
 
 .enviar:enabled{
-    color: white;
-    background-color: black;
+    color: #1E2E35;
+    background-color: #96EEC8;
 }
 .enviar:disabled{
     background-color: lightgray;

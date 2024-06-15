@@ -1,36 +1,30 @@
-<!-- <div class="acceder">
-    <div class="blur"> -->
-        <mat-card>
-            <div class="card-header">
-                <button class="volver" mat-button onclick="history.back()"><span class="material-symbols-outlined volver">arrow_back</span></button>
-                <mat-card-title>Acceder</mat-card-title>
+
+<mat-card>
+    <div class="card-header">
+        <button class="volver" mat-button onclick="history.back()"><span class="material-symbols-outlined volver">arrow_back</span></button>
+        <mat-card-title>Acceder</mat-card-title>
+    </div>
+    <mat-card-content>
+        <form [formGroup]="userForm" (ngSubmit)="enviar()">
+            <a>Correo:</a><br>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="user" placeholder="Introduce tu correo" required>
+            </mat-form-field><br>
+            <a>Contraseña:</a><br>
+            <mat-form-field appearance="outline">
+                <input placeholder="Introduce tu contraseña" matInput [type]=" hide ? 'password' : 'text'" formControlName="password" required>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+            </mat-form-field><br>
+            <div class="links">
+                <a [routerLink]="['Registro']">Registro</a> 
             </div>
-            <mat-card-content>
-                <form [formGroup]="userForm" (ngSubmit)="enviar()">
-                    Usuario: <br>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Nombre de usuario</mat-label>
-                        <input matInput formControlName="user" required>
-                    </mat-form-field><br>
-                    Contraseña: <br>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Contraseña</mat-label>
-                        <input matInput [type]=" hide ? 'password' : 'text'" formControlName="password" required>
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                          </button>
-                    </mat-form-field><br>
-                    <div class="links">
-                        <a [routerLink]="['Recuperar']">Has olvidado tu contraseña?</a>
-                        <a [routerLink]="['Registro']">Registro</a> 
-                    </div>
-                </form>
-            </mat-card-content>
-            <mat-card-actions>
-              <button class="enviar" mat-flat-button [disabled]="!userForm.valid" type="submit" (click)="enviar()">Iniciar sesion <span class="material-symbols-outlined icon">
-                login
-                </span></button>
-            </mat-card-actions>
-          </mat-card>
-    <!-- </div>
-</div> -->
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="enviar" mat-flat-button [disabled]="!userForm.valid" type="submit" (click)="enviar()">Iniciar sesion <span class="material-symbols-outlined icon">
+        login
+        </span></button>
+    </mat-card-actions>
+</mat-card>

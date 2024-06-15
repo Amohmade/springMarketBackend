@@ -14,15 +14,20 @@ h2{
 }
 
 a{
-  color: #1E2E35;
+  color: #ffffff;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
 
 a:hover{
-  color: #ffffff;
+  color: #1E2E35;
 }
 
 button{
   color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover{
+  color: #1E2E35;
 }

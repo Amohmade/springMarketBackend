@@ -1,7 +1,6 @@
 :host {
     display: flex;
     flex-direction: column;
-    /* height: 100vh; */
     font-family: "Gabarito", sans-serif;
 }
 
@@ -14,8 +13,8 @@
     padding: 3em;
     border-radius: 5px;
     font-size: large;
-    width: fit-content;
-    height: fit-content;
+    /* width: fit-content;
+    height: fit-content; */
     transition: all 0.2s ease-in-out;
     color: #1E2E35;
 }
@@ -31,7 +30,7 @@
     gap: 1em;
     padding: 4em;
     flex: 1 1 auto;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 

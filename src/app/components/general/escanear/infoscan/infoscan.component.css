@@ -34,19 +34,32 @@
 .todos{
     display: flex;
     flex-direction: column;
-    padding: 1em 4em;
+    padding: 1em 2em;
     overflow-y:scroll;
     min-height: 200px;
     max-height: 300px;
     transition: all 0.3s ease-in-out;
 }
 
+.prod{
+    width: 100%;
+}
+
+.precioitem{
+    display: flex;
+    align-items: center;
+}
+
+hr{
+    border: #1E2E35 ;
+}
 
 .productocarrito{
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: flex-end;
+    padding: 1em 0em;
 }
 
 .mat-mdc-card-content{

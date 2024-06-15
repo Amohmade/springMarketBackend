@@ -1,9 +1,11 @@
 .barra{
     padding: 1em 6em;
+    background-color: #1E2E35;
 }
 
 .mat-grid-list{
-    background-color: white;
+    /* background-color: white; */
+    background-color: #1E2E35;
     border-radius: 3px;
     /* transition: all 0.2s ease-in-out; */
 }
@@ -15,7 +17,8 @@
 
 button{
     border: none;
-    background-color: white;
+    /* background-color: white; */
+    background-color: #1E2E35;
 }
 
 button:hover{
@@ -25,7 +28,8 @@ button:hover{
 
 .mat-grid-tile{
     border: none;
-    background-color: white;
+    /* background-color: white; */
+    background-color: #1E2E35;
     transition: all 0.3s ease-in-out;
     border-radius: 5px;
 }

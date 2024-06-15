@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Observable, firstValueFrom} from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -34,6 +35,7 @@ interface Producto {
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatDividerModule,
     ReactiveFormsModule,
     AsyncPipe,
     HttpClientModule

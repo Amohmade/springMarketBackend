@@ -1,3 +1,7 @@
 *{
     background-color: #aae7cd;
 }
+
+html {
+    scroll-behavior: smooth;
+}

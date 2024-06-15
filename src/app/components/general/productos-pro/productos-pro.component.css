@@ -41,12 +41,25 @@
     transition: all 0.3s ease-in-out;
 }
 
+.prod{
+    width: 100%;
+}
+
+.precioitem{
+    display: flex;
+    align-items: center;
+}
+
+hr{
+    border: #1E2E35 ;
+}
 
 .productocarrito{
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: flex-end;
+    padding: 1em 0em;
 }
 
 .mat-mdc-card-content{

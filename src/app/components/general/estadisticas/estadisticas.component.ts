@@ -62,9 +62,9 @@ export class EstadisticasComponent implements OnInit{
   ngOnInit(): void {
     setTimeout(() => {
       this.originalUnits = [
-        { id: 1, nombre: "Pan", unidades: 4000, width: 0 },
-        { id: 2, nombre: "Coca Cola", unidades: 2000, width: 0 },
-        { id: 3, nombre: "Leche", unidades: 1000, width: 0 }
+        { id: 1, nombre: "Pan", unidades: 400, width: 0 },
+        { id: 2, nombre: "Coca Cola", unidades: 300, width: 0 },
+        { id: 3, nombre: "Leche", unidades: 200, width: 0 }
       ];
       this.animateProducts();
     }, 0);
@@ -73,22 +73,22 @@ export class EstadisticasComponent implements OnInit{
   animateProducts(): void {
     this.Topventas.forEach((producto, index) => {
       const targetUnits = this.originalUnits[index].unidades;
-      const duration = 1000; // Animation duration in milliseconds
-      const increment = targetUnits / (duration / 5); // Increment per frame
-      const maxWidth = targetUnits / 10; // Maximum width
+      const duration = 1000;
+      const increment = targetUnits / (duration / 5);
+      const maxWidth = targetUnits;
       let currentUnits = 0;
 
       const interval = setInterval(() => {
         if (currentUnits < targetUnits) {
           currentUnits += increment;
-          this.Topventas[index].unidades = Math.min(Math.ceil(currentUnits), targetUnits); // Update current units for animation
-          this.Topventas[index].width = maxWidth; // Update width for animation
+          this.Topventas[index].unidades = Math.min(Math.ceil(currentUnits), targetUnits);
+          this.Topventas[index].width = maxWidth;
         } else {
-          this.Topventas[index].unidades = targetUnits; // Ensure final count is accurate
-          this.Topventas[index].width = maxWidth; // Ensure final width is accurate
-          clearInterval(interval); // Stop interval when animation completes
+          this.Topventas[index].unidades = targetUnits;
+          this.Topventas[index].width = maxWidth; 
+          clearInterval(interval);
         }
-      }, 10); // Update every 10ms for smooth animation
+      }, 10);
     });
   }
 

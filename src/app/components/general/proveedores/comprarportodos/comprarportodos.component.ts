@@ -9,6 +9,7 @@ import {AsyncPipe, CommonModule, NgFor, NgIf} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ServiciorolService } from '../../../../serviciorol.service';
 
@@ -33,6 +34,7 @@ interface Producto {
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatDividerModule,
     ReactiveFormsModule,
     AsyncPipe,
     HttpClientModule

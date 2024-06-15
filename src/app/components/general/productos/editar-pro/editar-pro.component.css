@@ -16,10 +16,14 @@
     justify-content: end;
 }
 
-v
+.mat-mdc-form-field{
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+}
 
 button{
     font-family: "Gabarito", sans-serif;
+    font-weight: 500;
 }
 
 .guardar:enabled{
