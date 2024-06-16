@@ -51,8 +51,8 @@ export const routes: Routes = [
         children:[
             {
                 path: '',
-                component: EscanearComponent,
-                title: 'Escanear'
+                pathMatch: 'full',
+                redirectTo: 'Escanear'
             },
             {
                 path: 'Escanear',
