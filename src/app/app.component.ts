@@ -13,7 +13,6 @@ import { AuthService } from './services/auth.service';
   ],
   providers: [
     AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

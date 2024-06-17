@@ -14,7 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
         if (error.status === 401 || error.status === 403 || this.authService.isTokenExpired()) {
           this.authService.logout();
         }
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }
