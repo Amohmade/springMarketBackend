@@ -10,14 +10,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { map, startWith } from 'rxjs/operators';
-import { ServiciorolService } from '../../../serviciorol.service';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../../services/auth.service';
 
 interface Proveedor {
   id: number;
-  email: string;
   nombre: string;
   telefono: number;
+  correo: string;
 }
 
 @Component({
@@ -49,9 +49,10 @@ export class ProveedoresComponent implements OnInit{
   role:string = "";
   id:string = "";
 
-  constructor(private http: HttpClient,private serviciorol: ServiciorolService){
-    this.role = this.serviciorol.getRole() ?? "";
-    this.id = this.serviciorol.getId() ?? "";
+  constructor(
+    private http: HttpClient,
+    private authService:AuthService
+  ){
   }
 
   ngOnInit(): void {
@@ -84,45 +85,4 @@ export class ProveedoresComponent implements OnInit{
       producto.nombre.toLowerCase().includes(filterValue)
     );
   }
-
-  // onOptionSelected(event: any): void {
-  //   const seleccionado = event.option.value;
-  //   this.selectedProducto = this.listaproductos.find(producto => (producto.id === seleccionado)||(producto.nombre === seleccionado)) || null;
-  // }
-
-  // //Funciones carrito
-
-  // addProducto(producto: any){
-  //   const index = this.productos.findIndex((p) => p.id === producto.id);
-  //   if (index > -1) {
-  //     this.productos[index].cantidad += 1;
-  //   } else {
-  //     producto.cantidad = 1;
-  //     this.productos.push(producto);
-  //   }
-  //   this.saveCarrito();
-  //   this.updateSubTotal();
-  // }
-
-  // saveCarrito(){
-  //   localStorage.setItem('carrito_todosproveedores',JSON.stringify(this.productos))
-  // }
-
-  // updateSubTotal() {
-  //   this.subTotal = this.productos.reduce((total, producto) => total + producto.precio_venta * producto.cantidad, 0);
-  // }
-
-  // loadCarrito(){
-  //   this.productos = JSON.parse(localStorage.getItem('carrito_todosproveedores') as any) || [];
-  // }
-
-  // abrirCarrito(): void {
-  //   const dialogRef = this.dialog.open(TodosproductosComponent, {
-  //     width: '700px',
-  //     data: { productos: this.productos, id:this.id }
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.loadCarrito();
-  //   });
-  // }
 }

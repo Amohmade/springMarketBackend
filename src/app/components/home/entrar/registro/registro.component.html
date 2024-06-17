@@ -48,12 +48,13 @@
                     <small *ngIf="registroForm.get('tipo')?.errors?.['required']">El tipo es obligatorio.</small>
                   </div>
                 <mat-form-field appearance="outline">
-                    <mat-select placeholder="Selecciona un tipo" formControlName="tipo">
-                        <mat-option value="establecimiento">Establecimiento</mat-option>
-                        <mat-option value="proveedor">Proveedor</mat-option>
+                    <mat-select placeholder="Selecciona un tipo" formControlName="rol">
+                        <mat-option value="ESTABLECIMIENTO">Establecimiento</mat-option>
+                        <mat-option value="PROVEEDOR">Proveedor</mat-option>
                     </mat-select>
                 </mat-form-field>
         </form>
+        <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
     </mat-card-content>
     <mat-card-actions>
         <button class="enviar" mat-flat-button [disabled]="!registroForm.valid" type="submit" (click)="enviar()">Registrar <span class="material-symbols-outlined icon">

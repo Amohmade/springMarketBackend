@@ -7,6 +7,20 @@
     max-height: 700px;
 }
 
+.proveedores::-webkit-scrollbar {
+    background-color: #fff;
+    width: 10px;
+}
+
+.proveedores::-webkit-scrollbar-thumb {
+    background-color: #1E2E35;
+    border-radius: 10px;
+}
+
+.proveedores::-webkit-scrollbar-button {
+    display: none;  
+}
+
 .proveedor{
     background-color: white;
     border-radius: 5px;

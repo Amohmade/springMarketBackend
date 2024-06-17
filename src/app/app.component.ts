@@ -1,7 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token.interceptor';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { ServiciorolService } from './serviciorol.service';
+// import { ServiciorolService } from './serviciorol.service';
 
 @Component({
   selector: 'app-root',
@@ -9,25 +10,15 @@ import { ServiciorolService } from './serviciorol.service';
   imports: [
     RouterOutlet,
     HttpClientModule],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
   title = 'ManageDB';
-  role: string | null = null;
-  id: string | null = null;
-
-  constructor(private serviciorol: ServiciorolService) {}
 
   ngOnInit(): void {
-    this.serviciorol.setRole('Establecimiento');
-    this.serviciorol.setId('5');
-    
-
-    this.role = this.serviciorol.getRole();
-    this.id = this.serviciorol.getId();
-
-    console.log('Role from local storage:', this.role);
-    console.log('Id from local storage:', this.id);
   }
 }

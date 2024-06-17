@@ -3,7 +3,7 @@ import { Component, OnInit} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RouterLinkActive, RouterModule } from '@angular/router';
-import { ServiciorolService } from '../../../serviciorol.service';
+// import { ServiciorolService } from '../../../serviciorol.service';
 
 @Component({
   selector: 'app-barra-menu',
@@ -22,10 +22,10 @@ export class BarraMenuComponent implements OnInit {
 
   role:string = "";
 
-  constructor(private rol:ServiciorolService){}
+  // constructor(private rol:ServiciorolService){}
 
   ngOnInit(): void {
-    this.role = this.rol.getRole() ?? "";
+    // this.role = this.rol.getRole() ?? "";
   }
 
   Iconos = [

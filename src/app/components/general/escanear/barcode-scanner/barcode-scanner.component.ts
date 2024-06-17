@@ -136,6 +136,5 @@ export class BarcodeScannerComponent implements OnInit {
       acc[deviceInfo.deviceId] = deviceInfo;
       return acc;
     }, {} as { [key: string]: MediaDeviceInfo });
-    console.log(this.cameras)
   }
 }

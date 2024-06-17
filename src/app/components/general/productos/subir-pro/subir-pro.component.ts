@@ -7,6 +7,7 @@ import {MatDialogModule,MAT_DIALOG_DATA,MatDialogRef,MatDialogTitle,MatDialogCon
 import { HttpClient, HttpClientModule, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-subir-pro',
@@ -29,6 +30,7 @@ export class SubirProComponent {
     public dialogRef: MatDialogRef<SubirProComponent>,
     private http: HttpClient,
     private _snackBar: MatSnackBar,
+    private authService:AuthService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
@@ -52,7 +54,12 @@ export class SubirProComponent {
       const formData = new FormData();
       formData.append('file', this.archivoSeleccionado);
 
-      this.http.post(`http://localhost:8082/proveedores/productos/${this.data.id}`, formData)
+      const token = this.authService.getToken();
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      this.http.post(`http://localhost:8082/proveedores/productos`, formData,{ headers })
         .pipe(
           catchError((error: HttpErrorResponse) => {
             console.error('Error:', error);

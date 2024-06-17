@@ -6,8 +6,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { FormGroup,FormControl, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -30,18 +31,33 @@ export class RegistroComponent {
   hide=true;
 
   registroForm: FormGroup;
+  errorMsg: string = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService, 
+    private router: Router
+  ) {
     this.registroForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
       correo: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, Validators.minLength(6)]],
-      tipo: ['', Validators.required],
+      rol: ['', Validators.required],
     });
   }
 
   enviar(): void {
-    console.log('Formulario enviado', this.registroForm.value);
+    if (this.registroForm.valid) {
+      const { nombre, telefono, correo, contrasena, rol } = this.registroForm.value;
+      this.authService.register({ nombre: nombre!, telefono: telefono!, correo: correo!, contrasena: contrasena!, rol: rol! }).subscribe(success => {
+        if (success) {
+          this.router.navigate(['..']);
+          this.errorMsg = '';
+        } else {
+          this.errorMsg = 'Error en la peticion, vuelva a intentarlo.';
+        }
+      });
+    }
   }
 }

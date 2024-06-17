@@ -11,7 +11,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ServiciorolService } from '../../../../serviciorol.service';
+// import { ServiciorolService } from '../../../../serviciorol.service';
 
 interface Producto {
   id: number;
@@ -62,12 +62,12 @@ export class ComprarportodosComponent {
 
   constructor(
     private http: HttpClient,
-    private serviciorol:ServiciorolService,
+    // private serviciorol:ServiciorolService,
     private _snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef
   ){
-    this.role = this.serviciorol.getRole() ?? "";
-    this.id = this.serviciorol.getId() ?? "";
+    // this.role = this.serviciorol.getRole() ?? "";
+    // this.id = this.serviciorol.getId() ?? "";
   }
 
   ngOnInit():void {

@@ -4,8 +4,7 @@
 .mat-mdc-card{
     margin:auto;
     min-width: 500px;
-    background-color: transparent;
-    color: white;
+    background-color: white;
 }
 
 .card-header{
@@ -72,6 +71,10 @@ a{
     font-weight: 400;
 }
 
+.error{
+    color: red;
+}
+
 .enviar{
     padding: 1em;
     font-family: "Gabarito", sans-serif;
@@ -85,6 +88,7 @@ a{
     color: #1E2E35;
     background-color: #96EEC8;
 }
+
 .enviar:disabled{
     background-color: lightgray;
 }

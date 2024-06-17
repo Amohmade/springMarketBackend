@@ -5,25 +5,27 @@
         <mat-card-title>Acceder</mat-card-title>
     </div>
     <mat-card-content>
-        <form [formGroup]="userForm" (ngSubmit)="enviar()">
+        <form [formGroup]="userForm">
             <a>Correo:</a><br>
             <mat-form-field appearance="outline">
-                <input matInput formControlName="user" placeholder="Introduce tu correo" required>
+                <input matInput formControlName="correo" placeholder="Introduce tu correo" required>
             </mat-form-field><br>
             <a>Contraseña:</a><br>
             <mat-form-field appearance="outline">
-                <input placeholder="Introduce tu contraseña" matInput [type]=" hide ? 'password' : 'text'" formControlName="password" required>
+                <input placeholder="Introduce tu contraseña" matInput [type]=" hide ? 'password' : 'text'" formControlName="contrasena" required>
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-            </mat-form-field><br>
+            </mat-form-field>
+            <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+            <br>
             <div class="links">
                 <a [routerLink]="['Registro']">Registro</a> 
             </div>
         </form>
     </mat-card-content>
     <mat-card-actions>
-        <button class="enviar" mat-flat-button [disabled]="!userForm.valid" type="submit" (click)="enviar()">Iniciar sesion <span class="material-symbols-outlined icon">
+        <button class="enviar" mat-flat-button [disabled]="!userForm.valid" type="submit" (click)="login()">Iniciar sesion <span class="material-symbols-outlined icon">
         login
         </span></button>
     </mat-card-actions>

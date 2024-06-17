@@ -10,10 +10,10 @@
       <mat-label>Stock</mat-label>
       <input matInput formControlName="stock">
     </mat-form-field><br>
-    <mat-form-field appearance="outline" *ngIf="role == 'Establecimiento'">
+    <mat-form-field appearance="outline" *ngIf="data.role == 'ESTABLECIMIENTO'">
       <mat-label>Precio Coste</mat-label>
       <input matInput formControlName="precioCoste">
-    </mat-form-field><br>
+    </mat-form-field><br *ngIf="data.role == 'ESTABLECIMIENTO'">
     <mat-form-field appearance="outline">
       <mat-label>Precio Venta</mat-label>
       <input matInput formControlName="precioVenta">

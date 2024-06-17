@@ -76,6 +76,10 @@ a{
     font-weight: 400;
 }
 
+.error{
+    color: red;
+}
+
 .icon{
     vertical-align: middle;
 }

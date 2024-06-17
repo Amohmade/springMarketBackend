@@ -4,7 +4,7 @@
          matInput
          [formControl]="searchControl">
 </mat-form-field>
-<button *ngIf="role == 'Proveedor'" (click)="subirProductos()" class="subir">Subir productos</button>
+<button *ngIf="role == 'PROVEEDOR'" (click)="subirProductos()" class="subir">Subir productos</button>
 <br>
 <table mat-table [dataSource]="datos" matSort class="tabla">
   <ng-container matColumnDef="id">

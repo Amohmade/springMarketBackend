@@ -16,6 +16,7 @@ import { ProductosProComponent } from './components/general/productos-pro/produc
 import { BarcodeScannerComponent } from './components/general/escanear/barcode-scanner/barcode-scanner.component';
 import { InfoscanbarrasComponent } from './components/general/escanear/infoscanbarras/infoscanbarras.component';
 import { ComprarportodosComponent } from './components/general/proveedores/comprarportodos/comprarportodos.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
     {
@@ -48,6 +49,7 @@ export const routes: Routes = [
     {
         path: 'Menu',
         component: MenuComponent,
+        canActivate: [authGuard],
         children:[
             {
                 path: '',
@@ -60,7 +62,7 @@ export const routes: Routes = [
                 title: 'Escanear'
             },
             {
-                path: 'Escanear/Codigo de Barras',
+                path: 'Escanear/Codigo_de_Barras',
                 component: InfoscanbarrasComponent,
                 title: ' Codigo de Barras'
             },

@@ -11,7 +11,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ServiciorolService } from '../../../../serviciorol.service';
+import { AuthService } from '../../../../services/auth.service';
 
 interface Producto {
   id: number;
@@ -58,36 +58,31 @@ export class InfoscanComponent implements OnInit {
 
   subTotal!: any;
 
-  role:string = "";
-  id:string = "";
-
   constructor(private http: HttpClient,
-    private serviciorol: ServiciorolService,
+    private authService:AuthService,
     private _snackBar: MatSnackBar
-  ){
-      this.role = this.serviciorol.getRole() ?? "";
-      this.id = this.serviciorol.getId() ?? "";
-  }
+  ){}
 
   ngOnInit() {
-    this.fetchListaProductos(this.id).subscribe(data => {
-      this.listaproductos = data;
-      this.filteredProductos = data.filter(producto => producto.stock > 0);
-      this.filteredOptions = this.miform.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value || '')),
-      );
-    });
-
+    this.fetchListaProductos();
     this.loadCarrito();
     this.productos = this.getProducto();
   }
 
-  fetchListaProductos(id:string): Observable<Producto[]> {
-    const apiUrl = `http://localhost:8082/establecimientos/productos/${id}`;
-    return this.http.get<Producto[]>(apiUrl).pipe(
-      map(data => data.filter(producto => producto.stock > 0))
-    );
+  fetchListaProductos(): void {
+    this.authService.getWithToken<Producto[]>('establecimientos/productos').subscribe({
+      next: (data: Producto[]) => {
+        this.listaproductos = data;
+        this.filteredProductos = data.filter(producto => producto.stock > 0);
+        this.filteredOptions = this.miform.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value || '')),
+        );
+      },
+      error: (error) => {
+        console.error('Error fetching productos:', error);
+      }
+    });
   }
 
   private _filter(value: string): Producto[] {
@@ -181,23 +176,25 @@ export class InfoscanComponent implements OnInit {
 
   async realizarCompra(): Promise<void> {
     const compraData = this.prepareCompraData();
-    const apiUrl = `http://localhost:8082/ventas`;
+    const apiUrl = `establecimientos/ventas`;
     const comprasFallidas: Producto[] = [];
-
+  
     for (const item of compraData) {
       try {
-        await firstValueFrom(this.http.post(apiUrl, [item]));
+        await firstValueFrom(this.authService.postWithToken(apiUrl, [item]));
         this._snackBar.open(`Compra realizada`, "OK");
+        await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (error: any) {
         const productoFallido = this.productos.find(p => p.id === item.productoEstablecimientoId);
         if (productoFallido) {
           this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK");
+          await new Promise(resolve => setTimeout(resolve, 2000));
           comprasFallidas.push(productoFallido);
         }
       }
     }
-    this.productos = comprasFallidas;
     
+    this.productos = comprasFallidas;
     this.saveCarrito();
     this.updateSubTotal();
   }

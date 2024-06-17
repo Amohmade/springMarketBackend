@@ -22,6 +22,11 @@ input{
     font-family: "Gabarito", sans-serif;
 }
 
+button{
+    font-family: "Gabarito", sans-serif;
+    font-weight: 500;
+}
+
 .subir{
     background-color: #96EEC8;
     color: #1E2E35;
