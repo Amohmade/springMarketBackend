@@ -1,0 +1,26 @@
+.mat-mdc-form-field{
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+}
+
+.cancelar{
+    font-family: "Gabarito", sans-serif;
+    color: #1E2E35;
+    margin-right: 1em;
+}
+
+.cambiar:disabled{
+    font-family: "Gabarito", sans-serif;
+    color: lightgray;
+}
+.cambiar:enabled{
+    font-family: "Gabarito", sans-serif;
+    background-color: #96EEC8;
+    color: #1E2E35;
+}
+.cambiar:enabled{
+    font-family: "Gabarito", sans-serif;
+    background-color: #1E2E35;
+    color: #96EEC8;
+}
+

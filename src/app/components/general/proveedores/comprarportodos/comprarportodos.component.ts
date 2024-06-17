@@ -11,6 +11,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../../../../services/auth.service';
 // import { ServiciorolService } from '../../../../serviciorol.service';
 
 interface Producto {
@@ -62,12 +63,10 @@ export class ComprarportodosComponent {
 
   constructor(
     private http: HttpClient,
-    // private serviciorol:ServiciorolService,
+    private authService:AuthService,
     private _snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef
   ){
-    // this.role = this.serviciorol.getRole() ?? "";
-    // this.id = this.serviciorol.getId() ?? "";
   }
 
   ngOnInit():void {
@@ -85,8 +84,8 @@ export class ComprarportodosComponent {
   }
 
   fetchListaProductos(): Observable<Producto[]> {
-    const apiUrl = `http://localhost:8082/proveedores/productos`;
-    return this.http.get<Producto[]>(apiUrl);
+    const apiUrl = 'proveedores/allProductos';
+    return this.authService.getWithToken<Producto[]>(apiUrl);
   }
 
   private _filter(value: string): Producto[] {
@@ -179,25 +178,31 @@ export class ComprarportodosComponent {
 
   async realizarCompra(): Promise<void> {
     const compraData = this.prepareCompraData();
-    const apiUrl = `http://localhost:8082/compras/${this.id}`;
+    const apiUrl = `establecimientos/compras`;
     const comprasFallidas: Producto[] = [];
-
+    let comprasExitosas = 0;
+  
     for (const item of compraData) {
       try {
-        await firstValueFrom(this.http.post(apiUrl, [item]));
-        this._snackBar.open(`Compra realizada`, "OK");
+        await firstValueFrom(this.authService.postWithToken(apiUrl, [item]));
+        comprasExitosas++;
       } catch (error: any) {
         const productoFallido = this.productos.find(p => p.id === item.productoProveedorId);
         if (productoFallido) {
-          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK");
+          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK", { duration: 2000 });
+          await new Promise(resolve => setTimeout(resolve, 2000));
           comprasFallidas.push(productoFallido);
         }
       }
     }
+  
+    if (comprasExitosas > 0) {
+      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 2000 });
+    }
+  
     this.productos = comprasFallidas;
     
     this.saveCarrito();
     this.updateSubTotal();
-    this.cdr.detectChanges();
   }
 }

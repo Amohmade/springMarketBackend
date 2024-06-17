@@ -178,22 +178,26 @@ export class InfoscanComponent implements OnInit {
     const compraData = this.prepareCompraData();
     const apiUrl = `establecimientos/ventas`;
     const comprasFallidas: Producto[] = [];
+    let comprasExitosas = 0;
   
     for (const item of compraData) {
       try {
         await firstValueFrom(this.authService.postWithToken(apiUrl, [item]));
-        this._snackBar.open(`Compra realizada`, "OK");
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        comprasExitosas++;
       } catch (error: any) {
         const productoFallido = this.productos.find(p => p.id === item.productoEstablecimientoId);
         if (productoFallido) {
-          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK");
+          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK", { duration: 2000 });
           await new Promise(resolve => setTimeout(resolve, 2000));
           comprasFallidas.push(productoFallido);
         }
       }
     }
-    
+  
+    if (comprasExitosas > 0) {
+      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 2000 });
+    }
+  
     this.productos = comprasFallidas;
     this.saveCarrito();
     this.updateSubTotal();

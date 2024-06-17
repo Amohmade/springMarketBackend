@@ -1,11 +1,11 @@
+import { HttpInterceptorFn, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse} from '@angular/common/http';
+import { TokenInterceptor } from './token.interceptor';
+import { AuthService } from './services/auth.service';
 import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn } from '@angular/common/http';
-
-import { tokenInterceptor } from './token.interceptor';
 
 describe('tokenInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) => 
-    TestBed.runInInjectionContext(() => tokenInterceptor(req, next));
+    TestBed.runInInjectionContext(() => interceptor(req, next));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -15,3 +15,4 @@ describe('tokenInterceptor', () => {
     expect(interceptor).toBeTruthy();
   });
 });
+

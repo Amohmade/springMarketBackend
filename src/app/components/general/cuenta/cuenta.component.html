@@ -1,31 +1,33 @@
 <mat-card>
     <div class="card-header">
         <mat-card-title>Mi cuenta</mat-card-title>
-        <button class="editar" mat-icon-button (click)="toggleReadOnly()">
-            <span class="material-symbols-outlined">
-                {{ isReadOnly ? 'edit' : 'close' }}
-            </span>
-        </button>
+        <button class="cerrar" mat-flat-button (click)="cerrarSesion()">Cerrar sesion</button>
+
     </div>
     <mat-card-content>
         <form [formGroup]="editarForm" (ngSubmit)="enviar()">
             Nombre: <br>
             <mat-form-field appearance="outline">
-                <input matInput formControlName="nombre" [value]="user?.nombre" [readonly]="isReadOnly" required>
+                <input matInput formControlName="nombre" [value]="user?.nombre" readonly required>
             </mat-form-field><br>
             Telefono: <br>
             <mat-form-field appearance="outline">
-                <input matInput formControlName="telefono" [value]="this.user?.telefono" [readonly]="isReadOnly" required>
+                <input matInput formControlName="telefono" [value]="this.user?.telefono" readonly required>
             </mat-form-field><br>
             Correo: <br>
             <mat-form-field appearance="outline">
-                <input matInput formControlName="correo" [value]="this.user?.correo" [readonly]="isReadOnly" required>
+                <input matInput formControlName="correo" [value]="this.user?.correo" readonly required>
+            </mat-form-field><br>
+            Rol: <br>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="rol" [value]="this.user?.rol" readonly required>
             </mat-form-field><br>
         </form>
+        <div class="links">
+            <a [routerLink]="['Cambiar_contrasena']">Cambiar contraseña</a>
+        </div>
+        <router-outlet></router-outlet>
     </mat-card-content>
     <mat-card-actions>
-      <button class="modificar" mat-flat-button [disabled]="!editarForm.valid || isReadOnly" type="submit" (click)="enviar()">Modificar <span class="material-symbols-outlined icon">
-        login
-        </span></button>
     </mat-card-actions>
   </mat-card>

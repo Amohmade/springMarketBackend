@@ -13,7 +13,6 @@
     display:flex;
     padding: 2em;
     padding-bottom: 0;
-    /* color: white; */
     border-radius: 3px 3px 0px 0px;
     align-items: center;
     justify-content: space-between;
@@ -44,18 +43,16 @@
     vertical-align: middle;
 }
 
-.modificar{
-    padding: 2em;
+.cerrar{
     font-family: "Gabarito", sans-serif;
-    font-weight: 500;
-    width: 100%;
     transition: all 0.5s ease-in-out;
 }
 
-.modificar:enabled{
-    color: #1E2E35;
-    background-color: #96EEC8;
+.cerrar:hover{
+    color: #96EEC8;
+    background-color: #1E2E35;
 }
-.modificar:disabled{
-    background-color: lightgray;
+
+a{
+    color: #DA2C38;
 }

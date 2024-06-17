@@ -1,0 +1,13 @@
+<br>
+<form [formGroup]="cambioForm">
+    Contraseña actual: <br>
+    <mat-form-field appearance="outline">
+        <input matInput formControlName="actual" required>
+    </mat-form-field><br>
+    Contraseña nueva: <br>
+    <mat-form-field appearance="outline">
+        <input matInput formControlName="nueva" required>
+    </mat-form-field><br>
+</form>
+<button class="cancelar" mat-stroked-button [routerLink]="['..']">Cancelar</button>
+<button class="cambiar" mat-flat-button [disabled]="!cambioForm.valid" type="submit" (click)="enviar()">Cambiar</button>

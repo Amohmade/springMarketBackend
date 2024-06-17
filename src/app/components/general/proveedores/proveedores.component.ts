@@ -42,10 +42,7 @@ interface Proveedor {
 export class ProveedoresComponent implements OnInit{
   proveedores: Proveedor[] = [];
   filteredProveedores: Proveedor[] = [];
-  // listaproductos: Producto[] = [];
   miform = new FormControl('');
-  // filteredOptions!: Observable<Producto[]>;
-  // selectedProducto: Producto | null = null;
   role:string = "";
   id:string = "";
 
@@ -73,8 +70,8 @@ export class ProveedoresComponent implements OnInit{
   //Apis
 
   fetchProveedores(): Observable<Proveedor[]> {
-    const apiUrl = 'http://localhost:8082/proveedores';
-    return this.http.get<Proveedor[]>(apiUrl);
+    const apiUrl = 'usuarios/proveedores';
+    return this.authService.getWithToken<Proveedor[]>(apiUrl);
   }
 
   //Busqueda

@@ -50,14 +50,24 @@ export class RegistroComponent {
   enviar(): void {
     if (this.registroForm.valid) {
       const { nombre, telefono, correo, contrasena, rol } = this.registroForm.value;
-      this.authService.register({ nombre: nombre!, telefono: telefono!, correo: correo!, contrasena: contrasena!, rol: rol! }).subscribe(success => {
-        if (success) {
-          this.router.navigate(['..']);
-          this.errorMsg = '';
-        } else {
-          this.errorMsg = 'Error en la peticion, vuelva a intentarlo.';
+      this.authService.register({ nombre: nombre!, telefono: telefono!, correo: correo!, contrasena: contrasena!, rol: rol! }).subscribe({
+        next: (success) => {
+          if (success) {
+            this.router.navigate(['..']);
+            this.errorMsg = '';
+          } else {
+            this.errorMsg = 'Error en la petición, vuelva a intentarlo.';
+          }
+        },
+        error: (error) => {
+          if (error.status === 409) {
+            this.errorMsg = 'Ya existe una cuenta con ese correo o teléfono.';
+          } else {
+            this.errorMsg = 'Error en la petición, vuelva a intentarlo.';
+          }
         }
       });
     }
   }
+  
 }

@@ -49,14 +49,22 @@ export class AccederComponent{
     if (this.userForm.valid) {
       const correo = this.userForm.value.correo!;
       const contrasena = this.userForm.value.contrasena!;
-      this.authService.login({ correo: correo, contrasena }).subscribe(success => {
-        if (success) {
-          this.router.navigate(['/Menu']);
-          this.errorMsg = '';
-        } else {
-          this.errorMsg = 'Error en la peticion, vuelva a intentarlo.';
+      this.authService.login({ correo: correo, contrasena }).subscribe({
+        next: (success) => {
+          if (success) {
+            this.router.navigate(['/Menu']);
+            this.errorMsg = '';
+          }
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            this.errorMsg = 'Credenciales incorrectos, intentalo de nuevo.';
+          } else {
+            this.errorMsg = 'Error en la petición, vuelva a intentarlo.';
+          }
         }
       });
     }
   }
+  
 }

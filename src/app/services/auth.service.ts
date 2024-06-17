@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { jwtDecode } from 'jwt-decode';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
 interface Usuario {
@@ -21,7 +23,8 @@ export class AuthService {
   private jwtHelper = new JwtHelperService();
   private role:string = "";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   login(credentials: { correo: string; contrasena: string }): Observable<boolean> {
     return this.http.post<{ token: string }>(`${this.authUrl}/login`, credentials).pipe(
@@ -43,7 +46,9 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    console.log('Logging out...');
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
@@ -56,7 +61,7 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Usuario>(`${this.authUrl}/miCuenta`, { headers });
+    return this.http.get<Usuario>(`${this.authUrl}/usuarios/miCuenta`, { headers });
   }
   
   getRol(): Observable<string> {
@@ -73,6 +78,18 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  isTokenExpired(): boolean {
+    const token = this.getToken();
+    if (!token) return true;
+
+    const decodedToken: any = jwtDecode(token);
+    console.log(decodedToken)
+    const currentTime = Date.now() / 1000;
+    console.log(currentTime)
+
+    return decodedToken.exp < currentTime;
+  }
+
   getWithToken<T>(endpoint: string, params?: HttpParams): Observable<T> {
     const token = this.getToken();
     const headers = new HttpHeaders({
@@ -87,7 +104,8 @@ export class AuthService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.post<T>(`${this.authUrl}/${endpoint}`, body, { headers });
+    console.log(body);
+    return this.http.post<T>(`${this.authUrl}/${endpoint}`, body, { headers , responseType: 'text' as 'json' });
   }
 
   putWithToken<T>(endpoint: string, body: any): Observable<T> {

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { UserMenuComponent } from './components/general/user-menu/user-menu.component';
 import { EscanearComponent } from './components/general/escanear/escanear.component';
 import { InfoscanComponent } from './components/general/escanear/infoscan/infoscan.component';
 import { EstadisticasComponent } from './components/general/estadisticas/estadisticas.component';
@@ -12,11 +11,12 @@ import { RegistroComponent } from './components/home/entrar/registro/registro.co
 import { ErrorComponent } from './components/general/error/error.component';
 import { CuentaComponent } from './components/general/cuenta/cuenta.component';
 import { ProveedoresComponent } from './components/general/proveedores/proveedores.component';
-import { ProductosProComponent } from './components/general/productos-pro/productos-pro.component';
+import { ProductosProComponent } from './components/general/proveedores/productos-pro/productos-pro.component';
 import { BarcodeScannerComponent } from './components/general/escanear/barcode-scanner/barcode-scanner.component';
 import { InfoscanbarrasComponent } from './components/general/escanear/infoscanbarras/infoscanbarras.component';
 import { ComprarportodosComponent } from './components/general/proveedores/comprarportodos/comprarportodos.component';
 import { authGuard } from './auth.guard';
+import { CambiocontrasenaComponent } from './components/general/cuenta/cambiocontrasena/cambiocontrasena.component';
 
 export const routes: Routes = [
     {
@@ -104,6 +104,13 @@ export const routes: Routes = [
             {
                 path: 'Cuenta',
                 component: CuentaComponent,
+                children:[
+                    {
+                        path: 'Cambiar_contrasena',
+                        component: CambiocontrasenaComponent,
+                        title: 'Cambiar contraseña'
+                    }
+                ],
                 title: 'Estadisticas'
             },
             {

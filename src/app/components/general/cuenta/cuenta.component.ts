@@ -59,53 +59,19 @@ export class CuentaComponent implements OnInit {
     });
   }
 
-  // fetchDatosUsuario(): Observable<Usuario>{
-  //   const token = this.authService.getToken();
-  //   const headers = new HttpHeaders({
-  //     'Authorization': `Bearer ${token}`
-  //   });
-  //   return this.http.get<any>(`${this.apiUrl}/micuenta`, { headers });
-  // }
-
   editarForm = new FormGroup({
-    nombre: new FormControl<string>('',[
-      Validators.minLength(3),
-      Validators.required
-    ]),
-    telefono: new FormControl<string>('',[
-      Validators.minLength(3),
-      Validators.required
-    ]),
-    correo: new FormControl<string>('',[
-      Validators.email,
-      Validators.required
-    ]),
+    nombre: new FormControl<string>('',[]),
+    telefono: new FormControl<string>('',[]),
+    correo: new FormControl<string>('',[]),
+    rol: new FormControl<string>('',[]),
   });
+
+  cerrarSesion(){
+    this.authService.logout();
+    window.location.reload();
+  }
 
   enviar(){
     console.log(this.editarForm.value);
   }
-
-  // enviar(){
-  //   if (this.editarForm.dirty) {
-  //     console.log(this.editarForm.value);
-  //     const userData: Usuario = this.editarForm.value as Usuario;
-  //     this.editarDatosUsuario(userData).subscribe(data => {
-  //       this._snackBar.open(`Datos de usuario actualizados`, "OK");
-  //     });
-  //   } else {
-  //     this._snackBar.open(`Error, vuelva a intentarlo`, "OK");
-  //   }
-  // }
-
-  toggleReadOnly(): void {
-    this.isReadOnly = !this.isReadOnly;
-  }
-  
-  // editarDatosUsuario(userData: Usuario): Observable<any> {
-  //   const apiUrl = this.role === 'Establecimiento'
-  // ? `http://localhost:8082/establecimientos/${this.id}`
-  // : `http://localhost:8082/proveedores/${this.id}`;
-  //   return this.http.put(apiUrl, userData);
-  // }
 }
