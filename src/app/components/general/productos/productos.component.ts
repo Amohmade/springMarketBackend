@@ -13,7 +13,7 @@ import { EditarProComponent } from './editar-pro/editar-pro.component';
 import { SubirProComponent } from './subir-pro/subir-pro.component';
 import { BorrarProComponent } from './borrar-pro/borrar-pro.component';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
 interface Producto {
@@ -66,6 +66,7 @@ export class ProductosComponent implements OnInit {
     public dialog: MatDialog,
     private authService:AuthService,
     private _snackBar: MatSnackBar,
+    private router: Router
   ){}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -131,6 +132,7 @@ export class ProductosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.archivoSeleccionado = result;
+        this.fetchListaProductos();
       }
     });
   }

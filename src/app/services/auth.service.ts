@@ -30,6 +30,7 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.authUrl}/login`, credentials).pipe(
       map(response => {
         localStorage.setItem('token', response.token);
+        this.router.navigate(['/Menu']);
         return true;
       })
     );
@@ -40,6 +41,7 @@ export class AuthService {
       .pipe(
         map(response => {
           localStorage.setItem('token', response.token);
+          this.router.navigate(['/Menu']);
           return true;
         })
       );
@@ -47,8 +49,8 @@ export class AuthService {
 
   logout() {
     console.log('Logging out...');
-    localStorage.removeItem('authToken');
-    this.router.navigate(['/login']);
+    localStorage.removeItem('token');
+    this.router.navigate(['Cuenta']);
   }
 
   isLoggedIn(): boolean {

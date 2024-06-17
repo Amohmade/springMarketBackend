@@ -68,7 +68,6 @@ export class CuentaComponent implements OnInit {
 
   cerrarSesion(){
     this.authService.logout();
-    window.location.reload();
   }
 
   enviar(){

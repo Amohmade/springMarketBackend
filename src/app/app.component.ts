@@ -1,7 +1,7 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -9,7 +9,8 @@ import { AuthService } from './services/auth.service';
   standalone: true,
   imports: [
     RouterOutlet,
-    HttpClientModule],
+    HttpClientModule
+  ],
   providers: [
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
@@ -18,8 +19,13 @@ import { AuthService } from './services/auth.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  title = 'ManageDB';
+  title = 'SpringMarket';
 
-  ngOnInit(): void {
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/Menu']);
+    }
   }
 }

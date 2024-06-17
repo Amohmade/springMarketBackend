@@ -53,7 +53,6 @@ export class RegistroComponent {
       this.authService.register({ nombre: nombre!, telefono: telefono!, correo: correo!, contrasena: contrasena!, rol: rol! }).subscribe({
         next: (success) => {
           if (success) {
-            this.router.navigate(['..']);
             this.errorMsg = '';
           } else {
             this.errorMsg = 'Error en la petición, vuelva a intentarlo.';

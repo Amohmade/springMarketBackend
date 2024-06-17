@@ -53,7 +53,7 @@ export class SubirProComponent {
     if (this.archivoSeleccionado) {
       const formData = new FormData();
       formData.append('file', this.archivoSeleccionado);
-
+      
       const token = this.authService.getToken();
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
