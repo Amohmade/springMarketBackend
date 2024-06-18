@@ -12,11 +12,10 @@ import { ErrorComponent } from './components/general/error/error.component';
 import { CuentaComponent } from './components/general/cuenta/cuenta.component';
 import { ProveedoresComponent } from './components/general/proveedores/proveedores.component';
 import { ProductosProComponent } from './components/general/proveedores/productos-pro/productos-pro.component';
-import { BarcodeScannerComponent } from './components/general/escanear/barcode-scanner/barcode-scanner.component';
 import { InfoscanbarrasComponent } from './components/general/escanear/infoscanbarras/infoscanbarras.component';
 import { ComprarportodosComponent } from './components/general/proveedores/comprarportodos/comprarportodos.component';
-import { authGuard } from './auth.guard';
 import { CambiocontrasenaComponent } from './components/general/cuenta/cambiocontrasena/cambiocontrasena.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
     {
