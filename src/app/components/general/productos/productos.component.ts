@@ -54,11 +54,13 @@ export class ProductosComponent implements OnInit {
 
   columnas: string[] = ['id', 'nombre', 'stock', 'precio_coste', 'precio_venta','acciones'];
   productos: Producto[] = [];
+  filteredProductos: Producto[] = [];
   datos: MatTableDataSource<Producto> = new MatTableDataSource<Producto>([]);
   role:string = "";
   id:string = "";
   authUrl:string | null = "";
 
+  filteredOptions!: Observable<Producto[]>;
   searchControl = new FormControl();
   
   constructor(
@@ -89,6 +91,10 @@ export class ProductosComponent implements OnInit {
         console.error('Error fetching role', error);
       }
     });
+
+    this.searchControl.valueChanges.subscribe(value => {
+      this.filtrarBusqueda(value);
+    });
   }
 
   fetchListaProductos(): void {
@@ -108,6 +114,7 @@ export class ProductosComponent implements OnInit {
       error:(error) => {
         console.error('Error fetching productos:', error);
       }
+      
     });
   }
   
@@ -122,6 +129,7 @@ export class ProductosComponent implements OnInit {
   filtrarBusqueda(filterValue: string): void {
     this.datos.filter = filterValue.trim().toLowerCase();
   }
+
 
   subirProductos(): void {
     const dialogRef = this.dialog.open(SubirProComponent, {

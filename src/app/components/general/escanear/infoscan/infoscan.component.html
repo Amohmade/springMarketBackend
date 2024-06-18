@@ -33,17 +33,22 @@
         </mat-card-header>
         <mat-card-content class="listacesta">
           <div *ngFor="let producto of productos; let i  = index" class="productocarrito">
-            <p>{{producto.nombre}}</p><p>{{producto.precioVenta}}€</p>
-            <button mat-icon-button (click)="updateCantidad(producto, producto.cantidad - 1)">
-              <span class="material-symbols-outlined">remove</span>
-            </button>
-            <p>{{producto.cantidad}}</p>
-            <button mat-icon-button (click)="updateCantidad(producto, producto.cantidad + 1)">
-              <span class="material-symbols-outlined">add</span>
-            </button>
-            <button mat-icon-button (click)="deleteProductoCarrito(producto)">
-                <span class="material-symbols-outlined">close</span>
-            </button>
+            <div class="datos">
+              <p>{{producto.nombre}}</p>
+            </div>
+            <div class="acciones">
+              <p>{{producto.precioVenta}}€</p>
+              <button mat-icon-button (click)="updateCantidad(producto, producto.cantidad - 1)">
+                <span class="material-symbols-outlined">remove</span>
+              </button>
+              <p><b>{{producto.cantidad}}</b></p>
+              <button mat-icon-button (click)="updateCantidad(producto, producto.cantidad + 1)">
+                <span class="material-symbols-outlined">add</span>
+              </button>
+              <button mat-icon-button (click)="deleteProductoCarrito(producto)">
+                  <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
           </div>
         </mat-card-content>
         <mat-card-actions>

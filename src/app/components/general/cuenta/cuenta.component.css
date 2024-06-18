@@ -1,3 +1,14 @@
+:host {
+    font-family: "Gabarito", sans-serif;
+    height: 80vh;
+    margin: 1em;
+}
+
+.contenido{
+    padding: 1em;
+    gap: 1em;
+}
+
 .mat-mdc-card{
     margin:auto;
     max-width: 600px;

@@ -12,6 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../../../services/auth.service';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 interface Producto {
   id: number;
@@ -35,6 +36,7 @@ interface Producto {
     MatFormFieldModule,
     MatInputModule,
     MatDividerModule,
+    MatGridListModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
     HttpClientModule

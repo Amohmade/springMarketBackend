@@ -34,7 +34,7 @@
             <h2>Top ventas</h2>
                 <div class="topproducto" *ngFor="let producto of Topventas; index as i">
                 <b>{{i+1}}º</b>
-                    <div class="producto" [ngStyle]="{'width.px': producto.width}">
+                    <div class="producto" [ngStyle]="{'width.vw': producto.width/10}">
                         <h3>{{producto.nombre}} {{producto.unidades}} ventas</h3>
                     </div>
                 </div>

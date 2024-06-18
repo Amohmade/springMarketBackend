@@ -1,33 +1,34 @@
-<mat-card>
-    <div class="card-header">
-        <mat-card-title>Mi cuenta</mat-card-title>
-        <button class="cerrar" mat-flat-button (click)="cerrarSesion()">Cerrar sesion</button>
-
-    </div>
-    <mat-card-content>
-        <form [formGroup]="editarForm" (ngSubmit)="enviar()">
-            Nombre: <br>
-            <mat-form-field appearance="outline">
-                <input matInput formControlName="nombre" [value]="user?.nombre" readonly required>
-            </mat-form-field><br>
-            Telefono: <br>
-            <mat-form-field appearance="outline">
-                <input matInput formControlName="telefono" [value]="this.user?.telefono" readonly required>
-            </mat-form-field><br>
-            Correo: <br>
-            <mat-form-field appearance="outline">
-                <input matInput formControlName="correo" [value]="this.user?.correo" readonly required>
-            </mat-form-field><br>
-            Rol: <br>
-            <mat-form-field appearance="outline">
-                <input matInput formControlName="rol" [value]="this.user?.rol" readonly required>
-            </mat-form-field><br>
-        </form>
-        <div class="links">
-            <a [routerLink]="['Cambiar_contrasena']">Cambiar contraseña</a>
+<div class="contenido">
+    <mat-card>
+        <div class="card-header">
+            <mat-card-title>Mi cuenta</mat-card-title>
+            <button class="cerrar" mat-flat-button (click)="cerrarSesion()">Cerrar sesion</button>
         </div>
-        <router-outlet></router-outlet>
-    </mat-card-content>
-    <mat-card-actions>
-    </mat-card-actions>
-  </mat-card>
+        <mat-card-content>
+            <form [formGroup]="editarForm" (ngSubmit)="enviar()">
+                Nombre: <br>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="nombre" [value]="user?.nombre" readonly required>
+                </mat-form-field><br>
+                Telefono: <br>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="telefono" [value]="this.user?.telefono" readonly required>
+                </mat-form-field><br>
+                Correo: <br>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="correo" [value]="this.user?.correo" readonly required>
+                </mat-form-field><br>
+                Rol: <br>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="rol" [value]="this.user?.rol" readonly required>
+                </mat-form-field><br>
+            </form>
+            <div class="links">
+                <a [routerLink]="['Cambiar_contrasena']">Cambiar contraseña</a>
+            </div>
+            <router-outlet></router-outlet>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+    </mat-card>
+</div>

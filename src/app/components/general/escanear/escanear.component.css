@@ -1,38 +1,47 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    font-family: "Gabarito", sans-serif;
-}
-
-.box{
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: white;
-    padding: 3em;
-    border-radius: 5px;
-    font-size: large;
-    transition: all 0.2s ease-in-out;
-    color: #1E2E35;
-}
-
-.box:hover{
-    background-color: #1E2E35;
-    color: #aae7cd;
+  font-family: "Gabarito", sans-serif;
+  height: 80vh;
+  height: auto;
 }
 
 .contenido{
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 1em;
-    padding: 4em;
-    flex: 1 1 auto;
-    justify-content: space-around;
-    align-items: center;
+  padding: 1em;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: auto auto;
+  height: 89vh;
+}
+  
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3em;
+  font-size: large;
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+  color: #1E2E35;
 }
 
-.material-symbols-outlined{
-    font-size: 60px;
-    font-weight: bold;
+.box:hover {
+  background-color: #1E2E35;
+  color: #aae7cd;
+}
+
+.material-symbols-outlined {
+  font-size: 60px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px){
+  .contenido {
+      grid-template-columns: auto;
+  }
+}
+
+@media (min-width: 769px) {
+  .contenido {
+      grid-template-columns: auto auto;
+  }
 }

@@ -1,9 +1,9 @@
 import { Component,OnInit,Output } from '@angular/core';
-import { BarraMenuComponent } from '../../components/general/barra-menu/barra-menu.component';
 import { RouterModule,RouterLink, RouterLinkActive, RouterOutlet  } from '@angular/router';
 import { UserheaderComponent } from '../../components/general/userheader/userheader.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
@@ -22,8 +22,8 @@ interface Usuario {
   standalone: true,
   imports: [
     UserheaderComponent,
-    BarraMenuComponent,
     RouterOutlet,
+    MatListModule,
     MatSidenavModule,
     RouterModule,
     RouterLinkActive,
@@ -35,6 +35,7 @@ interface Usuario {
   styleUrl: './menu.component.css'
 })
 export class MenuComponent implements OnInit {
+  isOpen=true;
   role:string = "";
 
   Iconos = [
@@ -57,6 +58,10 @@ export class MenuComponent implements OnInit {
         console.error('Error fetching role', error);
       }
     });
+  }
+
+  toggleDrawer() {
+    this.isOpen = !this.isOpen;
   }
 
   accionPorRol(): any[] {

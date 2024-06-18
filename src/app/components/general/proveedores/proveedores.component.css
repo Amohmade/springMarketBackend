@@ -1,10 +1,19 @@
+:host {
+    font-family: "Gabarito", sans-serif;
+    height: 80vh;
+}
+
+.contenido{
+    padding: 1em;
+}
+
 .proveedores{
     display: grid;
     gap: 1em;
-    grid-template-columns: 32% 32% 32%;
+    grid-template-columns: auto auto auto auto;
     overflow-y:scroll;
-    min-height: 200px;
-    max-height: 700px;
+    min-height: 30vh;
+    max-height: 70vh;
 }
 
 .proveedores::-webkit-scrollbar {
@@ -23,6 +32,15 @@
 
 .proveedor{
     background-color: white;
+    border-radius: 5px;
+    padding: 2em;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.proveedor:hover{
+    background-color: #1E2E35;
+    color: #96EEC8;
     border-radius: 5px;
     padding: 2em;
     align-items: center;
@@ -68,4 +86,16 @@
 .carrito{
     width: 10em;
     margin-top: 1em;
+}
+
+@media (max-width: 769px) {
+    .proveedores {
+        height: 70vh;
+        grid-template-columns: auto;
+    }
+}
+@media (min-width: 769px) {
+    .proveedores {
+        grid-template-columns: auto auto auto auto;
+    }
 }

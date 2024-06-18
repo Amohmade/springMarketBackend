@@ -1,3 +1,12 @@
+:host {
+    font-family: "Gabarito", sans-serif;
+    height: 80vh;
+}
+
+.contenido{
+    padding: 1em;
+}
+
 .busqueda{
     width: 80%;
     font-family: "Gabarito", sans-serif;

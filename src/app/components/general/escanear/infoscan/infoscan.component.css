@@ -1,12 +1,16 @@
 :host {
     font-family: "Gabarito", sans-serif;
+    height: 80vh;
+    height: auto;
+    margin: 1em;
 }
 
 .contenido{
+    padding: 1em;
     display: grid;
-    grid-template-columns: 50% auto;
+    grid-template-columns: 3fr 2fr;
     gap: 1em;
-    align-items: center;
+    align-items: start;
 }
 
 .busqueda{
@@ -16,19 +20,32 @@
 }
 
 .cesta{
+    background-color: #1E2E35;
     width: 100%;
-    grid-column: 2;
-    grid-row: 1 / span 2;
 }
 
 .listacesta{
+    color: white;
     display: flex;
     flex-direction: column;
-    padding: 1em 4em;
+    padding: 1em 2em;
     overflow-y:scroll;
-    min-height: 200px;
-    max-height: 500px;
+    height: 65vh;
     transition: all 0.3s ease-in-out;
+}
+
+.listacesta::-webkit-scrollbar {
+    background-color: #ffffff00;
+    width: 10px;
+}
+
+.listacesta::-webkit-scrollbar-thumb {
+    background-color: #aae7cd;
+    border-radius: 10px;
+}
+
+.listacesta::-webkit-scrollbar-button {
+    display: none;  
 }
 
 .todos{
@@ -36,9 +53,22 @@
     flex-direction: column;
     padding: 1em 2em;
     overflow-y:scroll;
-    min-height: 200px;
-    max-height: 300px;
+    height: 70vh;
     transition: all 0.3s ease-in-out;
+}
+
+.todos::-webkit-scrollbar {
+    background-color: #fff;
+    width: 10px;
+}
+
+.todos::-webkit-scrollbar-thumb {
+    background-color: #1E2E35;
+    border-radius: 10px;
+}
+
+.todos::-webkit-scrollbar-button {
+    display: none;  
 }
 
 .prod{
@@ -62,9 +92,17 @@ hr{
     padding: 1em 0em;
 }
 
+.datos{
+    display: flex;
+}
+
+.acciones{
+    display: flex;
+    align-items: end;
+}
+
 .mat-mdc-card-content{
     display: flex;
-    justify-content: space-around;
     align-items: flex-end;
 }
 
@@ -74,7 +112,7 @@ hr{
     align-items: center;
     font-size: large;
     font-family: "Gabarito", sans-serif;
-    color: #1E2E35;
+    color: white;
 
 }
 
@@ -84,7 +122,6 @@ hr{
     background-color: #aae7cd;
     color: #1E2E35;
     font-family: "Gabarito", sans-serif;
-
 }
 
 .pagar{
@@ -101,7 +138,7 @@ hr{
 .mat-mdc-card-title{
     font-size: xx-large;
     font-family: "Gabarito", sans-serif;
-    color: #1E2E35;
+    color: #aae7cd;
 }
 
 .caja{
@@ -123,17 +160,32 @@ h2{
     font-size: large;
 }
 
-.vender{
-    display: grid;
-    grid-template-columns: auto 5em 40px;
-    background-color: white;
-    border-radius: 5px;
+@media (max-width: 768px) {
+    .contenido {
+        grid-template-columns: 1fr;
+    }
+
+    .cesta {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .buscar {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .todos{
+        height: 40vh;
+    }
+
+    .listacesta{
+        height: 15vh;
+    }
 }
 
-.ajustar{
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    font-size: x-large;
-    text-align: center;
+@media (min-width: 769px) {
+    .contenido {
+        grid-template-columns: 3fr 2fr;
+    }
 }
