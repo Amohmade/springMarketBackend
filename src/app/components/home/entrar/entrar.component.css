@@ -13,5 +13,12 @@
     height: 100%;
     flex: 1 1 auto;
     align-items: center;
+    padding: 1em;
     justify-content:space-around;
+}
+
+@media (max-width: 768px){
+    .cuerpo{
+        background-image: none;
+    }
 }

@@ -49,6 +49,7 @@
 .mat-mdc-form-field{
     font-family: "Gabarito", sans-serif;
     color: #1E2E35;
+    width: 100%;
 }
 
 p{
@@ -91,4 +92,16 @@ a{
 
 .enviar:disabled{
     background-color: lightgray;
+}
+
+@media (max-width: 768px){
+    .mat-mdc-card{
+        min-width: 90vw;
+    }
+    .mat-mdc-card-title{
+        font-size: x-large;
+    }
+    .volver{
+        font-weight: 400;
+    }
 }

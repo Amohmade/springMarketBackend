@@ -10,3 +10,17 @@ body{
 html, body { height: 100%; }
 body { margin: 0;
     font-family: "Gabarito", sans-serif; }
+
+body::-webkit-scrollbar {
+    background-color: #00000000;
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #96EEC8;
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-button {
+    display: none;  
+}

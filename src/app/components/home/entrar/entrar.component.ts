@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../general/header/header.component';
+import { HeaderComponent } from '../header/header.component';
 import { RouterOutlet } from '@angular/router';
-import { UserheaderComponent } from '../../general/userheader/userheader.component';
 
 @Component({
   selector: 'app-entrar',
   standalone: true,
   imports: [
-    UserheaderComponent,
+    HeaderComponent,
     RouterOutlet
   ],
   templateUrl: './entrar.component.html',

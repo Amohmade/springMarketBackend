@@ -3,11 +3,18 @@
 }
   
 .banner{
-    padding: 2em 10%;
+    background-image: url(https://img.freepik.com/free-vector/partnership-concept-illustration_114360-5994.jpg?w=826&t=st=1718694554~exp=1718695154~hmac=5339d9f9ac7c48f107b7193ee2ba413be273ff026115e938bc643b763e5525e4);
+    background-size: 35%;
+    background-attachment: fixed;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    padding: 20vh;
     text-align: center;
     place-content: center;
     align-items: center;
     overflow: hidden;
+    transition: all 0.2s ease-in-out;
 }
 
 .intro{
@@ -17,11 +24,12 @@
 
 .titulo{
     font-family: "Gabarito", sans-serif;
+    font-size: 50px;
     color: #1E2E35;
 }
 
 .sub{
-    font-size: 28px;
+    font-size: large;
     margin: 0em 4em;
 }
 
@@ -36,6 +44,19 @@ button{
     margin: 0em 2em 0em 7em;
 }
 
-.imagen{
-    width:80%;
+@media (max-width: 768px){
+    .titulo{
+      font-size: xx-large;
+      color: #96EEC8;
+    }
+    .sub{
+      font-size:medium;
+    }
+    .banner{
+        padding: 3em;
+        background-image: none;
+        background-color: #1E2E35;
+        color: #96EEC8;
+    }
+
 }

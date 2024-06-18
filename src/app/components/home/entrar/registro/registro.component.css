@@ -101,3 +101,21 @@ a{
 .enviar:disabled{
     background-color: lightgray;
 }
+
+@media (max-width: 768px){
+    .volver{
+        font-weight: 400;
+    }
+    .mat-mdc-card{
+        min-width: 90vw;
+    }
+    .mat-mdc-card-title{
+        font-size: x-large;
+    }
+    .mat-mdc-form-field{
+        width: 100%;
+    }
+    .top{
+        grid-template-columns: auto;
+    }
+}
