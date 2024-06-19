@@ -53,9 +53,6 @@ export class MenuComponent implements OnInit {
     this.authService.getRol().subscribe({
       next:(role) => {
         this.role = role;
-      },
-      error:(error) => {
-        console.error('Error fetching role', error);
       }
     });
   }

@@ -20,7 +20,7 @@ interface Producto {
   id: number;
   nombre: string;
   stock: number;
-  precioBase: number;
+  precioCoste: number;
   precioVenta: number;
   proveedor: {
     id: number;
@@ -52,7 +52,7 @@ interface Producto {
 })
 export class ProductosComponent implements OnInit {
 
-  columnas: string[] = ['id', 'nombre', 'stock', 'precio_coste', 'precio_venta','acciones'];
+  columnas: string[] = ['id', 'nombre', 'stock', 'precioCoste', 'precioVenta','acciones'];
   productos: Producto[] = [];
   filteredProductos: Producto[] = [];
   datos: MatTableDataSource<Producto> = new MatTableDataSource<Producto>([]);
@@ -83,12 +83,9 @@ export class ProductosComponent implements OnInit {
       next: (role) => {
         this.role = role;
         if (this.role === 'PROVEEDOR') {
-          this.columnas = ['id', 'nombre', 'stock', 'precio_venta', 'acciones'];
+          this.columnas = ['id', 'nombre', 'stock', 'precioVenta', 'acciones'];
         }
         this.fetchListaProductos();
-      },
-      error: (error) => {
-        console.error('Error fetching role', error);
       }
     });
 
@@ -158,7 +155,7 @@ export class ProductosComponent implements OnInit {
           this.productos[index] = result;
           this.datos.data = [...this.productos];
           this.iniciarPaginator();
-          this._snackBar.open(`Producto actualizado`, "OK");
+          this._snackBar.open(`Producto actualizado`, "OK", { duration: 3000 });
         }
       }
     });
@@ -172,7 +169,7 @@ export class ProductosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this._snackBar.open(`Producto ${producto.nombre} eliminado`, 'OK');
+        this._snackBar.open(`Producto ${producto.nombre} eliminado`, 'OK',{ duration: 3000 });
         this.fetchListaProductos();
       }
     });

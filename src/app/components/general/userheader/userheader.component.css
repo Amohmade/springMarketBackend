@@ -1,47 +1,58 @@
 .header{
-    font-optical-sizing: auto;
-    font-variation-settings:
-      "slnt" 0;
-    text-align: center;
-    background-image: linear-gradient(to right,#aae7cd,#1E2E35);
-  }
-  
+  font-optical-sizing: auto;
+  font-variation-settings:
+    "slnt" 0;
+  text-align: center;
+  background-image: linear-gradient(to right,#aae7cd,#1E2E35);
+}
+
+.barra{
+  display: flex;
+  justify-content:left;
+}
+
+h2{
+  margin: auto;
+  font-size:xx-large;
+  font-family: "Gabarito", sans-serif;
+}
+
+h3{
+  margin: auto;
+  font-size:large;
+  color: #1E2E35;
+  font-family: "Gabarito", sans-serif;
+  transition: all 0.2s ease-in-out;
+}
+
+h3:hover{
+  color: #E3F9ED;
+}
+
+a{
+  color: #1E2E35;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover{
+  color: #E3F9ED;
+}
+
+mat-icon{
+  color: #1E2E35;
+  transition: all 0.2s ease-in-out;
+}
+
+mat-icon:hover{
+  color: white;
+}
+
+@media (max-width: 768px){
   h2{
-    margin: auto;
-    font-size:xx-large;
-    font-family: "Gabarito", sans-serif;
+    font-size: large;
   }
-  
-  a{
-    color: #1E2E35;
-    text-decoration: none;
-    transition: all 0.2s ease-in-out;
+  h3{
+    font-size: medium;
   }
-  
-  a:hover{
-    color: #E3F9ED;
-  }
-
-  mat-icon{
-    color: #1E2E35;
-    transition: all 0.2s ease-in-out;
-  }
-
-  mat-icon:hover{
-    color: white;
-  }
-
-  button{
-    color: #1E2E35;
-    transition: all 0.2s ease-in-out;
-  }
-
-  button:hover{
-    color: white;
-  }
-
-  @media (max-width: 768px){
-    h2{
-      font-size: large;
-    }
-  }
+}

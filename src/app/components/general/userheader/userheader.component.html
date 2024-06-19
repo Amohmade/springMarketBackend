@@ -1,7 +1,7 @@
 <div class="header">
     <mat-grid-list cols="3" rowHeight="75px">
-        <mat-grid-tile><mat-icon (click)="enviarClick()">menu</mat-icon></mat-grid-tile>
+        <mat-grid-tile class="barra"><mat-icon (click)="enviarClick()">menu</mat-icon></mat-grid-tile>
         <mat-grid-tile><a [routerLink]="['/Menu']"><h2>SpringMarket</h2></a></mat-grid-tile>
-        <mat-grid-tile></mat-grid-tile>
+        <mat-grid-tile><a (click)="cerrarSesion()"><h3>Cerrar sesión</h3></a></mat-grid-tile>
     </mat-grid-list>
 </div>

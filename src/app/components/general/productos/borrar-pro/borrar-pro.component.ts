@@ -41,8 +41,7 @@ export class BorrarProComponent {
         this.dialogRef.close(true);
       },
       error: (error: HttpErrorResponse) => {
-        console.error('Error deleting product:', error);
-        this._snackBar.open(`Error al eliminar el producto, vuelva a intentarlo`, "OK");
+        this._snackBar.open(`Error al eliminar el producto, vuelva a intentarlo`, "OK",{ duration: 3000 });
         this.dialogRef.close(false);
       }
     });

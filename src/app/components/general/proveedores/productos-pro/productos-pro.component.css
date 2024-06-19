@@ -5,6 +5,7 @@
 }
 
 .contenido{
+    padding: 1em;
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 1em;
@@ -76,6 +77,17 @@
 .precioitem{
     display: flex;
     align-items: center;
+}
+
+.cantidad{
+    width: 5em;
+    font-family: "Gabarito", sans-serif;
+}
+
+.mat-mdc-form-field{
+    margin: 0em 1em;
+    background-color: white;
+    border-radius: 5px;
 }
 
 hr{

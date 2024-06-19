@@ -69,11 +69,11 @@ export class EditarProComponent implements OnInit {
           this.dialogRef.close(updatedProducto);
         },
         error: (error: HttpErrorResponse) => {
-          this._snackBar.open(`Error al actualizar el producto. Por favor, inténtelo de nuevo.`, "OK");
+          this._snackBar.open(`Error al actualizar el producto. Por favor, inténtelo de nuevo.`, "OK", { duration: 3000 });
         }
       });
     } else {
-      this._snackBar.open('Formulario inválido. Por favor, complete todos los campos correctamente.', 'Cerrar');
+      this._snackBar.open('Formulario inválido. Por favor, complete todos los campos correctamente.', 'Cerrar',{ duration: 3000 });
     }
   }
 

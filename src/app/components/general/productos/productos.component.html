@@ -23,14 +23,14 @@
       <td mat-cell *matCellDef="let producto" [ngClass]="{'sinstock': isStockZero(producto)}">{{ producto.stock }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="precio_coste" >
+    <ng-container matColumnDef="precioCoste" >
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio Coste</th>
-      <td mat-cell *matCellDef="let producto">{{ producto.precioCoste | number: '1.2-2' }}</td>
+      <td mat-cell *matCellDef="let producto">{{ producto.precioCoste}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="precio_venta">
+    <ng-container matColumnDef="precioVenta">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio Venta</th>
-      <td mat-cell *matCellDef="let producto">{{ producto.precioVenta | number: '1.2-2' }}</td>
+      <td mat-cell *matCellDef="let producto">{{ producto.precioVenta}}</td>
     </ng-container>
 
     <ng-container matColumnDef="acciones" class="acciones">

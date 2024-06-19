@@ -114,16 +114,7 @@ export class EstadisticasComponent implements OnInit{
   Imprimir() {
     if (this.rangoGrupoFechas.valid) {
       const { fechaInicio, fechaFin } = this.rangoGrupoFechas.value;
-      console.log({
-        diaInicio: fechaInicio.getMonth() + 1,
-        mesInicio: fechaInicio.getMonth() + 1,
-        anhoInicio: fechaInicio.getFullYear(),
-        diaFin: fechaFin.getMonth() + 1,
-        mesFin: fechaFin.getMonth() + 1,
-        anhoFin: fechaFin.getFullYear()
-      });
     } else {
-      console.error('Form is invalid');
     }
   }
 }
