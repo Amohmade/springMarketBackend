@@ -1,4 +1,7 @@
 .header{
+  display: flex;
+  justify-content: space-between;
+  padding: 3em;
   font-optical-sizing: auto;
   font-variation-settings:
     "slnt" 0;
@@ -20,7 +23,7 @@ h2{
 h3{
   margin: auto;
   font-size:large;
-  color: #1E2E35;
+  color: #aae7cd;
   font-family: "Gabarito", sans-serif;
   transition: all 0.2s ease-in-out;
 }

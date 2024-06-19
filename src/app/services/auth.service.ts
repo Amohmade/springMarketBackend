@@ -114,34 +114,7 @@ export class AuthService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-  
-    return this.http.post<T>(`${this.authUrl}/${endpoint}`, body, { headers, responseType: 'json'}).pipe(
-      catchError((error: any) => {
-        let errorMsg = 'An error occurred';
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `1: ${error.error.message}`;
-        } else if (error.error && typeof error.error === 'string') {
-          errorMsg = `2: ${error.error}`;
-        } else if (error.error && error.error.message) {
-          errorMsg = `3: ${error.error.message}`;
-        } else {
-          errorMsg = `4: ${JSON.stringify(error.error)}`;
-        }
-        console.log(errorMsg)
-        return throwError(() => new Error(errorMsg));
-      }),
-      map((response: any) => {
-        let errorMsg = 'An error occurred';
-        if(response.ok){
-          errorMsg = response.json();
-        }
-        if (response && response.data) {
-          return response.data as T;
-        } else {
-          throw new Error('Invalid response format');
-        }
-      })
-    );
+    return this.http.post<T>(`${this.authUrl}/${endpoint}`, body, { headers , responseType: 'text' as 'json' });
   }
 
   putWithToken<T>(endpoint: string, body: any): Observable<T> {

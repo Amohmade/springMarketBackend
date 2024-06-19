@@ -1,24 +1,22 @@
 :host {
     display: flex;
-    /* flex: ; */
     flex-direction: column;
-    /* height: 100vh; */
-}
-
-/* .mat-drawer-container{
-    
-} */
-
-.mat-drawer-content{
-    /* display: flex;
-    flex: 1; */
-}
-
-.mat-drawer {
+    height: 100vh;
+  }
+  
+  .mat-drawer-container {
+    height: 100vh;
+  }
+  
+  .mat-drawer-content {
+    place-content: middle;
+  }
+  
+  .mat-drawer {
     width: 100px;
     padding: 1em;
     background-color: #1E2E35;
-}
+  }
 
 .mat-grid-list{
     background-color: #1E2E35;
