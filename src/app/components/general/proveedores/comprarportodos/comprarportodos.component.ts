@@ -12,7 +12,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../../../services/auth.service';
-// import { ServiciorolService } from '../../../../serviciorol.service';
 
 interface Producto {
   id: number;
@@ -140,6 +139,15 @@ export class ComprarportodosComponent {
     }
   }
 
+  onCantidadChange(producto: Producto) {
+    const cantidad = Number(producto.cantidad);
+    if (isNaN(cantidad) || cantidad < 1) {
+      this._snackBar.open(`La cantidad debe ser un número positivo`, 'OK', { duration: 3000 });
+      producto.cantidad = 1;
+    }
+    this.updateCantidad(producto, cantidad);
+  }
+
   loadCarrito() {
     this.productos = JSON.parse(localStorage.getItem('carrito_todosproveedores') as any) || [];
   }
@@ -189,7 +197,7 @@ export class ComprarportodosComponent {
       } catch (error: any) {
         const productoFallido = this.productos.find(p => p.id === item.productoProveedorId);
         if (productoFallido) {
-          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK", { duration: 2000 });
+          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK", { duration: 3000 });
           await new Promise(resolve => setTimeout(resolve, 2000));
           comprasFallidas.push(productoFallido);
         }
@@ -197,7 +205,7 @@ export class ComprarportodosComponent {
     }
   
     if (comprasExitosas > 0) {
-      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 2000 });
+      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 3000 });
     }
   
     this.productos = comprasFallidas;

@@ -156,6 +156,15 @@ export class ProductosProComponent implements OnInit {
     }
   }
 
+  onCantidadChange(producto: Producto) {
+    const cantidad = Number(producto.cantidad);
+    if (isNaN(cantidad) || cantidad < 1) {
+      this._snackBar.open(`La cantidad debe ser un número positivo`, 'OK', { duration: 3000 });
+      producto.cantidad = 1;
+    }
+    this.updateCantidad(producto, cantidad);
+  }
+
   loadCarrito(){
     if (this.proveedor) {
       this.productos = JSON.parse(localStorage.getItem(`carrito_${this.proveedor}`) as any) || [];
@@ -210,7 +219,7 @@ export class ProductosProComponent implements OnInit {
       } catch (error: any) {
         const productoFallido = this.productos.find(p => p.id === item.productoEstablecimientoId);
         if (productoFallido) {
-          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK", { duration: 2000 });
+          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK", { duration: 3000 });
           await new Promise(resolve => setTimeout(resolve, 2000));
           comprasFallidas.push(productoFallido);
         }
@@ -218,7 +227,7 @@ export class ProductosProComponent implements OnInit {
     }
   
     if (comprasExitosas > 0) {
-      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 2000 });
+      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 3000 });
     }
   
     this.productos = comprasFallidas;

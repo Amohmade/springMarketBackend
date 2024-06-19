@@ -62,15 +62,13 @@ export class SubirProComponent {
       this.http.post(`http://localhost:8082/proveedores/productos`, formData,{ headers })
         .pipe(
           catchError((error: HttpErrorResponse) => {
-            console.error('Error:', error);
-            this._snackBar.open(`Error, vuelva a intentarlo`, "OK");
+            this._snackBar.open(`Error, vuelva a intentarlo`, "OK", { duration: 3000 });
             return throwError(() => new Error('Error subiendo el archivo'));
           })
         )
         .subscribe(response => {
-          console.log('Subida exitosa:', response);
           this.dialogRef.close(this.archivoSeleccionado);
-          this._snackBar.open(`Archivo enviado con exito`, "OK");
+          this._snackBar.open(`Archivo subido con éxito`, "OK", { duration: 3000 });
         });
     }
   }

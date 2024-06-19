@@ -80,9 +80,6 @@ export class InfoscanComponent implements OnInit {
           startWith(''),
           map(value => this._filter(value || '')),
         );
-      },
-      error: (error) => {
-        console.error('Error fetching productos:', error);
       }
     });
   }
@@ -140,6 +137,15 @@ export class InfoscanComponent implements OnInit {
     }
   }
 
+  onCantidadChange(producto: Producto) {
+    const cantidad = Number(producto.cantidad);
+    if (isNaN(cantidad) || cantidad < 1) {
+      this._snackBar.open(`La cantidad debe ser un número positivo`, 'OK', { duration: 3000 });
+      producto.cantidad = 1;
+    }
+    this.updateCantidad(producto, cantidad);
+  }
+
   loadCarrito(){
     this.productos = JSON.parse(localStorage.getItem('carrito_compra') as any) || [];
   }
@@ -189,7 +195,8 @@ export class InfoscanComponent implements OnInit {
       } catch (error: any) {
         const productoFallido = this.productos.find(p => p.id === item.productoEstablecimientoId);
         if (productoFallido) {
-          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK", { duration: 2000 });
+          const errorMessage = error.message || `Error al procesar la compra de ${productoFallido.nombre}`;
+          this._snackBar.open(errorMessage, "OK", { duration: 3000 });
           await new Promise(resolve => setTimeout(resolve, 2000));
           comprasFallidas.push(productoFallido);
         }
@@ -197,7 +204,7 @@ export class InfoscanComponent implements OnInit {
     }
   
     if (comprasExitosas > 0) {
-      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 2000 });
+      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 3000 });
     }
   
     this.productos = comprasFallidas;

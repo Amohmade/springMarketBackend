@@ -30,7 +30,7 @@ export const routes: Routes = [
             {
                 path: '',
                 component: AccederComponent,
-                title: 'Entrar'
+                title: 'Acceder'
             },
             {
                 path: 'Registro',
@@ -48,7 +48,6 @@ export const routes: Routes = [
     {
         path: 'Menu',
         component: MenuComponent,
-        canActivate: [authGuard],
         children:[
             {
                 path: '',
@@ -110,7 +109,7 @@ export const routes: Routes = [
                         title: 'Cambiar contraseña'
                     }
                 ],
-                title: 'Estadisticas'
+                title: 'Mi Cuenta'
             },
             {
                 path: '**',

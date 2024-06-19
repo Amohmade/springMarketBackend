@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatIcon } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-userheader',
@@ -18,6 +19,9 @@ import { RouterModule } from '@angular/router';
 })
 
 export class UserheaderComponent {
+  constructor(
+    private authService:AuthService
+  ){}
   
   @Output() open = new EventEmitter<void>();
 
@@ -38,5 +42,9 @@ export class UserheaderComponent {
 
   isEstablecimiento(): boolean {
     return this.rol === 'establecimiento';
+  }
+
+  cerrarSesion(){
+    this.authService.logout();
   }
 }

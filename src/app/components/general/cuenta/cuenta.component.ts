@@ -65,12 +65,4 @@ export class CuentaComponent implements OnInit {
     correo: new FormControl<string>('',[]),
     rol: new FormControl<string>('',[]),
   });
-
-  cerrarSesion(){
-    this.authService.logout();
-  }
-
-  enviar(){
-    console.log(this.editarForm.value);
-  }
 }

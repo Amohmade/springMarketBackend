@@ -1,16 +1,15 @@
 <div class="contenido">
     <mat-card>
-        <div class="card-header">
+        <mat-card-header>
             <mat-card-title>Mi cuenta</mat-card-title>
-            <button class="cerrar" mat-flat-button (click)="cerrarSesion()">Cerrar sesion</button>
-        </div>
+        </mat-card-header>
         <mat-card-content>
-            <form [formGroup]="editarForm" (ngSubmit)="enviar()">
+            <form [formGroup]="editarForm">
                 Nombre: <br>
                 <mat-form-field appearance="outline">
                     <input matInput formControlName="nombre" [value]="user?.nombre" readonly required>
                 </mat-form-field><br>
-                Telefono: <br>
+                Teléfono: <br>
                 <mat-form-field appearance="outline">
                     <input matInput formControlName="telefono" [value]="this.user?.telefono" readonly required>
                 </mat-form-field><br>

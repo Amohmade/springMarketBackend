@@ -58,7 +58,7 @@ export class AccederComponent{
         },
         error: (error) => {
           if (error.status === 401) {
-            this.errorMsg = 'Credenciales incorrectos, intentalo de nuevo.';
+            this.errorMsg = 'Credenciales incorrectas, inténtelo de nuevo.';
           } else {
             this.errorMsg = 'Error en la petición, vuelva a intentarlo.';
           }

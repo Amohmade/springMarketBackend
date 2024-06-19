@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { jwtDecode } from 'jwt-decode';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 interface Usuario {
   id: string;
@@ -43,12 +43,22 @@ export class AuthService {
           localStorage.setItem('token', response.token);
           this.router.navigate(['/Menu']);
           return true;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            return throwError('Ya existe una cuenta con ese correo o teléfono.');
+          } else {
+            let errorMessage = 'Error en la petición, vuelva a intentarlo.';
+            if (error.error && error.error.message) {
+              errorMessage = error.error.message;
+            }
+            return throwError(errorMessage);
+          }
         })
       );
   }
 
   logout() {
-    console.log('Logging out...');
     localStorage.removeItem('token');
     this.router.navigate(['Cuenta']);
   }
@@ -85,9 +95,7 @@ export class AuthService {
     if (!token) return true;
 
     const decodedToken: any = jwtDecode(token);
-    console.log(decodedToken)
-    const currentTime = Date.now() / 1000;
-    console.log(currentTime)
+    const currentTime = Date.now() / 1000 + 7200;
 
     return decodedToken.exp < currentTime;
   }
@@ -106,8 +114,34 @@ export class AuthService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    console.log(body);
-    return this.http.post<T>(`${this.authUrl}/${endpoint}`, body, { headers , responseType: 'text' as 'json' });
+  
+    return this.http.post<T>(`${this.authUrl}/${endpoint}`, body, { headers, responseType: 'json'}).pipe(
+      catchError((error: any) => {
+        let errorMsg = 'An error occurred';
+        if (error.error instanceof ErrorEvent) {
+          errorMsg = `1: ${error.error.message}`;
+        } else if (error.error && typeof error.error === 'string') {
+          errorMsg = `2: ${error.error}`;
+        } else if (error.error && error.error.message) {
+          errorMsg = `3: ${error.error.message}`;
+        } else {
+          errorMsg = `4: ${JSON.stringify(error.error)}`;
+        }
+        console.log(errorMsg)
+        return throwError(() => new Error(errorMsg));
+      }),
+      map((response: any) => {
+        let errorMsg = 'An error occurred';
+        if(response.ok){
+          errorMsg = response.json();
+        }
+        if (response && response.data) {
+          return response.data as T;
+        } else {
+          throw new Error('Invalid response format');
+        }
+      })
+    );
   }
 
   putWithToken<T>(endpoint: string, body: any): Observable<T> {

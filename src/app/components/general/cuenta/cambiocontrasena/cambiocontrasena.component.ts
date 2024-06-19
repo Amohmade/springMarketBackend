@@ -59,12 +59,10 @@ export class CambiocontrasenaComponent{
             this.cambioForm.reset();
           } else {
             this._snackBar.open('Error al cambiar contraseña. Consulte el log para más detalles.', 'OK', { duration: 3000 });
-            console.error('Password change failed:', response);
           }
         },
         error: (error) => {
           this._snackBar.open('Error al cambiar contraseña. Intente nuevamente.', 'OK', { duration: 3000 });
-          console.error('Error:', error);
         }
       });    
     } else {
