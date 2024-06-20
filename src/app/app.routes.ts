@@ -35,7 +35,7 @@ export const routes: Routes = [
             {
                 path: 'Registro',
                 component: RegistroComponent,
-                title: 'Registrar'
+                title: 'Registro'
             },
             {
                 path: '**',
@@ -48,6 +48,7 @@ export const routes: Routes = [
     {
         path: 'Menu',
         component: MenuComponent,
+        canActivate: [authGuard],
         children:[
             {
                 path: '',

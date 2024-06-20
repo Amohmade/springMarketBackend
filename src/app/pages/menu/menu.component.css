@@ -1,22 +1,46 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container {
+  height: 100vh;
+}
+
+.container{
+  overflow-y: hidden;
+  scrollbar-width: none;
+ -ms-overflow-style: none;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar{
+  display: none;
+}
   
-  .mat-drawer-container {
-    height: 100vh;
-  }
-  
-  .mat-drawer-content {
-    place-content: middle;
-  }
-  
-  .mat-drawer {
-    width: 100px;
-    padding: 1em;
-    background-color: #1E2E35;
-  }
+.mat-drawer-content {
+  place-content: middle;
+}
+
+.mat-drawer-content::-webkit-scrollbar {
+  background-color: #ffffff00;
+  width: 10px;
+}
+
+.mat-drawer-content::-webkit-scrollbar-thumb {
+    background-color: #aae7cd;
+    border-radius: 10px;
+}
+
+.mat-drawer-content::-webkit-scrollbar-button {
+    display: none;  
+}
+
+.mat-drawer {
+  width: 8em;
+  padding: 1em;
+  background-color: #1E2E35;
+}
 
 .mat-grid-list{
     background-color: #1E2E35;
@@ -24,7 +48,22 @@
     transition: all 0.2s ease-in-out;
 }
 
+.mat-grid-list::-webkit-scrollbar {
+  background-color: #ffffff00;
+  width: 10px;
+}
+
+.mat-grid-list::-webkit-scrollbar-thumb {
+    background-color: #aae7cd;
+    border-radius: 10px;
+}
+
+.mat-grid-list::-webkit-scrollbar-button {
+    display: none;  
+}
+
 .mat-grid-tile{
+  cursor: pointer;
     border: none;
     color: #96EEC8;
     background-color: #1E2E35;

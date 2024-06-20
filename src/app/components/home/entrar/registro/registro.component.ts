@@ -29,7 +29,6 @@ import { AuthService } from '../../../../services/auth.service';
 })
 export class RegistroComponent {
   hide=true;
-
   registroForm: FormGroup;
   errorMsg: string = '';
 
@@ -51,12 +50,18 @@ export class RegistroComponent {
     if (this.registroForm.valid) {
       const { nombre, telefono, correo, contrasena, rol } = this.registroForm.value;
       this.authService.register({ nombre, telefono, correo, contrasena, rol }).subscribe({
-        next: (success) => {
-          if (success) {
-            this.errorMsg = '';
-            this.router.navigate(['/Menu']); 
-          } else {
-            this.errorMsg = 'Error en la petición, vuelva a intentarlo.';
+        next: (response) => {
+          this.errorMsg = '';
+          if (this.authService.isLoggedIn()){
+            this.authService.getRol().subscribe({
+              next:(data)=> {
+                if(data == 'ESTABLECIMIENTO'){
+                  this.router.navigate(['/Menu']);
+                }else if(data == 'PROVEEDOR'){
+                  this.router.navigate(['/Menu/Productos']);
+                }
+              }
+            });
           }
         },
         error: (err) => {

@@ -4,7 +4,6 @@ BarcodeReader.license =
   'DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAyODg1NDE5LVRYbFhaV0pRY205cSIsIm1haW5TZXJ2ZXJVUkwiOiJodHRwczovL21kbHMuZHluYW1zb2Z0b25saW5lLmNvbSIsIm9yZ2FuaXphdGlvbklEIjoiMTAyODg1NDE5Iiwic3RhbmRieVNlcnZlclVSTCI6Imh0dHBzOi8vc2Rscy5keW5hbXNvZnRvbmxpbmUuY29tIiwiY2hlY2tDb2RlIjoxMjkwNzg2MjUyfQ==';
 
 BarcodeReader.engineResourcePath = 'assets/dynamsoft-javascript-barcode/';
-// BarcodeReader.engineResourcePath = 'node_modules/dynamsoft-javascript-barcode/dist/'; 
 
 export interface Product {
   id: string;

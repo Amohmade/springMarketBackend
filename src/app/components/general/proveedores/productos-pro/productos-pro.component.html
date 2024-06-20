@@ -17,7 +17,9 @@
             <div class="productocarrito"> 
               <p>{{producto.nombre}}</p>
               <div  class="precioitem">
-                <b>{{producto.precioVenta}}</b>€ <button mat-icon-button (click)="addProducto(producto)"><span class="material-symbols-outlined">shopping_cart</span></button>
+                <b>{{producto.precioVenta}}</b>€
+                <button mat-icon-button (click)="addProducto(producto)"><span class="material-symbols-outlined">shopping_cart</span></button>
+                Stock:{{producto.stock}}
               </div>
             </div>
             <mat-divider></mat-divider>

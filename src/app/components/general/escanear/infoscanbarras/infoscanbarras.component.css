@@ -71,12 +71,12 @@
 }
 
 .cantidad{
+    margin: 0em 1em;
     width: 5em;
     font-family: "Gabarito", sans-serif;
 }
 
 .mat-mdc-form-field{
-    margin: 0em 1em;
     background-color: white;
     border-radius: 5px;
 }

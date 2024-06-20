@@ -1,5 +1,5 @@
 <app-userheader (open)="drawer.toggle()" [isOpen]="isOpen"></app-userheader>
-<mat-drawer-container>
+<mat-drawer-container class="container">
     <mat-drawer mode="side" #drawer opened>
             <mat-grid-list cols="1">
                 <mat-grid-tile *ngFor="let icono of accionPorRol()" [routerLink]="[icono.nombre]" [routerLinkActive]="'active'"><span class="material-symbols-outlined">

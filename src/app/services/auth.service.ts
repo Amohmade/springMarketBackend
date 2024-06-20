@@ -30,32 +30,40 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.authUrl}/login`, credentials).pipe(
       map(response => {
         localStorage.setItem('token', response.token);
-        this.router.navigate(['/Menu']);
         return true;
       })
     );
   }
 
   register(credentials: { nombre: string; telefono: string; correo: string; contrasena: string; rol: string }): Observable<boolean> {
-    return this.http.post<{ token: string }>(`${this.authUrl}/register`, credentials)
-      .pipe(
-        map(response => {
-          localStorage.setItem('token', response.token);
-          this.router.navigate(['/Menu']);
-          return true;
-        }),
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 409) {
-            return throwError('Ya existe una cuenta con ese correo o teléfono.');
-          } else {
-            let errorMessage = 'Error en la petición, vuelva a intentarlo.';
-            if (error.error && error.error.message) {
-              errorMessage = error.error.message;
+    return this.http.post<{ token: string }>(`${this.authUrl}/register`, credentials).pipe(
+      map(response => {
+        if (response && response.token) {
+          localStorage.setItem("token",response.token)
+          this.getRol().subscribe({
+            next:(data)=> {
+              if(data == 'ESTABLECIMIENTO'){
+                this.router.navigate(['/Menu']);
+              }else if(data == 'PROVEEDOR'){
+                this.router.navigate(['/Menu/Productos']);
+              }
             }
-            return throwError(errorMessage);
-          }
-        })
-      );
+          });
+          return true;
+        }
+        throw new Error('Unexpected response structure');
+      }),
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error en la petición, vuelva a intentarlo.';
+        if (error.status === 409) {
+          errorMessage = 'Ya existe una cuenta con ese correo o teléfono.';
+        } else if (error.error && error.error.message) {
+          errorMessage = error.error.message;
+        }
+        console.error('Registration error:', errorMessage, error);
+        return throwError(errorMessage);
+      })
+    );
   }
 
   logout() {
@@ -114,7 +122,19 @@ export class AuthService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.post<T>(`${this.authUrl}/${endpoint}`, body, { headers , responseType: 'text' as 'json' });
+    return this.http.post<T>(`${this.authUrl}/${endpoint}`, body, { headers, responseType: 'text' as 'json' }).pipe(
+      catchError((error: any) => {
+        let errorMsg = 'An error occurred';
+        if (error.error instanceof ErrorEvent) {
+          // Client-side error
+          errorMsg = `Error: ${error.error.message}`;
+        } else {
+          // Server-side error
+          errorMsg = `Error: ${error.error}`;
+        }
+        return throwError(() => new Error(errorMsg));
+      })
+    );
   }
 
   putWithToken<T>(endpoint: string, body: any): Observable<T> {

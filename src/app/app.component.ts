@@ -20,11 +20,24 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   title = 'SpringMarket';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/Menu']);
+    this.redireccionar();
+  }
+  
+  redireccionar(){
+    if (this.authService.isLoggedIn()){
+      this.authService.getRol().subscribe({
+        next:(data)=> {
+          if(data == 'ESTABLECIMIENTO'){
+            this.router.navigate(['/Menu']);
+          }else if(data == 'PROVEEDOR'){
+            this.router.navigate(['/Menu/Productos']);
+          }
+        }
+      });
     }
   }
 }

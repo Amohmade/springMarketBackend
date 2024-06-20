@@ -52,7 +52,15 @@ export class AccederComponent{
       this.authService.login({ correo: correo, contrasena }).subscribe({
         next: (success) => {
           if (success) {
-            this.router.navigate(['/Menu']);
+            this.authService.getRol().subscribe({
+              next:(data)=> {
+                if(data == 'ESTABLECIMIENTO'){
+                  this.router.navigate(['/Menu']);
+                }else if(data == 'PROVEEDOR'){
+                  this.router.navigate(['/Menu/Productos']);
+                }
+              }
+            });
             this.errorMsg = '';
           }
         },

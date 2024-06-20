@@ -1,6 +1,5 @@
 :host {
     font-family: "Gabarito", sans-serif;
-    /* height: 80vh; */
 }
 
 .contenido{
@@ -39,6 +38,11 @@
 
 .sinstock{
     color: #DA2C38;
+}
+
+.alerta{
+    color: #DA2C38;
+    margin-bottom: 0;
 }
 
 .subir{

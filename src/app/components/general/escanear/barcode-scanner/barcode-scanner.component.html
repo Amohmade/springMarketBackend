@@ -3,7 +3,7 @@
  
 <div class="select" [hidden]="!isLoaded">
 <h1 for="videoSource">Escanear producto</h1>
-<mat-form-field *ngIf="!selectedCamera">
+<mat-form-field *ngIf="selectedCamera">
     <mat-label>Seleccionar camara</mat-label>
     <mat-select id="videoSource" [(value)]="selectedCamera" (selectionChange)="openCamera($event)">
         <mat-option *ngFor="let camera of cameras" [value]="camera.deviceId">

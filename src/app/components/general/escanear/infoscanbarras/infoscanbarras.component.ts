@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -50,6 +50,7 @@ interface CarritoItem {
 export class InfoscanbarrasComponent implements OnInit{
 
   listaproductos: Producto[] = [];
+  filteredProductos: Producto[] = [];
 
   audio = document.getElementById('play');
 
@@ -68,21 +69,35 @@ export class InfoscanbarrasComponent implements OnInit{
 
   constructor(private http: HttpClient,
     private authService:AuthService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef
   ){}
 
   ngOnInit() {
-    this.fetchListaProductos();
+    this.fetchListaProductos().subscribe(data => {
+      this.listaproductos = data;
+      this.filteredProductos = data;
+      this.filteredOptions = this.miform.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value || '')),
+      );
+    });
     this.loadCarrito();
-    this.productos = this.getProducto();
   }
 
-  fetchListaProductos(): void {
-    this.authService.getWithToken<Producto[]>('establecimientos/productos').subscribe({
-      next: (data: Producto[]) => {
-        this.listaproductos = data;
-      }
-    });
+  fetchListaProductos(): Observable<Producto[]> {
+    const apiUrl = 'establecimientos/productos';
+    return this.authService.getWithToken<Producto[]>(apiUrl).pipe(
+      map((productos: Producto[]) => productos.filter(producto => producto.stock > 0))
+    );
+  }
+
+  private _filter(value: string): Producto[] {
+    const filterValue = value.trim().toLowerCase();
+    this.filteredProductos = this.listaproductos.filter(producto =>
+      producto.nombre.toLowerCase().includes(filterValue) && producto.stock > 0
+    );
+    return this.filteredProductos;
   }
 
   onOptionSelected(event: any): void {
@@ -189,28 +204,61 @@ export class InfoscanbarrasComponent implements OnInit{
     const compraData = this.prepareCompraData();
     const apiUrl = `establecimientos/ventas`;
     const comprasFallidas: Producto[] = [];
+    const productosNoOrdenados: string[] = [];
     let comprasExitosas = 0;
   
     for (const item of compraData) {
       try {
-        await firstValueFrom(this.authService.postWithToken(apiUrl, [item]));
-        comprasExitosas++;
+        const response: any = await firstValueFrom(this.authService.postWithToken(apiUrl, [item]));
+  
+        if (typeof response === 'string' && response.includes('Stock insuficiente')) {
+          const insufficientStockMessages = response.split('\n');
+          insufficientStockMessages.forEach((msg: string) => {
+            const match = msg.match(/producto:\s(\d+)/);
+            if (match) {
+              const productoId = parseInt(match[1], 10);
+              const productoFallido = this.productos.find(p => p.id === productoId);
+              if (productoFallido) {
+                productosNoOrdenados.push(productoFallido.nombre);
+                comprasFallidas.push(productoFallido);
+              }
+            }
+          });
+        } else {
+          comprasExitosas++;
+          const producto = this.productos.find(p => p.id === item.productoProveedorId);
+          if (producto) {
+            producto.stock -= producto.cantidad;
+          }
+        }
       } catch (error: any) {
-        const productoFallido = this.productos.find(p => p.id === item.productoEstablecimientoId);
+        const productoFallido = this.productos.find(p => p.id === item.productoProveedorId);
         if (productoFallido) {
-          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK", { duration: 3000 });
-          await new Promise(resolve => setTimeout(resolve, 2000));
+          productosNoOrdenados.push(productoFallido.nombre);
           comprasFallidas.push(productoFallido);
         }
       }
     }
   
-    if (comprasExitosas > 0) {
-      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 3000 });
+    this.productos = this.productos.filter(producto => comprasFallidas.includes(producto));
+  
+    if (productosNoOrdenados.length > 0) {
+      this._snackBar.open(`Stock insuficiente para los productos: ${productosNoOrdenados.join(', ')}`, "OK", { duration: 3000 });
+    }
+
+    if (comprasExitosas > 0 && productosNoOrdenados.length == 0) {
+      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 2000 });
+    }else if(comprasExitosas > 0){
+      setTimeout(() => {
+        this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 2000 });
+      },3000);  
     }
   
-    this.productos = comprasFallidas;
     this.saveCarrito();
     this.updateSubTotal();
-  } 
+  
+    this.listaproductos = this.listaproductos.filter(producto => producto.stock > 0);
+    this._filter(this.miform.value || '');
+    this.cdr.detectChanges();
+  }
 }

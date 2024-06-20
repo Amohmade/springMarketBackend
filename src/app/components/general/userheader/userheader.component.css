@@ -10,6 +10,7 @@
 }
 
 .barra{
+  cursor: pointer;
   display: flex;
   justify-content:left;
 }
@@ -21,6 +22,7 @@ h2{
 }
 
 h3{
+  cursor: pointer;
   margin: auto;
   font-size:large;
   color: #aae7cd;
@@ -29,7 +31,7 @@ h3{
 }
 
 h3:hover{
-  color: #E3F9ED;
+  color: white;
 }
 
 a{

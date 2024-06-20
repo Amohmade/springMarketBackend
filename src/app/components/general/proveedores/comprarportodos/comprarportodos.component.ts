@@ -57,9 +57,6 @@ export class ComprarportodosComponent {
 
   subTotal!: any;
 
-  role:string = "";
-  id:string = "";
-
   constructor(
     private http: HttpClient,
     private authService:AuthService,
@@ -72,28 +69,29 @@ export class ComprarportodosComponent {
     this.fetchListaProductos().subscribe(data => {
       this.listaproductos = data;
       this.filteredProductos = data;
+      this.filteredOptions = this.miform.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value || '')),
+      );
     });
-
-    this.filteredOptions = this.miform.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
-    );
-
     this.loadCarrito();
   }
 
   fetchListaProductos(): Observable<Producto[]> {
     const apiUrl = 'proveedores/allProductos';
-    return this.authService.getWithToken<Producto[]>(apiUrl);
+    return this.authService.getWithToken<Producto[]>(apiUrl).pipe(
+      map((productos: Producto[]) => productos.filter(producto => producto.stock > 0))
+    );
   }
 
   private _filter(value: string): Producto[] {
     const filterValue = value.trim().toLowerCase();
     this.filteredProductos = this.listaproductos.filter(producto =>
-      producto.nombre.toLowerCase().includes(filterValue)
+      producto.nombre.toLowerCase().includes(filterValue) && producto.stock > 0
     );
     return this.filteredProductos;
   }
+
 
   onOptionSelected(event: any): void {
     const seleccionado = event.option.value;
@@ -188,29 +186,61 @@ export class ComprarportodosComponent {
     const compraData = this.prepareCompraData();
     const apiUrl = `establecimientos/compras`;
     const comprasFallidas: Producto[] = [];
+    const productosNoOrdenados: string[] = [];
     let comprasExitosas = 0;
   
     for (const item of compraData) {
       try {
-        await firstValueFrom(this.authService.postWithToken(apiUrl, [item]));
-        comprasExitosas++;
+        const response: any = await firstValueFrom(this.authService.postWithToken(apiUrl, [item]));
+  
+        if (typeof response === 'string' && response.includes('Stock insuficiente')) {
+          const insufficientStockMessages = response.split('\n');
+          insufficientStockMessages.forEach((msg: string) => {
+            const match = msg.match(/producto:\s(\d+)/);
+            if (match) {
+              const productoId = parseInt(match[1], 10);
+              const productoFallido = this.productos.find(p => p.id === productoId);
+              if (productoFallido) {
+                productosNoOrdenados.push(productoFallido.nombre);
+                comprasFallidas.push(productoFallido);
+              }
+            }
+          });
+        } else {
+          comprasExitosas++;
+          const producto = this.productos.find(p => p.id === item.productoProveedorId);
+          if (producto) {
+            producto.stock -= producto.cantidad;
+          }
+        }
       } catch (error: any) {
         const productoFallido = this.productos.find(p => p.id === item.productoProveedorId);
         if (productoFallido) {
-          this._snackBar.open(`Quedan ${productoFallido.stock} unidades de ${productoFallido.nombre}`, "OK", { duration: 3000 });
-          await new Promise(resolve => setTimeout(resolve, 2000));
+          productosNoOrdenados.push(productoFallido.nombre);
           comprasFallidas.push(productoFallido);
         }
       }
     }
   
-    if (comprasExitosas > 0) {
-      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 3000 });
+    this.productos = this.productos.filter(producto => comprasFallidas.includes(producto));
+  
+    if (productosNoOrdenados.length > 0) {
+      this._snackBar.open(`Stock insuficiente para los productos: ${productosNoOrdenados.join(', ')}`, "OK", { duration: 3000 });
+    }
+
+    if (comprasExitosas > 0 && productosNoOrdenados.length == 0) {
+      this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 2000 });
+    }else if(comprasExitosas > 0){
+      setTimeout(() => {
+        this._snackBar.open(`${comprasExitosas} compras realizadas con éxito`, "OK", { duration: 2000 });
+      },3000);  
     }
   
-    this.productos = comprasFallidas;
-    
     this.saveCarrito();
     this.updateSubTotal();
+  
+    this.listaproductos = this.listaproductos.filter(producto => producto.stock > 0);
+    this._filter(this.miform.value || '');
+    this.cdr.detectChanges();
   }
 }

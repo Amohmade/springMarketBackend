@@ -44,7 +44,6 @@ export class BarcodeScannerComponent implements OnInit {
   context: CanvasRenderingContext2D | undefined;
   scanner: BarcodeScanner | undefined;
   cameraInfo: { [key: string]: MediaDeviceInfo } = {};
-  // videoSelect: HTMLSelectElement | undefined;
   overlayManager: OverlayManager;
 
   @Output() scannedProduct = new EventEmitter<string>();
@@ -62,7 +61,6 @@ export class BarcodeScannerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.videoSelect = document.querySelector('select#videoSource') as HTMLSelectElement;
     this.overlayManager.initOverlay(document.getElementById('overlay') as HTMLCanvasElement);
     (async () => {
       await this.initBarcodeScanner();
